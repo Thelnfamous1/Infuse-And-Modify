@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "simply_harder:item/ancient_motive_core"
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "simply_harder:diamond_sword_infusion"
+    ]
+  },
+  "criteria": {
+    "has_infusion_core": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "simply_harder:infusion_core"
+            ],
+            "nbt": "{Tier:\"minecraft:diamond\"}"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "simply_harder:diamond_sword_infusion"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_infusion_core",
+      "has_the_recipe"
+    ]
+  ]
+}

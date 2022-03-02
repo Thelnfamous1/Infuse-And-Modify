@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "simply_harder:stone_axe_infusion"
+    ]
+  },
+  "criteria": {
+    "has_infusion_core": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "simply_harder:infusion_core"
+            ],
+            "nbt": "{Tier:\"minecraft:stone\"}"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "simply_harder:stone_axe_infusion"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_infusion_core",
+      "has_the_recipe"
+    ]
+  ]
+}

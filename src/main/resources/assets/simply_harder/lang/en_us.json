@@ -1,0 +1,31 @@
+{
+  "attribute.name.player.exhaustion": "Exhaustion",
+
+  "item.simply_harder.infusion_core": "Infusion Core",
+
+  "item.simply_harder.infusion_core.tier": "Tier:",
+  "item.simply_harder.infusion_core.tier.minecraft.wood": "Wood",
+  "item.simply_harder.infusion_core.tier.minecraft.stone": "Stone",
+  "item.simply_harder.infusion_core.tier.minecraft.iron": "Iron",
+  "item.simply_harder.infusion_core.tier.minecraft.diamond": "Diamond",
+  "item.simply_harder.infusion_core.tier.minecraft.gold": "Gold",
+  "item.simply_harder.infusion_core.tier.minecraft.netherite": "Netherite",
+
+  "item.simply_harder.infusion_core.armor_material": "Armor Material:",
+  "item.simply_harder.infusion_core.armor_material.minecraft.leather": "Leather",
+  "item.simply_harder.infusion_core.armor_material.minecraft.chain": "Chain",
+  "item.simply_harder.infusion_core.armor_material.minecraft.iron": "Iron",
+  "item.simply_harder.infusion_core.armor_material.minecraft.gold": "Gold",
+  "item.simply_harder.infusion_core.armor_material.minecraft.diamond": "Diamond",
+  "item.simply_harder.infusion_core.armor_material.minecraft.turtle": "Turtle",
+  "item.simply_harder.infusion_core.armor_material.minecraft.netherite": "Netherite",
+  
+  "item.simply_harder.modifier_core": "Modifier Core",
+  
+  "item.simply_harder.modifier_core.modifiers.mainhand": "Modifiers for Main Hand:",
+  "item.simply_harder.modifier_core.modifiers.offhand": "Modifiers for Off Hand:",
+  "item.simply_harder.modifier_core.modifiers.feet": "Modifiers for Feet:",
+  "item.simply_harder.modifier_core.modifiers.legs": "Modifiers for Legs:",
+  "item.simply_harder.modifier_core.modifiers.chest": "Modifiers for Body:",
+  "item.simply_harder.modifier_core.modifiers.head": "Modifiers for Head:"
+}
