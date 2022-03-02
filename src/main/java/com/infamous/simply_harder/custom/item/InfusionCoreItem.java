@@ -23,6 +23,10 @@ public class InfusionCoreItem extends Item {
         super(properties);
     }
 
+    public static boolean isInfusionCore(ItemStack stack){
+        return stack.getItem() instanceof InfusionCoreItem;
+    }
+
     public static ItemStack setTierInfusion(ItemStack itemStack, Tier tier){
         if(TierSortingRegistry.isTierSorted(tier)){
             itemStack.getOrCreateTag().putString(TIER_TAG, String.valueOf(TierSortingRegistry.getName(tier)));
@@ -58,6 +62,34 @@ public class InfusionCoreItem extends Item {
 
     public static ItemStack buildArmorMaterialInfusion(ArmorMaterial armorMaterial) {
         return setArmorMaterialInfusion(new ItemStack(SHItems.INFUSION_CORE.get()), armorMaterial);
+    }
+
+    public static boolean isEmptyInfusionCore(ItemStack itemStack) {
+        return isInfusionCore(itemStack) && !hasTierInfusion(itemStack) && !hasArmorMaterialInfusion(itemStack);
+    }
+
+    public static boolean isTierInfusionCore(ItemStack itemStack) {
+        return isInfusionCore(itemStack) && hasTierInfusion(itemStack);
+    }
+
+    public static boolean isArmorMaterialInfusionCore(ItemStack itemStack) {
+        return isInfusionCore(itemStack) && hasArmorMaterialInfusion(itemStack);
+    }
+
+    public static boolean canInfuseCore(ItemStack left, ItemStack right) {
+        return isEmptyInfusionCore(left) && right.isDamageableItem();
+    }
+
+    public static boolean canInfuseUsingCore(ItemStack left, ItemStack right){
+        return canInfuseTierUsingCore(left, right) || canInfuseArmorMaterialUsingCore(left, right);
+    }
+
+    public static boolean canInfuseTierUsingCore(ItemStack left, ItemStack right) {
+        return left.getItem() instanceof TieredItem && isTierInfusionCore(right);
+    }
+
+    public static boolean canInfuseArmorMaterialUsingCore(ItemStack left, ItemStack right) {
+        return left.getItem() instanceof ArmorItem && isArmorMaterialInfusionCore(right);
     }
 
     @Override

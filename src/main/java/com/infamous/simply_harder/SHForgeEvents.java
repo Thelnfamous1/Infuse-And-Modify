@@ -2,6 +2,7 @@ package com.infamous.simply_harder;
 
 import com.google.common.collect.Multimap;
 import com.infamous.simply_harder.custom.critera.ModCriteriaTriggers;
+import com.infamous.simply_harder.custom.item.InfusionCoreItem;
 import com.infamous.simply_harder.custom.item.ModifierCoreItem;
 import com.infamous.simply_harder.registry.SHAttributes;
 import net.minecraft.resources.ResourceLocation;
@@ -12,7 +13,11 @@ import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TieredItem;
+import net.minecraftforge.common.ToolAction;
+import net.minecraftforge.common.ToolActions;
 import net.minecraftforge.event.AddReloadListenerEvent;
 import net.minecraftforge.event.AnvilUpdateEvent;
 import net.minecraftforge.event.ItemAttributeModifierEvent;
@@ -67,23 +72,73 @@ public class SHForgeEvents {
     static void onAnvilUpdate(AnvilUpdateEvent event){
         ItemStack left = event.getLeft();
         ItemStack right = event.getRight();
-        boolean canModifyLeft = left.isDamageableItem() && !ModifierCoreItem.hasModifierCore(left); // TODO: Can try to merge or overwrite modifier cores
-        if(canModifyLeft && ModifierCoreItem.isModifierCore(right) && ModifierCoreItem.hasModifierCore(right)){
-            ItemStack output = left.copy();
-            int modifierCost = 0;
-            for(EquipmentSlot slot : EquipmentSlot.values()){
-                Multimap<Attribute, AttributeModifier> modifiersFromCore = ModifierCoreItem.getModifiersFromCore(right, slot);
-                if(!modifiersFromCore.isEmpty()){
-                    for(Map.Entry<Attribute, AttributeModifier> entry : modifiersFromCore.entries()) {
-                        ModifierCoreItem.addModifierToCore(output, entry.getKey(), entry.getValue(), slot);
-                        modifierCost++;
-                    }
+        if(ModifierCoreItem.canModifyUsingCore(left, right) || ModifierCoreItem.canModifyCore(left, right)){
+            combineWithModifierCore(event, left, right);
+        } else if(InfusionCoreItem.canInfuseCore(left, right)){ // there is no "canInfuseUsingCore", that's what the smithing recipes are for
+            combineWithInfusionCore(event, left, right);
+        }
+    }
+
+    private static void combineWithModifierCore(AnvilUpdateEvent event, ItemStack left, ItemStack right) {
+        ItemStack output = left.copy();
+        int modifierCost = 0;
+        for(EquipmentSlot slot : EquipmentSlot.values()){
+            Multimap<Attribute, AttributeModifier> modifiersFromCore = ModifierCoreItem.getModifiersFromCore(right, slot);
+            if(!modifiersFromCore.isEmpty()){
+                for(Map.Entry<Attribute, AttributeModifier> entry : modifiersFromCore.entries()) {
+                    ModifierCoreItem.addModifierToCore(output, entry.getKey(), entry.getValue(), slot);
+                    modifierCost++;
                 }
             }
-            event.setOutput(output);
-            event.setCost(modifierCost);
-            event.setMaterialCost(1);
         }
+        event.setOutput(output);
+        event.setCost(modifierCost);
+        event.setMaterialCost(1);
+    }
+
+    private static void combineWithInfusionCore(AnvilUpdateEvent event, ItemStack left, ItemStack right) {
+        ItemStack output;
+        if(right.getItem() instanceof TieredItem tieredItem){
+            output = left.copy();
+            InfusionCoreItem.setTierInfusion(output, tieredItem.getTier());
+            event.setCost(calculateToolCost(right));
+        } else if(right.getItem() instanceof ArmorItem armorItem){
+            output = left.copy();
+            InfusionCoreItem.setArmorMaterialInfusion(output, armorItem.getMaterial());
+            event.setCost(calculateArmorCost(armorItem));
+        } else{
+            return; // cancel, we don't want to infuse nothing into the core and waste materials
+        }
+        event.setOutput(output);
+        event.setMaterialCost(1);
+    }
+
+    private static int calculateToolCost(ItemStack stack) {
+        int cost = 4;
+        if(stack.canPerformAction(ToolActions.PICKAXE_DIG)){
+            cost -= 3;
+        } else if(stack.canPerformAction(ToolActions.AXE_DIG)){
+            cost -= 3;
+        } else if(stack.canPerformAction(ToolActions.SWORD_DIG)){
+            cost -= 2;
+        } else if(stack.canPerformAction(ToolActions.HOE_DIG)){
+            cost -= 2;
+        } else if(stack.canPerformAction(ToolActions.SHOVEL_DIG)){
+            cost -= 1;
+        }
+        return cost;
+    }
+
+    private static int calculateArmorCost(ArmorItem armorItem) {
+        int cost = 9;
+        switch (armorItem.getSlot()){
+            case HEAD -> cost -= 5;
+            case CHEST -> cost -= 8;
+            case LEGS -> cost -= 7;
+            case FEET -> cost -= 4;
+            default -> cost -= 2;
+        }
+        return cost;
     }
 
     @SubscribeEvent(priority = EventPriority.LOWEST)

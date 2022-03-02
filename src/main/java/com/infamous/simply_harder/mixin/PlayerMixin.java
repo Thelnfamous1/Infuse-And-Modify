@@ -14,8 +14,6 @@ import org.spongepowered.asm.mixin.injection.ModifyArg;
 @Mixin(Player.class)
 public abstract class PlayerMixin extends LivingEntity {
 
-    @Shadow public abstract Iterable<ItemStack> getArmorSlots();
-
     protected PlayerMixin(EntityType<? extends LivingEntity> entityType, Level level) {
         super(entityType, level);
     }

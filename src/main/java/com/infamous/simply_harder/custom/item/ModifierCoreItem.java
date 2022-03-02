@@ -29,9 +29,11 @@ import java.util.Optional;
 public class ModifierCoreItem extends Item {
 
     public static final String MODIFIER_CORE_TAG = new ResourceLocation(SimplyHarder.MOD_ID, "modifier_core").toString();
-    public static final String MODIFIERS_LABEL_LOCALIZATION = "item.simply_harder.modifier_core.modifiers";
+    public static final String MODIFIERS_LABEL_LOCALIZATION = "item.simply_harder.modifier_core.modifiers.";
     public static final String SLOT_TAG = "Slot";
     public static final String ATTRIBUTE_NAME_TAG = "AttributeName";
+    public static final String SUBTRACTIVE_MODIFIER_LOCALIZATION = "attribute.modifier.take.";
+    public static final String ADDITIVE_MODIFIER_LOCALIZATION = "attribute.modifier.plus.";
 
     public ModifierCoreItem(Properties properties) {
         super(properties);
@@ -110,22 +112,52 @@ public class ModifierCoreItem extends Item {
                     }
 
                     if (modifierAmount > 0.0D) {
-                        components.add((new TranslatableComponent("attribute.modifier.plus." + attributemodifier.getOperation().toValue(), ItemStack.ATTRIBUTE_MODIFIER_FORMAT.format(displayedAmount), new TranslatableComponent(entry.getKey().getDescriptionId()))).withStyle(ChatFormatting.BLUE));
+                        components.add((new TranslatableComponent(buildAdditiveModifierLocalization(attributemodifier), ItemStack.ATTRIBUTE_MODIFIER_FORMAT.format(displayedAmount), new TranslatableComponent(entry.getKey().getDescriptionId()))).withStyle(ChatFormatting.BLUE));
                     } else if (modifierAmount < 0.0D) {
                         displayedAmount *= -1.0D;
-                        components.add((new TranslatableComponent("attribute.modifier.take." + attributemodifier.getOperation().toValue(), ItemStack.ATTRIBUTE_MODIFIER_FORMAT.format(displayedAmount), new TranslatableComponent(entry.getKey().getDescriptionId()))).withStyle(ChatFormatting.RED));
+                        components.add((new TranslatableComponent(buildSubtractiveModifierLocalization(attributemodifier), ItemStack.ATTRIBUTE_MODIFIER_FORMAT.format(displayedAmount), new TranslatableComponent(entry.getKey().getDescriptionId()))).withStyle(ChatFormatting.RED));
                     }
                 }
             }
         }
     }
 
+    private static String buildSubtractiveModifierLocalization(AttributeModifier attributemodifier) {
+        return SUBTRACTIVE_MODIFIER_LOCALIZATION + attributemodifier.getOperation().toValue();
+    }
+
+    private static String buildAdditiveModifierLocalization(AttributeModifier attributemodifier) {
+        return ADDITIVE_MODIFIER_LOCALIZATION + attributemodifier.getOperation().toValue();
+    }
+
     private static String buildModifiersLocalization(EquipmentSlot equipmentslot) {
-        return MODIFIERS_LABEL_LOCALIZATION + "." + equipmentslot.getName();
+        return MODIFIERS_LABEL_LOCALIZATION + equipmentslot.getName();
     }
 
     public static boolean isModifierCore(ItemStack itemStack) {
         return itemStack.getItem() instanceof ModifierCoreItem;
+    }
+
+    public static boolean isEmptyModifierCore(ItemStack itemStack) {
+        return isModifierCore(itemStack) && !hasModifierCore(itemStack);
+    }
+
+    public static boolean isFullModifierCore(ItemStack itemStack) {
+        return isModifierCore(itemStack) && hasModifierCore(itemStack);
+    }
+
+    public static boolean isMimickingModifierCore(ItemStack itemStack) {
+        return !isModifierCore(itemStack) && hasModifierCore(itemStack);
+    }
+
+    public static boolean canModifyCore(ItemStack left, ItemStack right) {
+        return isEmptyModifierCore(left)
+                && isMimickingModifierCore(right);
+    }
+
+    public static boolean canModifyUsingCore(ItemStack left, ItemStack right) {
+        return left.isDamageableItem() && !hasModifierCore(left)
+                && isFullModifierCore(right);
     }
 
     @Override
