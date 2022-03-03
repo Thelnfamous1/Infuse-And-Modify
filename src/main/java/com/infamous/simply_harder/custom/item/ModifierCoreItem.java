@@ -76,14 +76,14 @@ public class ModifierCoreItem extends Item {
         }
     }
 
-    public static void addModifiersToCore(ItemStack addFrom, ItemStack addTo) {
+    public static void addModifiersToCore(ItemStack addFrom, ItemStack coreStack) {
         for(EquipmentSlot slot : EquipmentSlot.values()){
             Multimap<Attribute, AttributeModifier> modifiers = addFrom.getAttributeModifiers(slot);
             for(Map.Entry<Attribute, AttributeModifier> entry : modifiers.entries()){
-                addModifierToCore(addTo, entry.getKey(), entry.getValue(), slot);
+                addModifierToCore(coreStack, entry.getKey(), entry.getValue(), slot);
             }
         }
-        InfuseAndModifyHelper.addRequirementsToTag(addFrom, getModifierCore(addTo));
+        InfuseAndModifyHelper.addRequirementsToTag(addFrom, getModifierCore(coreStack));
     }
 
     // Replicated from ItemStack#addAttributeModifier

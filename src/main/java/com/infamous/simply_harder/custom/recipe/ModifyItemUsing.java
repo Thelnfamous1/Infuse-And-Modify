@@ -49,7 +49,7 @@ public class ModifyItemUsing extends ModificationRecipe{
         ItemStack right = getRight(container);
 
         ItemStack result = left.copy();
-        ModifierCoreItem.addModifiersFromCore(left, right);
+        ModifierCoreItem.addModifiersFromCore(result, right);
         return result;
     }
 
