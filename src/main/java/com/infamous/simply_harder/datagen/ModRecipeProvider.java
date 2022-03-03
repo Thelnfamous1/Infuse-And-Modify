@@ -2,6 +2,10 @@ package com.infamous.simply_harder.datagen;
 
 import com.infamous.simply_harder.SimplyHarder;
 import com.infamous.simply_harder.custom.critera.ExperienceChangeTrigger;
+import com.infamous.simply_harder.custom.recipe.InfuseIntoItemRecipe;
+import com.infamous.simply_harder.custom.recipe.InfuseItemIntoRecipe;
+import com.infamous.simply_harder.custom.recipe.ModifyItemUsing;
+import com.infamous.simply_harder.custom.recipe.ModifyUsingItemRecipe;
 import com.infamous.simply_harder.datagen.builder.DisabledRecipeBuilder;
 import com.infamous.simply_harder.datagen.builder.MultiConditionShapedRecipeBuilder;
 import com.infamous.simply_harder.registry.SHRecipes;
@@ -14,14 +18,17 @@ import net.minecraft.world.item.Items;
 import java.util.function.Consumer;
 
 public class ModRecipeProvider extends RecipeProvider {
+
     public ModRecipeProvider(DataGenerator dataGenerator) {
         super(dataGenerator);
     }
 
     @Override
     protected void buildCraftingRecipes(Consumer<FinishedRecipe> onFinished) {
-        SpecialRecipeBuilder.special(SHRecipes.INFUSE_INTO_ITEM.get()).save(onFinished, new ResourceLocation(SimplyHarder.MOD_ID, "infuse_into_item").toString());
-        SpecialRecipeBuilder.special(SHRecipes.INFUSE_ITEM_INTO.get()).save(onFinished, new ResourceLocation(SimplyHarder.MOD_ID,"infuse_item_into").toString());
+        SpecialRecipeBuilder.special(SHRecipes.INFUSE_INTO_ITEM.get()).save(onFinished, new ResourceLocation(SimplyHarder.MOD_ID, InfuseIntoItemRecipe.NAME).toString());
+        SpecialRecipeBuilder.special(SHRecipes.INFUSE_ITEM_INTO.get()).save(onFinished, new ResourceLocation(SimplyHarder.MOD_ID, InfuseItemIntoRecipe.NAME).toString());
+        SpecialRecipeBuilder.special(SHRecipes.MODIFY_ITEM_USING.get()).save(onFinished, new ResourceLocation(SimplyHarder.MOD_ID, ModifyItemUsing.NAME).toString());
+        SpecialRecipeBuilder.special(SHRecipes.MODIFY_USING_ITEM.get()).save(onFinished, new ResourceLocation(SimplyHarder.MOD_ID, ModifyUsingItemRecipe.NAME).toString());
 
         // REPLACE STONE TOOLS VANILLA RECIPES, REQUIRE LEVEL 10 to unlock
         MultiConditionShapedRecipeBuilder.shaped(Items.STONE_AXE).define('#', Items.STICK).define('X', ItemTags.STONE_TOOL_MATERIALS).pattern("XX").pattern("X#").pattern(" #").unlockedBy("has_cobblestone", has(ItemTags.STONE_TOOL_MATERIALS)).unlockedBy("has_experience", hasExperienceLevel(10)).save(onFinished);

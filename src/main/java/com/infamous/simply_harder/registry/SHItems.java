@@ -24,11 +24,11 @@ public class SHItems {
     }
 
     private static Supplier<Item> buildInfusionCore() {
-        return () -> new InfusionCatalystItem(((new Item.Properties()).stacksTo(1).tab(CreativeModeTab.TAB_MISC)));
+        return () -> new InfusionCatalystItem(((new Item.Properties()).stacksTo(1).rarity(Rarity.EPIC).tab(CreativeModeTab.TAB_MISC)));
     }
 
     private static Supplier<Item> buildModifierCore() {
-        return () -> new ModifierCoreItem(((new Item.Properties()).stacksTo(1).tab(CreativeModeTab.TAB_MISC)));
+        return () -> new ModifierCoreItem(((new Item.Properties()).stacksTo(1).rarity(Rarity.EPIC).tab(CreativeModeTab.TAB_MISC)));
     }
 
     private static RegistryObject<Item> register(String id, Supplier<Item> builder) {

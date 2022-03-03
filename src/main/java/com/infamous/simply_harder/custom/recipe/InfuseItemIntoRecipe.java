@@ -10,6 +10,8 @@ import net.minecraft.world.level.Level;
 
 public class InfuseItemIntoRecipe extends InfusionRecipe{
 
+    public static final String NAME = "infuse_item_into";
+
     public InfuseItemIntoRecipe(ResourceLocation id) {
         super(id);
     }

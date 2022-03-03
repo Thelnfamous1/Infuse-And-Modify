@@ -1,5 +1,6 @@
 package com.infamous.simply_harder;
 
+import com.infamous.simply_harder.custom.ModRecipeTypes;
 import com.infamous.simply_harder.custom.critera.ExperienceChangeTrigger;
 import com.infamous.simply_harder.custom.critera.ModCriteriaTriggers;
 import com.infamous.simply_harder.datagen.ModBlockTagsProvider;
@@ -9,7 +10,9 @@ import com.infamous.simply_harder.network.ModNetwork;
 import com.infamous.simply_harder.registry.SHAttributes;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.data.DataGenerator;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.event.entity.EntityAttributeModificationEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -30,6 +33,7 @@ public class SHModEvents {
         event.enqueueWork(ModNetwork::register);
         //event.enqueueWork(PeakExperienceAttacher::register);
         event.enqueueWork(() -> ModCriteriaTriggers.EXPERIENCE_CHANGED.register(CriteriaTriggers.register(new ExperienceChangeTrigger())));
+        event.enqueueWork(() -> ModRecipeTypes.MODIFICATION.register(RecipeType.register(new ResourceLocation(SimplyHarder.MOD_ID, "modification").toString())));
     }
 
     @SubscribeEvent

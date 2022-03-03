@@ -2,52 +2,52 @@
   "attribute.name.player.exhaustion": "Exhaustion",
 
   "item.simply_harder.infusion_catalyst": "Infusion Catalyst",
-
-  "item.simply_harder.infusion_catalyst.required_tool_actions": "Required Tool Actions:",
-
-  "item.simply_harder.tool_actions": "Tool Actions:",
-
-  "item.simply_harder.tool_action.axe_dig": "Axe Dig",
-  "item.simply_harder.tool_action.axe_strip": "Axe Strip",
-  "item.simply_harder.tool_action.axe_scrape": "Axe Scrape",
-  "item.simply_harder.tool_action.axe_wax_off": "Axe Wax Off",
-
-  "item.simply_harder.tool_action.pickaxe_dig": "Pickaxe Dig",
-
-  "item.simply_harder.tool_action.hoe_dig": "Hoe Dig",
-
-  "item.simply_harder.tool_action.shears_dig": "Shears Dig",
-  "item.simply_harder.tool_action.shears_harvest": "Shears Harvest",
-  "item.simply_harder.tool_action.shears_carve": "Shears Carve",
-  "item.simply_harder.tool_action.shears_disarm": "Shears Disarm",
-
-  "item.simply_harder.tool_action.shovel_dig": "Shovel Dig",
-  "item.simply_harder.tool_action.shovel_flatten": "Shovel Flatten",
-
-  "item.simply_harder.tool_action.sword_dig": "Sword Dig",
-  "item.simply_harder.tool_action.sword_sweep": "Sword Sweep",
-
-  "item.simply_harder.infusion_catalyst.required_equipment_slot": "Required Equipment Slot:",
-
-  "item.simply_harder.equipment_slot": "Equipment Slot:",
-
-  "item.simply_harder.equipment_slot.mainhand": "Main Hand",
-  "item.simply_harder.equipment_slot.offhand": "Off Hand",
-  "item.simply_harder.equipment_slot.feet": "Feet",
-  "item.simply_harder.equipment_slot.legs": "Legs",
-  "item.simply_harder.equipment_slot.chest": "Chest",
-  "item.simply_harder.equipment_slot.head": "Head",
-
   "item.simply_harder.infusion_catalyst.infused_item": "Infused Item:",
-
   "item.simply_harder.infusion_catalyst.inactive": "Inactive",
   
   "item.simply_harder.modifier_core": "Modifier Core",
+  "item.simply_harder.modifier_core.modifiers.mainhand": "Stored Main Hand Modifiers:",
+  "item.simply_harder.modifier_core.modifiers.offhand": "Stored Off Hand Modifiers:",
+  "item.simply_harder.modifier_core.modifiers.feet": "Stored Feet Modifiers:",
+  "item.simply_harder.modifier_core.modifiers.legs": "Stored Legs Modifiers:",
+  "item.simply_harder.modifier_core.modifiers.chest": "Stored Chest Modifiers:",
+  "item.simply_harder.modifier_core.modifiers.head": "Stored Head Modifiers:",
+  "item.simply_harder.modifier_core.empty": "Empty",
   
-  "item.simply_harder.modifier_core.modifiers.mainhand": "Main Hand Modifiers from Core:",
-  "item.simply_harder.modifier_core.modifiers.offhand": "Off Hand Modifiers from Core:",
-  "item.simply_harder.modifier_core.modifiers.feet": "Feet Modifiers from Core:",
-  "item.simply_harder.modifier_core.modifiers.legs": "Legs Modifiers from Core:",
-  "item.simply_harder.modifier_core.modifiers.chest": "Chest Modifiers from Core:",
-  "item.simply_harder.modifier_core.modifiers.head": "Head Modifiers from Core:"
+  "item.simply_harder.generic.required_tool_actions": "Required Tool Actions:",
+  "item.simply_harder.generic.tool_actions": "Tool Actions:",
+  "item.simply_harder.generic.tool_action.axe_dig": "Axe Dig",
+  "item.simply_harder.generic.tool_action.axe_strip": "Axe Strip",
+  "item.simply_harder.generic.tool_action.axe_scrape": "Axe Scrape",
+  "item.simply_harder.generic.tool_action.axe_wax_off": "Axe Wax Off",
+  "item.simply_harder.generic.tool_action.pickaxe_dig": "Pickaxe Dig",
+  "item.simply_harder.generic.tool_action.hoe_dig": "Hoe Dig",
+  "item.simply_harder.generic.tool_action.shears_dig": "Shears Dig",
+  "item.simply_harder.generic.tool_action.shears_harvest": "Shears Harvest",
+  "item.simply_harder.generic.tool_action.shears_carve": "Shears Carve",
+  "item.simply_harder.generic.tool_action.shears_disarm": "Shears Disarm",
+  "item.simply_harder.generic.tool_action.shovel_dig": "Shovel Dig",
+  "item.simply_harder.generic.tool_action.shovel_flatten": "Shovel Flatten",
+  "item.simply_harder.generic.tool_action.sword_dig": "Sword Dig",
+  "item.simply_harder.generic.tool_action.sword_sweep": "Sword Sweep",
+
+  "item.simply_harder.generic.required_use_animation": "Required Use Animation:",
+  "item.simply_harder.generic.use_animation": "Use Animation:",
+  "item.simply_harder.generic.use_animation.none": "None",
+  "item.simply_harder.generic.use_animation.eat": "Eat",
+  "item.simply_harder.generic.use_animation.drink": "Drink",
+  "item.simply_harder.generic.use_animation.block": "Block",
+  "item.simply_harder.generic.use_animation.bow": "Bow",
+  "item.simply_harder.generic.use_animation.spear": "Spear",
+  "item.simply_harder.generic.use_animation.crossbow": "Crossbow",
+  "item.simply_harder.generic.use_animation.spyglass": "Spyglass",
+
+  "item.simply_harder.generic.required_equipment_slot": "Required Equipment Slot:",
+  "item.simply_harder.generic.equipment_slot": "Equipment Slot:",
+  "item.simply_harder.generic.equipment_slot.mainhand": "Main Hand",
+  "item.simply_harder.generic.equipment_slot.offhand": "Off Hand",
+  "item.simply_harder.generic.equipment_slot.feet": "Feet",
+  "item.simply_harder.generic.equipment_slot.legs": "Legs",
+  "item.simply_harder.generic.equipment_slot.chest": "Chest",
+  "item.simply_harder.generic.equipment_slot.head": "Head"
 }
