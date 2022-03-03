@@ -40,7 +40,7 @@ public class ModifyUsingItemRecipe extends ModificationRecipe{
     public boolean matches(Container container, Level level) {
         ItemStack left = getLeft(container);
         ItemStack right = getRight(container);
-        return ModifierCoreItem.isEmptyCore(left) && !right.isEmpty();
+        return ModifierCoreItem.isEmptyCore(left) && !right.isEmpty() && !ModifierCoreItem.isModifierCore(right);
     }
 
     @Override

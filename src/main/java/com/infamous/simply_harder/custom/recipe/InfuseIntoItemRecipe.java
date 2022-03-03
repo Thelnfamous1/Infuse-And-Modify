@@ -1,6 +1,7 @@
 package com.infamous.simply_harder.custom.recipe;
 
 import com.infamous.simply_harder.custom.item.InfusionCatalystItem;
+import com.infamous.simply_harder.custom.item.ModifierCoreItem;
 import com.infamous.simply_harder.registry.SHRecipes;
 import com.infamous.simply_harder.util.InfuseAndModifyHelper;
 import net.minecraft.nbt.CompoundTag;
@@ -26,7 +27,7 @@ public class InfuseIntoItemRecipe extends InfusionRecipe{
     public boolean matches(Container container, Level level) {
         ItemStack base = InfusionRecipe.getBase(container);
         ItemStack addition = InfusionRecipe.getAddition(container);
-        return InfuseAndModifyHelper.meetsRequirements(base, addition);
+        return !base.isEmpty() && !ModifierCoreItem.isModifierCore(base) && InfuseAndModifyHelper.meetsRequirements(base, addition);
     }
 
     @Override
