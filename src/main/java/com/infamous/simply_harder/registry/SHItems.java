@@ -2,7 +2,7 @@ package com.infamous.simply_harder.registry;
 
 import com.infamous.simply_harder.SimplyHarder;
 import com.infamous.simply_harder.custom.item.ModifierCoreItem;
-import com.infamous.simply_harder.custom.item.InfusionCoreItem;
+import com.infamous.simply_harder.custom.item.InfusionCatalystItem;
 import net.minecraft.world.item.*;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
@@ -15,16 +15,16 @@ public class SHItems {
 
     private static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, SimplyHarder.MOD_ID);
 
-    public static final RegistryObject<Item> INFUSION_CORE = register("infusion_core", buildInfusionCore());
+    public static final RegistryObject<Item> INFUSION_CATALYST = register(InfusionCatalystItem.NAME, buildInfusionCore());
 
-    public static final RegistryObject<Item> MODIFIER_CORE = register("modifier_core", buildModifierCore());
+    public static final RegistryObject<Item> MODIFIER_CORE = register(ModifierCoreItem.NAME, buildModifierCore());
 
     private static Supplier<Item> buildSimpleMaterial() {
         return () -> new Item(((new Item.Properties()).tab(CreativeModeTab.TAB_MATERIALS)));
     }
 
     private static Supplier<Item> buildInfusionCore() {
-        return () -> new InfusionCoreItem(((new Item.Properties()).stacksTo(1).tab(CreativeModeTab.TAB_MISC)));
+        return () -> new InfusionCatalystItem(((new Item.Properties()).stacksTo(1).tab(CreativeModeTab.TAB_MISC)));
     }
 
     private static Supplier<Item> buildModifierCore() {

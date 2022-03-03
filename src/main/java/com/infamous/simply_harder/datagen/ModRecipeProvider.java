@@ -1,15 +1,15 @@
 package com.infamous.simply_harder.datagen;
 
 import com.infamous.simply_harder.SimplyHarder;
-import com.infamous.simply_harder.datagen.builder.MultiConditionShapedRecipeBuilder;
-import com.infamous.simply_harder.datagen.builder.DisabledRecipeBuilder;
 import com.infamous.simply_harder.custom.critera.ExperienceChangeTrigger;
-import com.infamous.simply_harder.datagen.util.InfusionRecipeHelper;
+import com.infamous.simply_harder.datagen.builder.DisabledRecipeBuilder;
+import com.infamous.simply_harder.datagen.builder.MultiConditionShapedRecipeBuilder;
+import com.infamous.simply_harder.registry.SHRecipes;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.recipes.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
-import net.minecraft.world.item.*;
+import net.minecraft.world.item.Items;
 
 import java.util.function.Consumer;
 
@@ -20,20 +20,8 @@ public class ModRecipeProvider extends RecipeProvider {
 
     @Override
     protected void buildCraftingRecipes(Consumer<FinishedRecipe> onFinished) {
-        InfusionRecipeHelper.infusion(onFinished, ArmorMaterials.LEATHER, Items.LEATHER_BOOTS, Items.LEATHER_CHESTPLATE, Items.LEATHER_HELMET, Items.LEATHER_LEGGINGS);
-        InfusionRecipeHelper.infusion(onFinished, ArmorMaterials.CHAIN, Items.CHAINMAIL_BOOTS, Items.CHAINMAIL_CHESTPLATE, Items.CHAINMAIL_HELMET, Items.CHAINMAIL_LEGGINGS);
-        InfusionRecipeHelper.infusion(onFinished, ArmorMaterials.IRON, Items.IRON_BOOTS, Items.IRON_CHESTPLATE, Items.IRON_HELMET, Items.IRON_LEGGINGS);
-        InfusionRecipeHelper.infusion(onFinished, ArmorMaterials.GOLD, Items.GOLDEN_BOOTS, Items.GOLDEN_CHESTPLATE, Items.GOLDEN_HELMET, Items.GOLDEN_LEGGINGS);
-        InfusionRecipeHelper.infusion(onFinished, ArmorMaterials.DIAMOND, Items.DIAMOND_BOOTS, Items.DIAMOND_CHESTPLATE, Items.DIAMOND_HELMET, Items.DIAMOND_LEGGINGS);
-        InfusionRecipeHelper.infusion(onFinished, ModItemTagsProvider.HELMETS, ArmorMaterials.TURTLE, Items.TURTLE_HELMET); // Special case: Turtle tier only used for 1 item in vanilla, Turtle Helmet
-        InfusionRecipeHelper.infusion(onFinished, ArmorMaterials.NETHERITE, Items.NETHERITE_BOOTS, Items.NETHERITE_CHESTPLATE, Items.NETHERITE_HELMET, Items.NETHERITE_LEGGINGS);
-
-        InfusionRecipeHelper.infusion(onFinished, Tiers.WOOD, Items.WOODEN_AXE, Items.WOODEN_HOE, Items.WOODEN_PICKAXE, Items.WOODEN_SHOVEL, Items.WOODEN_SWORD);
-        InfusionRecipeHelper.infusion(onFinished, Tiers.STONE, Items.STONE_AXE, Items.STONE_HOE, Items.STONE_PICKAXE, Items.STONE_SHOVEL, Items.STONE_SWORD);
-        InfusionRecipeHelper.infusion(onFinished, Tiers.IRON, Items.IRON_AXE, Items.IRON_HOE, Items.IRON_PICKAXE, Items.IRON_SHOVEL, Items.IRON_SWORD);
-        InfusionRecipeHelper.infusion(onFinished, Tiers.DIAMOND, Items.DIAMOND_AXE, Items.DIAMOND_HOE, Items.DIAMOND_PICKAXE, Items.DIAMOND_SHOVEL, Items.DIAMOND_SWORD);
-        InfusionRecipeHelper.infusion(onFinished, Tiers.GOLD, Items.GOLDEN_AXE, Items.GOLDEN_HOE, Items.GOLDEN_PICKAXE, Items.GOLDEN_SHOVEL, Items.GOLDEN_SWORD);
-        InfusionRecipeHelper.infusion(onFinished, Tiers.NETHERITE, Items.NETHERITE_AXE, Items.NETHERITE_HOE, Items.NETHERITE_PICKAXE, Items.NETHERITE_SHOVEL, Items.NETHERITE_SWORD);
+        SpecialRecipeBuilder.special(SHRecipes.INFUSE_INTO_ITEM.get()).save(onFinished, new ResourceLocation(SimplyHarder.MOD_ID, "infuse_into_item").toString());
+        SpecialRecipeBuilder.special(SHRecipes.INFUSE_ITEM_INTO.get()).save(onFinished, new ResourceLocation(SimplyHarder.MOD_ID,"infuse_item_into").toString());
 
         // REPLACE STONE TOOLS VANILLA RECIPES, REQUIRE LEVEL 10 to unlock
         MultiConditionShapedRecipeBuilder.shaped(Items.STONE_AXE).define('#', Items.STICK).define('X', ItemTags.STONE_TOOL_MATERIALS).pattern("XX").pattern("X#").pattern(" #").unlockedBy("has_cobblestone", has(ItemTags.STONE_TOOL_MATERIALS)).unlockedBy("has_experience", hasExperienceLevel(10)).save(onFinished);

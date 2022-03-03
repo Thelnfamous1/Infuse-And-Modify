@@ -4,6 +4,7 @@ import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import com.infamous.simply_harder.SimplyHarder;
 import net.minecraft.ChatFormatting;
+import net.minecraft.Util;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.Tag;
@@ -28,8 +29,8 @@ import java.util.Optional;
 
 public class ModifierCoreItem extends Item {
 
-    public static final String MODIFIER_CORE_TAG = new ResourceLocation(SimplyHarder.MOD_ID, "modifier_core").toString();
-    public static final String MODIFIERS_LABEL_LOCALIZATION = "item.simply_harder.modifier_core.modifiers.";
+    public static final String NAME = "modifier_core";
+    public static final String MODIFIER_CORE_TAG = new ResourceLocation(SimplyHarder.MOD_ID, NAME).toString();
     public static final String SLOT_TAG = "Slot";
     public static final String ATTRIBUTE_NAME_TAG = "AttributeName";
     public static final String SUBTRACTIVE_MODIFIER_LOCALIZATION = "attribute.modifier.take.";
@@ -89,12 +90,12 @@ public class ModifierCoreItem extends Item {
                 null);
     }
 
-    private static void showModifiersFromCore(List<Component> components, ItemStack stack){
+    public static void showModifiersFromCore(List<Component> components, ItemStack stack){
         for(EquipmentSlot slot : EquipmentSlot.values()) {
             Multimap<Attribute, AttributeModifier> modifiersFromCore = getModifiersFromCore(stack, slot);
             if (!modifiersFromCore.isEmpty()) {
                 components.add(TextComponent.EMPTY);
-                components.add((new TranslatableComponent(buildModifiersLocalization(slot))).withStyle(ChatFormatting.GRAY));
+                components.add((new TranslatableComponent(Util.makeDescriptionId("item", buildModifiersLocalization(slot)))).withStyle(ChatFormatting.GRAY));
 
                 for(Map.Entry<Attribute, AttributeModifier> entry : modifiersFromCore.entries()) {
                     AttributeModifier attributemodifier = entry.getValue();
@@ -130,8 +131,8 @@ public class ModifierCoreItem extends Item {
         return ADDITIVE_MODIFIER_LOCALIZATION + attributemodifier.getOperation().toValue();
     }
 
-    private static String buildModifiersLocalization(EquipmentSlot equipmentslot) {
-        return MODIFIERS_LABEL_LOCALIZATION + equipmentslot.getName();
+    private static ResourceLocation buildModifiersLocalization(EquipmentSlot equipmentslot) {
+        return new ResourceLocation(SimplyHarder.MOD_ID, NAME + "/modifiers/" + equipmentslot.getName());
     }
 
     public static boolean isModifierCore(ItemStack itemStack) {
@@ -146,13 +147,13 @@ public class ModifierCoreItem extends Item {
         return isModifierCore(itemStack) && hasModifierCore(itemStack);
     }
 
-    public static boolean isMimickingModifierCore(ItemStack itemStack) {
+    public static boolean isNonCoreWithModifierCore(ItemStack itemStack) {
         return !isModifierCore(itemStack) && hasModifierCore(itemStack);
     }
 
     public static boolean canModifyCore(ItemStack left, ItemStack right) {
         return isEmptyModifierCore(left)
-                && isMimickingModifierCore(right);
+                && isNonCoreWithModifierCore(right);
     }
 
     public static boolean canModifyUsingCore(ItemStack left, ItemStack right) {

@@ -37,8 +37,8 @@ public class SHModEvents {
         DataGenerator generator = event.getGenerator();
         ExistingFileHelper existingFileHelper = event.getExistingFileHelper();
         if(event.includeServer()){
-            ModBlockTagsProvider modBlockTagsProvider = new ModBlockTagsProvider(generator, existingFileHelper);
-            generator.addProvider(new ModItemTagsProvider(generator, modBlockTagsProvider, existingFileHelper));
+            //ModBlockTagsProvider modBlockTagsProvider = new ModBlockTagsProvider(generator, existingFileHelper);
+            //generator.addProvider(new ModItemTagsProvider(generator, modBlockTagsProvider, existingFileHelper));
             generator.addProvider(new ModRecipeProvider(generator));
         }
     }

@@ -4,7 +4,8 @@
   "compatibilityLevel": "JAVA_17",
   "refmap": "simply_harder.refmap.json",
   "mixins": [
-    "PlayerMixin"
+    "PlayerMixin",
+    "ToolActionAccessor"
   ],
   "injectors": {
     "defaultRequire": 1
