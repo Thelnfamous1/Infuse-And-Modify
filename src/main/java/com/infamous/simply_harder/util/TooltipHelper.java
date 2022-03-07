@@ -36,7 +36,7 @@ public class TooltipHelper {
                 (new TranslatableComponent(Util.makeDescriptionId("item", buildMasterworkTierLocalization(tier))))
                         .withStyle(ChatFormatting.YELLOW)
         );
-        if(EnhancementCoreItem.isMaxTier(itemStack)){
+        if(!EnhancementCoreItem.isMaxTier(itemStack)){
             int levelCost = EnhancementCoreItem.getLevelCost(itemStack);
             int materialCost = EnhancementCoreItem.getMaterialCost(itemStack);
             toolTip.add(

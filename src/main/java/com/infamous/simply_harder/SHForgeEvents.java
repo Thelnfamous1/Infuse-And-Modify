@@ -26,17 +26,17 @@ public class SHForgeEvents {
         ItemStack left = event.getLeft();
         ItemStack right = event.getRight();
         Player player = event.getPlayer();
-        SimpleAnvilContainer container = ForgingRecipe.buildAnvilContainer((AnvilMenu) player.containerMenu, left, right);
+        SimpleAnvilContainer container = ForgingRecipe.buildAnvilContainer((AnvilMenu) player.containerMenu, player, left, right);
         player.level.getRecipeManager()
                 .getRecipeFor(ModRecipeTypes.MODIFICATION.get(), container, player.level)
                 .ifPresentOrElse(mr -> {
                     event.setOutput(mr.assemble(container));
                     event.setCost(mr.calculateLevelCost(container));
                     event.setMaterialCost(mr.calculateMaterialCost(container));
-                }, () -> handleMasterworkRecipe(event, player, container));
+                }, () -> handleMasterworkingRecipe(event, player, container));
     }
 
-    private static void handleMasterworkRecipe(AnvilUpdateEvent event, Player player, SimpleAnvilContainer container) {
+    private static void handleMasterworkingRecipe(AnvilUpdateEvent event, Player player, SimpleAnvilContainer container) {
         player.level.getRecipeManager()
                 .getRecipeFor(ModRecipeTypes.MASTERWORKING.get(), container, player.level)
                 .ifPresent(mwr -> {

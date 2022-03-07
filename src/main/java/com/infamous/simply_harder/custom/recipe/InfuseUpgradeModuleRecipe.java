@@ -23,7 +23,7 @@ public class InfuseUpgradeModuleRecipe extends BaseInfusionRecipe {
 
     @Override
     public boolean isAdditionIngredient(ItemStack stack) {
-        return !stack.isEmpty();
+        return !stack.isEmpty() && stack.isDamageableItem();
     }
 
     @Override

@@ -21,8 +21,13 @@ public class MasterworkingRecipe extends ForgingRecipe {
     public boolean matches(SimpleAnvilContainer container, Level level) {
         ItemStack left = ForgingRecipe.getLeft(container);
         ItemStack right = ForgingRecipe.getRight(container);
-        return !EnhancementCoreItem.isMaxTier(left)
+        return this.isValidItemForMasterworking(left, container)
+                && !EnhancementCoreItem.isMaxTier(left)
                 && EnhancementCoreItem.isEnhancementCore(right);
+    }
+
+    private boolean isValidItemForMasterworking(ItemStack left, SimpleAnvilContainer container) {
+        return !left.isEmpty() && (left.isDamageableItem() || container.getPlayer().getAbilities().instabuild);
     }
 
     @Override

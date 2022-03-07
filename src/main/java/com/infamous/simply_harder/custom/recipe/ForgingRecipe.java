@@ -2,6 +2,7 @@ package com.infamous.simply_harder.custom.recipe;
 
 import com.infamous.simply_harder.custom.container.SimpleAnvilContainer;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AnvilMenu;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Recipe;
@@ -14,8 +15,8 @@ public abstract class ForgingRecipe implements Recipe<SimpleAnvilContainer> {
         this.id = id;
     }
 
-    public static SimpleAnvilContainer buildAnvilContainer(AnvilMenu anvilMenu, ItemStack left, ItemStack right){
-        return new SimpleAnvilContainer(anvilMenu, left, right);
+    public static SimpleAnvilContainer buildAnvilContainer(AnvilMenu anvilMenu, Player player, ItemStack left, ItemStack right){
+        return new SimpleAnvilContainer(anvilMenu, player, left, right);
     }
 
     protected static ItemStack getLeft(SimpleAnvilContainer container) {
