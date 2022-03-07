@@ -1,8 +1,10 @@
 package com.infamous.simply_harder.client;
 
 import com.infamous.simply_harder.SimplyHarder;
+import com.infamous.simply_harder.custom.item.EnhancementCoreItem;
 import com.infamous.simply_harder.util.TooltipHelper;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TextComponent;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraftforge.api.distmarker.Dist;
@@ -21,7 +23,9 @@ public class SHForgeClientEvents {
         ItemStack itemStack = event.getItemStack();
         List<Component> toolTip = event.getToolTip();
 
-        if(flags.isAdvanced()){
+        if(EnhancementCoreItem.hasMasterwork(itemStack)){
+            toolTip.add(TextComponent.EMPTY);
+            TooltipHelper.appendMasterworkLines(toolTip, itemStack);
         }
     }
 

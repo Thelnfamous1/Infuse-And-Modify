@@ -1,6 +1,7 @@
 package com.infamous.simply_harder.custom.item;
 
 import com.infamous.simply_harder.SimplyHarder;
+import com.infamous.simply_harder.registry.SHItems;
 import com.infamous.simply_harder.util.TooltipHelper;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -16,16 +17,65 @@ public class EnhancementCoreItem extends Item {
     public static final String NAME = "enhancement_core";
 
     public static final ResourceLocation ENHANCEMENT_CORE_LORE_LOCALIZATION = new ResourceLocation(SimplyHarder.MOD_ID, NAME + "/lore");
-
+    public static final int MAX_TIER = 10;
 
     public EnhancementCoreItem(Properties properties) {
         super(properties);
     }
 
-    @Override
-    public void appendHoverText(ItemStack p_41421_, @Nullable Level p_41422_, List<Component> p_41423_, TooltipFlag p_41424_) {
-        super.appendHoverText(p_41421_, p_41422_, p_41423_, p_41424_);
+    public static boolean hasMasterwork(ItemStack itemStack) {
+        // TODO
+        return false;
+    }
 
-        TooltipHelper.appendLore(p_41423_, ENHANCEMENT_CORE_LORE_LOCALIZATION);
+    public static int getTier(ItemStack itemStack) {
+        // TODO
+        return 0;
+    }
+
+    public static boolean isMaxTier(ItemStack itemStack) {
+        return getTier(itemStack) >= MAX_TIER;
+    }
+
+    public static int getLevelCost(ItemStack itemStack) {
+        // TODO
+        return 0;
+    }
+
+    public static int getMaterialCost(ItemStack itemStack) {
+        // TODO
+        return 0;
+    }
+
+    public static boolean isEnhancementCore(ItemStack right) {
+        return right.is(SHItems.ENHANCEMENT_CORE.get());
+    }
+
+    public static void setTier(ItemStack left, int tier) {
+        // TODO
+
+        if(!isMaxTier(left)){
+            setLevelCost(left, calculateCostForTier(tier));
+            setMaterialCost(left, calculateCostForTier(tier));
+        }
+    }
+
+    private static void setMaterialCost(ItemStack left, int materialCost) {
+        // TODO
+    }
+
+    private static void setLevelCost(ItemStack left, int levelCost) {
+        // TODO
+    }
+
+    private static int calculateCostForTier(int tier) {
+        return tier / 2 + tier % 2 == 0 ? 0 : 1;
+    }
+
+    @Override
+    public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag tooltipFlag) {
+        super.appendHoverText(stack, level, tooltip, tooltipFlag);
+
+        TooltipHelper.appendLore(tooltip, ENHANCEMENT_CORE_LORE_LOCALIZATION);
     }
 }

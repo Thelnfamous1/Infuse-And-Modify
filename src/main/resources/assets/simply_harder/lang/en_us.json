@@ -4,7 +4,22 @@
   "item.simply_harder.upgrade_module.lore": "A collection of universal components that can be used to infuse gear items.",
   
   "item.simply_harder.modification": "Modification",
+  "item.simply_harder.modification.equipped": "Current Mod:",
+  "item.simply_harder.modification.": "Current Mod",
 
   "item.simply_harder.enhancement_core": "Enhancement Core",
-  "item.simply_harder.enhancement_core.lore": "Required for forging Masterwork gear."
+  "item.simply_harder.enhancement_core.lore": "Required for forging Masterwork gear.",
+
+  "item.simply_harder.masterwork.tier.1": "Tier I",
+  "item.simply_harder.masterwork.tier.2": "Tier II",
+  "item.simply_harder.masterwork.tier.3": "Tier III",
+  "item.simply_harder.masterwork.tier.4": "Tier IV",
+  "item.simply_harder.masterwork.tier.5": "Tier V",
+  "item.simply_harder.masterwork.tier.6": "Tier VI",
+  "item.simply_harder.masterwork.tier.7": "Tier VII",
+  "item.simply_harder.masterwork.tier.8": "Tier VIII",
+  "item.simply_harder.masterwork.tier.9": "Tier IX",
+  "item.simply_harder.masterwork.tier.10": "Masterwork",
+  "item.simply_harder.masterwork.level_cost": "Tier Up Level Cost: %1$s",
+  "item.simply_harder.masterwork.material_cost": "Tier Up Material Cost: %1$s"
 }

@@ -11,6 +11,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TextComponent;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
@@ -89,28 +90,38 @@ public class UpgradeModuleItem extends Item {
         return tag.getCompound(UPGRADE_MODULE_TAG);
     }
 
-    private static void appendInfusedItemText(ItemStack itemStack, List<Component> components) {
-        Item infusedItemType = getInfusedItemType(itemStack);
-        components.add(
-                (new TranslatableComponent(Util.makeDescriptionId("item", INFUSED_ITEM_LABEL_LOCALIZATION)))
-                        .withStyle(ChatFormatting.GRAY)
-                        .append(" ")
-                        .append(
-                                (new TranslatableComponent(infusedItemType.getDescriptionId()))
-                                        .withStyle(ChatFormatting.GREEN)
-                        )
-        );
+    private static void appendInfusedItemText(ItemStack itemStack, List<Component> tooltip, TooltipFlag tooltipFlag) {
+        if(tooltipFlag.isAdvanced()){
+            ItemStack infusedItem = getInfusedItem(itemStack);
+            tooltip.add(
+                    (new TranslatableComponent(Util.makeDescriptionId("item", INFUSED_ITEM_LABEL_LOCALIZATION)))
+                            .withStyle(ChatFormatting.GRAY)
+            );
+            List<Component> tooltipLines = infusedItem.getTooltipLines((Player)null, tooltipFlag);
+            tooltip.addAll(tooltipLines);
+        } else{
+            Item infusedItemType = getInfusedItemType(itemStack);
+            tooltip.add(
+                    (new TranslatableComponent(Util.makeDescriptionId("item", INFUSED_ITEM_LABEL_LOCALIZATION)))
+                            .withStyle(ChatFormatting.GRAY)
+                            .append(" ")
+                            .append(
+                                    (new TranslatableComponent(infusedItemType.getDescriptionId()))
+                                            .withStyle(ChatFormatting.GREEN)
+                            )
+            );
+        }
     }
 
     @Override
-    public void appendHoverText(ItemStack itemStack, @Nullable Level level, List<Component> toolTip, TooltipFlag tooltipFlag) {
-        super.appendHoverText(itemStack, level, toolTip, tooltipFlag);
+    public void appendHoverText(ItemStack itemStack, @Nullable Level level, List<Component> tooltip, TooltipFlag tooltipFlag) {
+        super.appendHoverText(itemStack, level, tooltip, tooltipFlag);
 
-        TooltipHelper.appendLore(toolTip, UPGRADE_MODULE_LORE_LOCALIZATION);
+        TooltipHelper.appendLore(tooltip, UPGRADE_MODULE_LORE_LOCALIZATION);
 
         if(hasInfusedItem(itemStack)){
-            toolTip.add(TextComponent.EMPTY);
-            appendInfusedItemText(itemStack, toolTip);
+            tooltip.add(TextComponent.EMPTY);
+            appendInfusedItemText(itemStack, tooltip, tooltipFlag);
         }
     }
 

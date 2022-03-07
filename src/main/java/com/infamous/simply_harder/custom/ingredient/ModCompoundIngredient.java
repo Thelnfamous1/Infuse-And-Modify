@@ -1,4 +1,4 @@
-package com.infamous.simply_harder.custom;
+package com.infamous.simply_harder.custom.ingredient;
 
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraftforge.common.crafting.CompoundIngredient;

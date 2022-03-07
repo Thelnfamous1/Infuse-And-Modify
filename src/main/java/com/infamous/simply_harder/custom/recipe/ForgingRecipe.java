@@ -1,31 +1,28 @@
 package com.infamous.simply_harder.custom.recipe;
 
-import com.infamous.simply_harder.custom.ModRecipeTypes;
+import com.infamous.simply_harder.custom.container.SimpleAnvilContainer;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.Container;
-import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.inventory.AnvilMenu;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Recipe;
-import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.block.Blocks;
 
-public abstract class BaseModificationRecipe implements Recipe<Container> {
+public abstract class ForgingRecipe implements Recipe<SimpleAnvilContainer> {
     private final ResourceLocation id;
 
-    public BaseModificationRecipe(ResourceLocation id) {
+    public ForgingRecipe(ResourceLocation id) {
         this.id = id;
     }
 
-    public static Container buildContainer(ItemStack left, ItemStack right){
-        return new SimpleContainer(left, right);
+    public static SimpleAnvilContainer buildAnvilContainer(AnvilMenu anvilMenu, ItemStack left, ItemStack right){
+        return new SimpleAnvilContainer(anvilMenu, left, right);
     }
 
-    protected static ItemStack getLeft(Container container) {
+    protected static ItemStack getLeft(SimpleAnvilContainer container) {
         return container.getItem(AnvilMenu.INPUT_SLOT);
     }
 
-    protected static ItemStack getRight(Container container) {
+    protected static ItemStack getRight(SimpleAnvilContainer container) {
         return container.getItem(AnvilMenu.ADDITIONAL_SLOT);
     }
 
@@ -46,12 +43,7 @@ public abstract class BaseModificationRecipe implements Recipe<Container> {
         return new ItemStack(Blocks.ANVIL);
     }
 
-    @Override
-    public RecipeType<?> getType() {
-        return ModRecipeTypes.MODIFICATION.get();
-    }
+    public abstract int calculateLevelCost(SimpleAnvilContainer container);
 
-    public abstract int calculateLevelCost(Container container);
-
-    public abstract int calculateMaterialCost(Container container);
+    public abstract int calculateMaterialCost(SimpleAnvilContainer container);
 }

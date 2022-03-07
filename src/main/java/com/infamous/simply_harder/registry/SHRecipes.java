@@ -3,6 +3,7 @@ package com.infamous.simply_harder.registry;
 import com.infamous.simply_harder.SimplyHarder;
 import com.infamous.simply_harder.custom.recipe.InfusionRecipe;
 import com.infamous.simply_harder.custom.recipe.InfuseUpgradeModuleRecipe;
+import com.infamous.simply_harder.custom.recipe.MasterworkingRecipe;
 import com.infamous.simply_harder.custom.recipe.ModificationRecipe;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeSerializer;
@@ -26,6 +27,9 @@ public class SHRecipes {
 
     public static final RegistryObject<SimpleRecipeSerializer<ModificationRecipe>> MODIFICATION =
             register(ModificationRecipe.NAME, () -> new SimpleRecipeSerializer<>(ModificationRecipe::new));
+
+    public static final RegistryObject<SimpleRecipeSerializer<MasterworkingRecipe>> MASTERWORKING =
+            register(MasterworkingRecipe.NAME, () -> new SimpleRecipeSerializer<>(MasterworkingRecipe::new));
 
     private static <S extends RecipeSerializer<T>, T extends Recipe<?>> RegistryObject<S> register(String name, Supplier<S> supplier){
         return RECIPES.register(name, supplier);
