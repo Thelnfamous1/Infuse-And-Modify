@@ -1,8 +1,9 @@
 package com.infamous.simply_harder.registry;
 
 import com.infamous.simply_harder.SimplyHarder;
-import com.infamous.simply_harder.custom.item.ModifierCoreItem;
-import com.infamous.simply_harder.custom.item.InfusionCatalystItem;
+import com.infamous.simply_harder.custom.item.EnhancementCoreItem;
+import com.infamous.simply_harder.custom.item.ModificationItem;
+import com.infamous.simply_harder.custom.item.UpgradeModuleItem;
 import net.minecraft.world.item.*;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
@@ -15,20 +16,26 @@ public class SHItems {
 
     private static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, SimplyHarder.MOD_ID);
 
-    public static final RegistryObject<Item> INFUSION_CATALYST = register(InfusionCatalystItem.NAME, buildInfusionCore());
+    public static final RegistryObject<Item> UPGRADE_MODULE = register(UpgradeModuleItem.NAME, buildUpgradeModule());
 
-    public static final RegistryObject<Item> MODIFIER_CORE = register(ModifierCoreItem.NAME, buildModifierCore());
+    public static final RegistryObject<Item> MODIFICATION = register(ModificationItem.NAME, buildModification());
+
+    public static final RegistryObject<Item> ENHANCEMENT_CORE = register(EnhancementCoreItem.NAME, buildEnhancementCore());
 
     private static Supplier<Item> buildSimpleMaterial() {
         return () -> new Item(((new Item.Properties()).tab(CreativeModeTab.TAB_MATERIALS)));
     }
 
-    private static Supplier<Item> buildInfusionCore() {
-        return () -> new InfusionCatalystItem(((new Item.Properties()).stacksTo(1).rarity(Rarity.EPIC).tab(CreativeModeTab.TAB_MISC)));
+    private static Supplier<Item> buildUpgradeModule() {
+        return () -> new UpgradeModuleItem(((new Item.Properties()).rarity(Rarity.EPIC).tab(CreativeModeTab.TAB_MISC)));
     }
 
-    private static Supplier<Item> buildModifierCore() {
-        return () -> new ModifierCoreItem(((new Item.Properties()).stacksTo(1).rarity(Rarity.EPIC).tab(CreativeModeTab.TAB_MISC)));
+    private static Supplier<Item> buildModification() {
+        return () -> new ModificationItem(((new Item.Properties()).rarity(Rarity.EPIC).tab(CreativeModeTab.TAB_MISC)));
+    }
+
+    private static Supplier<Item> buildEnhancementCore() {
+        return () -> new EnhancementCoreItem(((new Item.Properties()).rarity(Rarity.EPIC).tab(CreativeModeTab.TAB_MISC)));
     }
 
     private static RegistryObject<Item> register(String id, Supplier<Item> builder) {

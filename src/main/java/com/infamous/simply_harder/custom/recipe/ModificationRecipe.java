@@ -1,63 +1,54 @@
 package com.infamous.simply_harder.custom.recipe;
 
-import com.infamous.simply_harder.custom.ModRecipeTypes;
+import com.infamous.simply_harder.custom.item.ModificationItem;
+import com.infamous.simply_harder.registry.SHRecipes;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.Container;
-import net.minecraft.world.SimpleContainer;
-import net.minecraft.world.inventory.AnvilMenu;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.Recipe;
-import net.minecraft.world.item.crafting.RecipeType;
-import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.item.crafting.RecipeSerializer;
+import net.minecraft.world.level.Level;
 
-public abstract class ModificationRecipe implements Recipe<Container> {
-    private final ResourceLocation id;
+public class ModificationRecipe extends BaseModificationRecipe {
+    public static final String NAME = "modification";
 
     public ModificationRecipe(ResourceLocation id) {
-        this.id = id;
+        super(id);
     }
 
-    public static Container buildContainer(ItemStack left, ItemStack right){
-        return new SimpleContainer(left, right);
+    @Override
+    public int calculateLevelCost(Container container) {
+        return ModificationItem.getLevelCost(BaseModificationRecipe.getRight(container));
     }
 
-    protected static ItemStack getLeft(Container container) {
-        return container.getItem(AnvilMenu.INPUT_SLOT);
+    @Override
+    public int calculateMaterialCost(Container container) {
+        return ModificationItem.getMaterialCost(BaseModificationRecipe.getRight(container));
     }
 
-    protected static ItemStack getRight(Container container) {
-        return container.getItem(AnvilMenu.ADDITIONAL_SLOT);
+    @Override
+    public boolean matches(Container container, Level level) {
+        ItemStack left = getLeft(container);
+        ItemStack right = getRight(container);
+        return ModificationItem.isUsableMod(right)
+                && ModificationItem.isValidForMod(left, right);
     }
 
-    public ResourceLocation getId() {
-        return this.id;
+    @Override
+    public ItemStack assemble(Container container) {
+        ItemStack left = getLeft(container);
+        ItemStack right = getRight(container);
+
+        ItemStack result = left.copy();
+        ModificationItem.addMod(result, right);
+        return result;
+    }
+
+    @Override
+    public RecipeSerializer<?> getSerializer() {
+        return SHRecipes.MODIFICATION.get();
     }
 
     public boolean isSpecial() {
         return true;
-    }
-
-    public ItemStack getResultItem() {
-        return ItemStack.EMPTY;
-    }
-
-    public boolean canCraftInDimensions(int gridWidth, int gridHeight) {
-        return gridWidth * gridHeight >= 2;
-    }
-
-    @Override
-    public ItemStack getToastSymbol() {
-        return new ItemStack(Blocks.ANVIL);
-    }
-
-    @Override
-    public RecipeType<?> getType() {
-        return ModRecipeTypes.MODIFICATION.get();
-    }
-
-    public abstract int calculateLevelCost(Container container);
-
-    public int calculateMaterialCost(Container container) {
-        return 1;
     }
 }

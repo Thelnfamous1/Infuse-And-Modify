@@ -1,8 +1,8 @@
 package com.infamous.simply_harder.custom;
 
-import com.infamous.simply_harder.custom.recipe.ModificationRecipe;
+import com.infamous.simply_harder.custom.recipe.BaseModificationRecipe;
 import net.minecraft.world.item.crafting.RecipeType;
 
 public class ModRecipeTypes {
-    public static final SimpleRegistryObjectHolder<RecipeType<ModificationRecipe>> MODIFICATION = new SimpleRegistryObjectHolder<>();
+    public static final SimpleRegistryObjectHolder<RecipeType<BaseModificationRecipe>> MODIFICATION = new SimpleRegistryObjectHolder<>();
 }

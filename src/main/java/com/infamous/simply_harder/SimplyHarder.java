@@ -17,7 +17,6 @@ public class SimplyHarder
     public static final String MOD_ID = "simply_harder";
     // Directly reference a log4j logger.
     public static final Logger LOGGER = LogManager.getLogger();
-    private static final ArmorManager ARMOR_MANAGER = new ArmorManager();
 
     public SimplyHarder() {
         // Register the setup method for modloading
@@ -30,7 +29,4 @@ public class SimplyHarder
         MinecraftForge.EVENT_BUS.register(this);
     }
 
-    public static ArmorManager getArmorManager() {
-        return ARMOR_MANAGER;
-    }
 }

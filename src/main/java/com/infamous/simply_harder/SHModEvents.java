@@ -1,14 +1,9 @@
 package com.infamous.simply_harder;
 
 import com.infamous.simply_harder.custom.ModRecipeTypes;
-import com.infamous.simply_harder.custom.critera.ExperienceChangeTrigger;
-import com.infamous.simply_harder.custom.critera.ModCriteriaTriggers;
-import com.infamous.simply_harder.datagen.ModBlockTagsProvider;
-import com.infamous.simply_harder.datagen.ModItemTagsProvider;
 import com.infamous.simply_harder.datagen.ModRecipeProvider;
 import com.infamous.simply_harder.network.ModNetwork;
 import com.infamous.simply_harder.registry.SHAttributes;
-import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
@@ -25,14 +20,13 @@ public class SHModEvents {
 
     @SubscribeEvent
     static void onAttributeModification(EntityAttributeModificationEvent event){
-        event.add(EntityType.PLAYER, SHAttributes.EXHAUSTION.get());
     }
 
     @SubscribeEvent
     static void onCommonSetup(FMLCommonSetupEvent event){
         event.enqueueWork(ModNetwork::register);
         //event.enqueueWork(PeakExperienceAttacher::register);
-        event.enqueueWork(() -> ModCriteriaTriggers.EXPERIENCE_CHANGED.register(CriteriaTriggers.register(new ExperienceChangeTrigger())));
+        //event.enqueueWork(() -> ModCriteriaTriggers.EXPERIENCE_CHANGED.register(CriteriaTriggers.register(new ExperienceChangeTrigger())));
         event.enqueueWork(() -> ModRecipeTypes.MODIFICATION.register(RecipeType.register(new ResourceLocation(SimplyHarder.MOD_ID, "modification").toString())));
     }
 

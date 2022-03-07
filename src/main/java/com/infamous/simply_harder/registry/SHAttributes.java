@@ -14,8 +14,6 @@ public class SHAttributes {
 
     private static final DeferredRegister<Attribute> ATTRIBUTES = DeferredRegister.create(ForgeRegistries.ATTRIBUTES, SimplyHarder.MOD_ID);
 
-    public static final RegistryObject<Attribute> EXHAUSTION = register("exhaustion", buildSimpleAttribute("attribute.name.player.exhaustion", 1.0D, 0.0D, 32.0D));
-
     private static RegistryObject<Attribute> register(String name, Supplier<Attribute> builder) {
         return ATTRIBUTES.register(name, builder);
     }
