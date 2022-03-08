@@ -1,10 +1,16 @@
 package com.infamous.simply_harder.custom.item;
 
 import com.infamous.simply_harder.SimplyHarder;
+import com.infamous.simply_harder.custom.WrappedAttributeModifier;
+import com.infamous.simply_harder.custom.WrappedAttributeModifierMap;
 import com.infamous.simply_harder.registry.SHItems;
+import com.infamous.simply_harder.util.AttributeHelper;
 import com.infamous.simply_harder.util.TooltipHelper;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
@@ -12,39 +18,40 @@ import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
+import java.util.Map;
 
 public class EnhancementCoreItem extends Item {
     public static final String NAME = "enhancement_core";
+    public static final String MASTERWORK_NAME = "masterwork";
+    public static final String MASTERWORK_TAG = new ResourceLocation(SimplyHarder.MOD_ID, MASTERWORK_NAME).toString();
+    public static final String TIER_TAG = "Tier";
 
     public static final ResourceLocation ENHANCEMENT_CORE_LORE_LOCALIZATION = new ResourceLocation(SimplyHarder.MOD_ID, NAME + "/lore");
-    public static final int MAX_TIER = 10;
 
     public EnhancementCoreItem(Properties properties) {
         super(properties);
     }
 
     public static boolean hasMasterwork(ItemStack itemStack) {
-        // TODO
-        return false;
+        return itemStack.hasTag() && itemStack.getTag().contains(MASTERWORK_TAG, Tag.TAG_COMPOUND);
+    }
+
+    public static CompoundTag getMasterwork(ItemStack stack){
+        CompoundTag tag = stack.getOrCreateTag();
+        if (!tag.contains(MASTERWORK_TAG, Tag.TAG_COMPOUND)) {
+            tag.put(MASTERWORK_TAG, new CompoundTag());
+        }
+        return tag.getCompound(MASTERWORK_TAG);
+    }
+
+    public static int getTierCheckTag(ItemStack stack){
+        return hasMasterwork(stack) ? getTier(stack) : 0;
     }
 
     public static int getTier(ItemStack itemStack) {
-        // TODO
-        return 0;
-    }
+        CompoundTag masterworkTag = getMasterwork(itemStack);
 
-    public static boolean isMaxTier(ItemStack itemStack) {
-        return getTier(itemStack) >= MAX_TIER;
-    }
-
-    public static int getLevelCost(ItemStack itemStack) {
-        // TODO
-        return 0;
-    }
-
-    public static int getMaterialCost(ItemStack itemStack) {
-        // TODO
-        return 0;
+        return masterworkTag.getInt(TIER_TAG);
     }
 
     public static boolean isEnhancementCore(ItemStack right) {
@@ -52,24 +59,23 @@ public class EnhancementCoreItem extends Item {
     }
 
     public static void setTier(ItemStack left, int tier) {
-        // TODO
+        CompoundTag masterworkTag = getMasterwork(left);
+        masterworkTag.putInt(TIER_TAG, tier);
+    }
 
-        if(!isMaxTier(left)){
-            setLevelCost(left, calculateCostForTier(tier));
-            setMaterialCost(left, calculateCostForTier(tier));
+    public static void addModifiers(ItemStack result, WrappedAttributeModifierMap modifierMap) {
+        CompoundTag masterworkTag = getMasterwork(result);
+
+        for(Map.Entry<Attribute, WrappedAttributeModifier> entry : modifierMap.modifiers().entries()){
+            WrappedAttributeModifier value = entry.getValue();
+            AttributeHelper.addAttributeModifier(masterworkTag, entry.getKey(), value.modifier(), value.slot());
         }
     }
 
-    private static void setMaterialCost(ItemStack left, int materialCost) {
-        // TODO
-    }
+    public static void clearModifiers(ItemStack result) {
+        CompoundTag masterworkTag = getMasterwork(result);
 
-    private static void setLevelCost(ItemStack left, int levelCost) {
-        // TODO
-    }
-
-    private static int calculateCostForTier(int tier) {
-        return tier / 2 + tier % 2 == 0 ? 0 : 1;
+        masterworkTag.remove(AttributeHelper.ATTRIBUTE_MODIFIERS_TAG);
     }
 
     @Override

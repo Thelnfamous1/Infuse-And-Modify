@@ -1,9 +1,15 @@
 package com.infamous.simply_harder;
 
+import com.google.common.collect.Multimap;
 import com.infamous.simply_harder.custom.container.SimpleAnvilContainer;
-import com.infamous.simply_harder.custom.recipe.ModRecipeTypes;
+import com.infamous.simply_harder.custom.item.EnhancementCoreItem;
+import com.infamous.simply_harder.custom.item.GearModItem;
 import com.infamous.simply_harder.custom.recipe.ForgingRecipe;
+import com.infamous.simply_harder.custom.recipe.ModRecipeTypes;
+import com.infamous.simply_harder.util.AttributeHelper;
 import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.ai.attributes.Attribute;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AnvilMenu;
 import net.minecraft.world.item.ItemStack;
@@ -12,6 +18,8 @@ import net.minecraftforge.event.ItemAttributeModifierEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
+import java.util.Map;
+
 @Mod.EventBusSubscriber(modid = SimplyHarder.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class SHForgeEvents {
 
@@ -19,6 +27,18 @@ public class SHForgeEvents {
     static void onItemAttributeEvent(ItemAttributeModifierEvent event){
         ItemStack itemStack = event.getItemStack();
         EquipmentSlot slotType = event.getSlotType();
+        if(EnhancementCoreItem.hasMasterwork(itemStack)){
+            Multimap<Attribute, AttributeModifier> modifiers = AttributeHelper.getAttributeModifiers(EnhancementCoreItem.getMasterwork(itemStack), slotType);
+            for(Map.Entry<Attribute, AttributeModifier> entry : modifiers.entries()){
+                event.addModifier(entry.getKey(), entry.getValue());
+            }
+        }
+        if(GearModItem.hasMod(itemStack)){
+            Multimap<Attribute, AttributeModifier> modifiers = AttributeHelper.getAttributeModifiers(GearModItem.getMod(itemStack), slotType);
+            for(Map.Entry<Attribute, AttributeModifier> entry : modifiers.entries()){
+                event.addModifier(entry.getKey(), entry.getValue());
+            }
+        }
     }
 
     @SubscribeEvent

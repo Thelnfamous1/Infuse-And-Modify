@@ -1,7 +1,7 @@
 package com.infamous.simply_harder.custom.recipe;
 
 import com.infamous.simply_harder.custom.container.SimpleAnvilContainer;
-import com.infamous.simply_harder.custom.item.ModificationItem;
+import com.infamous.simply_harder.custom.item.GearModItem;
 import com.infamous.simply_harder.registry.SHRecipes;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
@@ -18,20 +18,20 @@ public class ModificationRecipe extends ForgingRecipe {
 
     @Override
     public int calculateLevelCost(SimpleAnvilContainer container) {
-        return ModificationItem.getLevelCost(ForgingRecipe.getRight(container));
+        return GearModItem.getLevelCost(ForgingRecipe.getRight(container));
     }
 
     @Override
     public int calculateMaterialCost(SimpleAnvilContainer container) {
-        return ModificationItem.getMaterialCost(ForgingRecipe.getRight(container));
+        return GearModItem.getMaterialCost(ForgingRecipe.getRight(container));
     }
 
     @Override
     public boolean matches(SimpleAnvilContainer container, Level level) {
         ItemStack left = getLeft(container);
         ItemStack right = getRight(container);
-        return ModificationItem.isUsableMod(right)
-                && ModificationItem.isValidForMod(left, right);
+        return GearModItem.isUsableMod(right)
+                && GearModItem.isValidForMod(left, right);
     }
 
     @Override
@@ -40,7 +40,7 @@ public class ModificationRecipe extends ForgingRecipe {
         ItemStack right = getRight(container);
 
         ItemStack result = left.copy();
-        ModificationItem.addMod(result, right);
+        GearModItem.addMod(result, right);
         return result;
     }
 

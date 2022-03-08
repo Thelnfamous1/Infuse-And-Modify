@@ -3,15 +3,11 @@ package com.infamous.simply_harder.custom.item;
 import com.infamous.simply_harder.SimplyHarder;
 import com.infamous.simply_harder.registry.SHItems;
 import com.infamous.simply_harder.util.TooltipHelper;
-import net.minecraft.ChatFormatting;
-import net.minecraft.Util;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TextComponent;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
@@ -30,7 +26,6 @@ public class UpgradeModuleItem extends Item {
     public static final ResourceLocation INFUSED_ITEM_LABEL_LOCALIZATION = new ResourceLocation(SimplyHarder.MOD_ID, NAME + "/infused_item");
 
     public static final ResourceLocation UPGRADE_MODULE_LORE_LOCALIZATION = new ResourceLocation(SimplyHarder.MOD_ID, NAME + "/lore");
-
 
     public UpgradeModuleItem(Properties properties) {
         super(properties);
@@ -90,29 +85,6 @@ public class UpgradeModuleItem extends Item {
         return tag.getCompound(UPGRADE_MODULE_TAG);
     }
 
-    private static void appendInfusedItemText(ItemStack itemStack, List<Component> tooltip, TooltipFlag tooltipFlag) {
-        if(tooltipFlag.isAdvanced()){
-            ItemStack infusedItem = getInfusedItem(itemStack);
-            tooltip.add(
-                    (new TranslatableComponent(Util.makeDescriptionId("item", INFUSED_ITEM_LABEL_LOCALIZATION)))
-                            .withStyle(ChatFormatting.GRAY)
-            );
-            List<Component> tooltipLines = infusedItem.getTooltipLines((Player)null, tooltipFlag);
-            tooltip.addAll(tooltipLines);
-        } else{
-            Item infusedItemType = getInfusedItemType(itemStack);
-            tooltip.add(
-                    (new TranslatableComponent(Util.makeDescriptionId("item", INFUSED_ITEM_LABEL_LOCALIZATION)))
-                            .withStyle(ChatFormatting.GRAY)
-                            .append(" ")
-                            .append(
-                                    (new TranslatableComponent(infusedItemType.getDescriptionId()))
-                                            .withStyle(ChatFormatting.GREEN)
-                            )
-            );
-        }
-    }
-
     @Override
     public void appendHoverText(ItemStack itemStack, @Nullable Level level, List<Component> tooltip, TooltipFlag tooltipFlag) {
         super.appendHoverText(itemStack, level, tooltip, tooltipFlag);
@@ -121,7 +93,7 @@ public class UpgradeModuleItem extends Item {
 
         if(hasInfusedItem(itemStack)){
             tooltip.add(TextComponent.EMPTY);
-            appendInfusedItemText(itemStack, tooltip, tooltipFlag);
+            TooltipHelper.appendInfusedItemText(itemStack, tooltip, tooltipFlag);
         }
     }
 

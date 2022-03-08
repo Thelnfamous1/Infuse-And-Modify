@@ -2,7 +2,7 @@ package com.infamous.simply_harder.registry;
 
 import com.infamous.simply_harder.SimplyHarder;
 import com.infamous.simply_harder.custom.item.EnhancementCoreItem;
-import com.infamous.simply_harder.custom.item.ModificationItem;
+import com.infamous.simply_harder.custom.item.GearModItem;
 import com.infamous.simply_harder.custom.item.UpgradeModuleItem;
 import net.minecraft.world.item.*;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -18,7 +18,7 @@ public class SHItems {
 
     public static final RegistryObject<Item> UPGRADE_MODULE = register(UpgradeModuleItem.NAME, buildUpgradeModule());
 
-    public static final RegistryObject<Item> MODIFICATION = register(ModificationItem.NAME, buildModification());
+    public static final RegistryObject<Item> GEAR_MOD = register(GearModItem.NAME, buildModification());
 
     public static final RegistryObject<Item> ENHANCEMENT_CORE = register(EnhancementCoreItem.NAME, buildEnhancementCore());
 
@@ -31,7 +31,7 @@ public class SHItems {
     }
 
     private static Supplier<Item> buildModification() {
-        return () -> new ModificationItem(((new Item.Properties()).rarity(Rarity.EPIC).tab(CreativeModeTab.TAB_MISC)));
+        return () -> new GearModItem(((new Item.Properties()).rarity(Rarity.EPIC).tab(CreativeModeTab.TAB_MISC)));
     }
 
     private static Supplier<Item> buildEnhancementCore() {

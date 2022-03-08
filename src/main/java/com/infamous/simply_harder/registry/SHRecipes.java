@@ -28,8 +28,8 @@ public class SHRecipes {
     public static final RegistryObject<SimpleRecipeSerializer<ModificationRecipe>> MODIFICATION =
             register(ModificationRecipe.NAME, () -> new SimpleRecipeSerializer<>(ModificationRecipe::new));
 
-    public static final RegistryObject<SimpleRecipeSerializer<MasterworkingRecipe>> MASTERWORKING =
-            register(MasterworkingRecipe.NAME, () -> new SimpleRecipeSerializer<>(MasterworkingRecipe::new));
+    public static final RegistryObject<MasterworkingRecipe.Serializer> MASTERWORKING =
+            register(MasterworkingRecipe.NAME, MasterworkingRecipe.Serializer::new);
 
     private static <S extends RecipeSerializer<T>, T extends Recipe<?>> RegistryObject<S> register(String name, Supplier<S> supplier){
         return RECIPES.register(name, supplier);
