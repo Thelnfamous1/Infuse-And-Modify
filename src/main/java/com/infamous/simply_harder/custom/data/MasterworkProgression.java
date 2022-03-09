@@ -54,6 +54,7 @@ public class MasterworkProgression {
             int currentTier = i + 1;
             tiersArr.add(MasterworkTier.toJson(this.tiers.get(currentTier)));
         }
+        jsonObject.add(TIERS, tiersArr);
         return jsonObject;
     }
 

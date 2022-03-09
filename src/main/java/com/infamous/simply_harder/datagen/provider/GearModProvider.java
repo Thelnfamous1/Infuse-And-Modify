@@ -91,17 +91,17 @@ public class GearModProvider implements DataProvider {
     }
 
     protected void buildGearMods(Consumer<GearMod> onFinished) {
-        this.buildMeleeWeaponMod(onFinished, UUID.fromString("9b0f12ac-5f12-4dd8-8eb3-2cd2a088440b"), new ResourceLocation(SimplyHarder.MOD_ID, "mighty_edge"), Attributes.ATTACK_DAMAGE, 1, AttributeModifier.Operation.ADDITION);
-        this.buildMeleeWeaponMod(onFinished, UUID.fromString("4ba87d0a-18cf-47b0-b4fb-6a4b893bdc5f"), new ResourceLocation(SimplyHarder.MOD_ID, "dexterous_grip"), Attributes.ATTACK_SPEED, -0.4, AttributeModifier.Operation.ADDITION);
-        this.buildMeleeWeaponMod(onFinished, UUID.fromString("9715a94d-a2d1-477b-bb56-dbd216ff11fc"), new ResourceLocation(SimplyHarder.MOD_ID, "impactful_body"), Attributes.ATTACK_KNOCKBACK, 0.1, AttributeModifier.Operation.ADDITION);
+        this.buildMeleeWeaponMod(onFinished, UUID.fromString("9b0f12ac-5f12-4dd8-8eb3-2cd2a088440b"), new ResourceLocation(SimplyHarder.MOD_ID, "mighty_edge"), Attributes.ATTACK_DAMAGE, 1.0D, AttributeModifier.Operation.ADDITION);
+        this.buildMeleeWeaponMod(onFinished, UUID.fromString("4ba87d0a-18cf-47b0-b4fb-6a4b893bdc5f"), new ResourceLocation(SimplyHarder.MOD_ID, "dexterous_grip"), Attributes.ATTACK_SPEED, -0.4D, AttributeModifier.Operation.ADDITION);
+        this.buildMeleeWeaponMod(onFinished, UUID.fromString("9715a94d-a2d1-477b-bb56-dbd216ff11fc"), new ResourceLocation(SimplyHarder.MOD_ID, "impactful_body"), Attributes.ATTACK_KNOCKBACK, 0.1D, AttributeModifier.Operation.ADDITION);
 
 
-        this.buildArmorMod(onFinished, UUID.fromString("90485c2e-8a10-4be0-9b82-4ac69461ab27"), new ResourceLocation(SimplyHarder.MOD_ID, "resilient_plate"), Attributes.ARMOR, 2, AttributeModifier.Operation.ADDITION);
-        this.buildArmorMod(onFinished, UUID.fromString("5cc258f7-b0c8-499f-a407-1bc94e83986b"), new ResourceLocation(SimplyHarder.MOD_ID, "mitigating_scale"), Attributes.ARMOR_TOUGHNESS, 1, AttributeModifier.Operation.ADDITION);
-        this.buildArmorMod(onFinished, UUID.fromString("294cd28b-db30-461b-9e02-c2d7f1f41976"), new ResourceLocation(SimplyHarder.MOD_ID, "dense_frame"), Attributes.KNOCKBACK_RESISTANCE, 0.1, AttributeModifier.Operation.ADDITION);
-        this.buildArmorMod(onFinished, UUID.fromString("529b0aa7-f572-4480-89d0-ac3f6d42adae"), new ResourceLocation(SimplyHarder.MOD_ID, "mobile_amplifier"), Attributes.MOVEMENT_SPEED, 0.1, AttributeModifier.Operation.MULTIPLY_BASE);
-        this.buildArmorMod(onFinished, UUID.fromString("e98eafd4-2de3-4844-819c-77f3ac5e4ac7"), new ResourceLocation(SimplyHarder.MOD_ID, "resolute_augment"), Attributes.MAX_HEALTH, 0.1, AttributeModifier.Operation.ADDITION);
-        this.buildArmorMod(onFinished, UUID.fromString("717968b7-14fb-46fd-935f-8d783271a4fd"), new ResourceLocation(SimplyHarder.MOD_ID, "fortunate_weighting"), Attributes.LUCK, 1, AttributeModifier.Operation.ADDITION);
+        this.buildArmorMod(onFinished, UUID.fromString("90485c2e-8a10-4be0-9b82-4ac69461ab27"), new ResourceLocation(SimplyHarder.MOD_ID, "resilient_plate"), Attributes.ARMOR, 2.0D, AttributeModifier.Operation.ADDITION);
+        this.buildArmorMod(onFinished, UUID.fromString("5cc258f7-b0c8-499f-a407-1bc94e83986b"), new ResourceLocation(SimplyHarder.MOD_ID, "mitigating_scale"), Attributes.ARMOR_TOUGHNESS, 1.0D, AttributeModifier.Operation.ADDITION);
+        this.buildArmorMod(onFinished, UUID.fromString("294cd28b-db30-461b-9e02-c2d7f1f41976"), new ResourceLocation(SimplyHarder.MOD_ID, "dense_frame"), Attributes.KNOCKBACK_RESISTANCE, 0.1D, AttributeModifier.Operation.ADDITION);
+        this.buildArmorMod(onFinished, UUID.fromString("529b0aa7-f572-4480-89d0-ac3f6d42adae"), new ResourceLocation(SimplyHarder.MOD_ID, "mobile_amplifier"), Attributes.MOVEMENT_SPEED, 0.1D, AttributeModifier.Operation.MULTIPLY_BASE);
+        this.buildArmorMod(onFinished, UUID.fromString("e98eafd4-2de3-4844-819c-77f3ac5e4ac7"), new ResourceLocation(SimplyHarder.MOD_ID, "resolute_augment"), Attributes.MAX_HEALTH, 0.1D, AttributeModifier.Operation.ADDITION);
+        this.buildArmorMod(onFinished, UUID.fromString("717968b7-14fb-46fd-935f-8d783271a4fd"), new ResourceLocation(SimplyHarder.MOD_ID, "fortunate_weighting"), Attributes.LUCK, 1.0D, AttributeModifier.Operation.ADDITION);
     }
 
     private void buildGearMod(Consumer<GearMod> onFinished, UUID uuid, ResourceLocation name, Attribute attribute, double amount, AttributeModifier.Operation operation, EquipmentSlot[] slots, Tags.IOptionalNamedTag<Item> tag) {

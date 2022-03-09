@@ -97,7 +97,7 @@ public class MasterworkProgressionProvider implements DataProvider {
         this.buildMeleeWeapon(onFinished, operations);
 
         Attribute[] armorAttributes = {Attributes.ARMOR, Attributes.ARMOR_TOUGHNESS};
-        double[] armorAmounts = {0.2, 0.1};
+        double[] armorAmounts = {0.2D, 0.1D};
 
         this.buildBoots(onFinished, operations, armorAttributes, armorAmounts);
         this.buildChestplate(onFinished, operations, armorAttributes, armorAmounts);
@@ -106,7 +106,7 @@ public class MasterworkProgressionProvider implements DataProvider {
     }
 
     private void buildLeggings(Consumer<MasterworkProgression> onFinished, AttributeModifier.Operation[] operations, Attribute[] armorAttributes, double[] armorAmounts) {
-        double leggingsFactor = 1;
+        double leggingsFactor = 1.0D;
         double[] leggingsAmounts = {armorAmounts[0] * leggingsFactor, armorAmounts[1] * leggingsFactor};
         UUID leggingsUUID = UUID.fromString("c09c05bf-a7f4-4cbd-ade8-ea57a547b6be");
         MasterworkProgressionBuilder.progression(LEGGINGS)
@@ -120,7 +120,7 @@ public class MasterworkProgressionProvider implements DataProvider {
     }
 
     private void buildHelmet(Consumer<MasterworkProgression> onFinished, AttributeModifier.Operation[] operations, Attribute[] armorAttributes, double[] armorAmounts) {
-        double helmetFactor = 0.5;
+        double helmetFactor = 0.5D;
         double[] helmetAmounts = {armorAmounts[0] * helmetFactor, armorAmounts[1] * helmetFactor};
         UUID helmetUUID = UUID.fromString("57aa580c-6db3-473f-8b17-6197f7419268");
         MasterworkProgressionBuilder.progression(HELMET)
@@ -134,7 +134,7 @@ public class MasterworkProgressionProvider implements DataProvider {
     }
 
     private void buildChestplate(Consumer<MasterworkProgression> onFinished, AttributeModifier.Operation[] operations, Attribute[] armorAttributes, double[] armorAmounts) {
-        double chestplateFactor = 1;
+        double chestplateFactor = 1.0D;
         double[] chestplateAmounts = {armorAmounts[0] * chestplateFactor, armorAmounts[1] * chestplateFactor};
         UUID chestplateUUID = UUID.fromString("dfb333b7-884d-4496-8aa7-71965116bd96");
         MasterworkProgressionBuilder.progression(CHESTPLATE)
@@ -148,7 +148,7 @@ public class MasterworkProgressionProvider implements DataProvider {
     }
 
     private void buildBoots(Consumer<MasterworkProgression> onFinished, AttributeModifier.Operation[] operations, Attribute[] armorAttributes, double[] armorAmounts) {
-        double bootsFactor = 0.5;
+        double bootsFactor = 0.5D;
         double[] bootsAmounts = {armorAmounts[0] * bootsFactor, armorAmounts[1] * bootsFactor};
         UUID bootsUUID = UUID.fromString("38aa5cf6-5cd7-4dc9-be3e-0bfdf7c9cf8c");
         MasterworkProgressionBuilder.progression(BOOTS)
@@ -162,7 +162,7 @@ public class MasterworkProgressionProvider implements DataProvider {
     }
 
     private void buildMeleeWeapon(Consumer<MasterworkProgression> onFinished, AttributeModifier.Operation[] operations) {
-        double[] meleeWeaponAmounts = {0.2, 0.05};
+        double[] meleeWeaponAmounts = {0.2D, 0.05D};
         UUID meleeWeaponsUUID = UUID.fromString("a2ad69fe-46b6-4d36-8c32-26ca1c3b10cd");
         MasterworkProgressionBuilder.progression(MELEE_WEAPON)
                 .addDefaultTiers(
