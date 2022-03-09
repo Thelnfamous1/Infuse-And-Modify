@@ -30,6 +30,14 @@ public record GearMod(ResourceLocation id,
         return new GearMod(id, installable, levelCost, attributeModifiers);
     }
 
+    public JsonObject toJson(){
+        JsonObject jsonObject = new JsonObject();
+        jsonObject.addProperty(ID, this.id.toString());
+        jsonObject.add(INSTALLABLE, this.installable.toJson());
+        jsonObject.add(ATTRIBUTE_MODIFIERS, this.wrappedAttributeModifiers.toJson());
+        return jsonObject;
+    }
+
     public static GearMod fromNetwork(FriendlyByteBuf byteBuf) {
         ResourceLocation id = new ResourceLocation(byteBuf.readUtf());
         Ingredient installable = Ingredient.fromNetwork(byteBuf);

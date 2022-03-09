@@ -6,6 +6,7 @@ import com.infamous.simply_harder.custom.recipe.InfuseUpgradeModuleRecipe;
 import com.infamous.simply_harder.custom.recipe.ModificationRecipe;
 import com.infamous.simply_harder.datagen.builder.DisabledRecipeBuilder;
 import com.infamous.simply_harder.datagen.builder.InfusionRecipeBuilder;
+import com.infamous.simply_harder.datagen.builder.MasterworkingRecipeBuilder;
 import com.infamous.simply_harder.registry.SHItems;
 import com.infamous.simply_harder.registry.SHRecipes;
 import net.minecraft.advancements.critereon.InventoryChangeTrigger;
@@ -13,6 +14,7 @@ import net.minecraft.advancements.critereon.ItemPredicate;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.recipes.*;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.Tag;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -29,6 +31,9 @@ public class ModRecipeProvider extends RecipeProvider {
     protected void buildCraftingRecipes(Consumer<FinishedRecipe> onFinished) {
         SpecialRecipeBuilder.special(SHRecipes.INFUSE_UPGRADE_MODULE.get()).save(onFinished, new ResourceLocation(SimplyHarder.MOD_ID, InfuseUpgradeModuleRecipe.NAME).toString());
         SpecialRecipeBuilder.special(SHRecipes.MODIFICATION.get()).save(onFinished, new ResourceLocation(SimplyHarder.MOD_ID, ModificationRecipe.NAME).toString());
+
+        buildSimpleMasterworkingRecipe(onFinished, ModItemTagsProvider.MELEE_WEAPONS, new ResourceLocation(SimplyHarder.MOD_ID, "melee_weapons"));
+        buildSimpleMasterworkingRecipe(onFinished, ModItemTagsProvider.ARMORS, new ResourceLocation(SimplyHarder.MOD_ID, "armors"));
 
         // ADD IRON -> DIAMOND INFUSION RECIPES
         buildSimpleInfusionRecipe(onFinished, Items.IRON_AXE, Items.DIAMOND_AXE);
@@ -86,6 +91,10 @@ public class ModRecipeProvider extends RecipeProvider {
 
     private void buildSimpleInfusionRecipe(Consumer<FinishedRecipe> onFinished, Item base, Item addition) {
         InfusionRecipeBuilder.infusion(base, addition).unlocks("has_upgrade_module", hasInfusedUpgradeModule(addition.getDefaultInstance())).save(onFinished, base, addition);
+    }
+
+    private void buildSimpleMasterworkingRecipe(Consumer<FinishedRecipe> onFinished, Tag<Item> masterworkable, ResourceLocation progressionId) {
+        MasterworkingRecipeBuilder.masterworking(masterworkable, progressionId).unlocks("has_enhancement_core", has(SHItems.ENHANCEMENT_CORE.get())).save(onFinished, progressionId);
     }
 
     private static ItemStack buildUpgradeModule(ItemStack stack){

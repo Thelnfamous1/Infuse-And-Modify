@@ -10,6 +10,7 @@ import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 
+import javax.annotation.Nullable;
 import java.util.Map;
 import java.util.Optional;
 
@@ -75,5 +76,26 @@ public class WrappedAttributeModifierMap {
 
     public Multimap<Attribute, WrappedAttributeModifier> getAttributeModifiers() {
         return this.attributeModifiers;
+    }
+
+    public static class Builder{
+        private final ImmutableMultimap.Builder<Attribute, WrappedAttributeModifier> attributeModifiers = ImmutableMultimap.builder();
+
+        public Builder(){
+        }
+
+        public static Builder builder(){
+            return new Builder();
+        }
+
+        public Builder addAttributeModifier(Attribute attribute, @Nullable EquipmentSlot slot, AttributeModifier modifier){
+            this.attributeModifiers.put(attribute, new WrappedAttributeModifier(slot, modifier));
+            return this;
+        }
+
+        public WrappedAttributeModifierMap build(){
+            return new WrappedAttributeModifierMap(this.attributeModifiers.build());
+        }
+
     }
 }

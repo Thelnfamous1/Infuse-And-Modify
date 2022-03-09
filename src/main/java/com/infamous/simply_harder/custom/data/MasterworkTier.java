@@ -39,4 +39,46 @@ public record MasterworkTier(int levelCost, int materialCost,
         byteBuf.writeVarInt(masterworkTier.materialCost);
         masterworkTier.wrappedAttributeModifiers.toNetwork(byteBuf);
     }
+
+    public static JsonObject toJson(MasterworkTier masterworkTier) {
+        JsonObject jsonObject = new JsonObject();
+        jsonObject.addProperty(LEVEL_COST, masterworkTier.levelCost);
+        jsonObject.addProperty(MATERIAL_COST, masterworkTier.materialCost);
+        jsonObject.add(ATTRIBUTE_MODIFIERS, masterworkTier.wrappedAttributeModifiers.toJson());
+        return jsonObject;
+    }
+
+    public static class Builder{
+        private int levelCost;
+        private int materialCost;
+        private WrappedAttributeModifierMap wrappedAttributeModifiers = WrappedAttributeModifierMap.EMPTY;
+
+        public Builder(){
+
+        }
+
+        public static Builder builder(){
+            return new Builder();
+        }
+
+        public Builder levelCost(int levelCost){
+            this.levelCost = levelCost;
+            return this;
+        }
+
+        public Builder materialCost(int materialCost){
+            this.materialCost = materialCost;
+            return this;
+        }
+
+        public Builder wrappedAttributeModifiers(WrappedAttributeModifierMap wrappedAttributeModifiers){
+            this.wrappedAttributeModifiers = wrappedAttributeModifiers;
+            return this;
+        }
+
+        public MasterworkTier build(){
+            return new MasterworkTier(this.levelCost, this.materialCost, this.wrappedAttributeModifiers);
+        }
+
+    }
 }

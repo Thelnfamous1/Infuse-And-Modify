@@ -10,31 +10,31 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.data.ExistingFileHelper;
-import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
 
 public class ModItemTagsProvider extends ItemTagsProvider {
 
-    public static final Tags.IOptionalNamedTag<Item> PICKAXES = buildTag("pickaxes");
+    public static final Tags.IOptionalNamedTag<Item> AXES = buildForgeTag("axes");
+    public static final Tags.IOptionalNamedTag<Item> HOES = buildForgeTag("hoes");
+    public static final Tags.IOptionalNamedTag<Item> PICKAXES = buildForgeTag("pickaxes");
+    public static final Tags.IOptionalNamedTag<Item> SWORDS = buildForgeTag("swords");
+    public static final Tags.IOptionalNamedTag<Item> SHOVELS = buildForgeTag("shovels");
+    public static final Tags.IOptionalNamedTag<Item> MELEE_WEAPONS = buildForgeTag("melee_weapons");
 
+    public static final Tags.IOptionalNamedTag<Item> SHIELDS = buildForgeTag("shields");
 
-    public static final Tags.IOptionalNamedTag<Item> AXES = buildTag("axes");
-    public static final Tags.IOptionalNamedTag<Item> SWORDS = buildTag("swords");
-    public static final Tags.IOptionalNamedTag<Item> SHOVELS = buildTag("shovels");
-    public static final Tags.IOptionalNamedTag<Item> HOES = buildTag("hoes");
-
-    public static final Tags.IOptionalNamedTag<Item> BOOTS = buildTag("boots");
-    public static final Tags.IOptionalNamedTag<Item> CHESTPLATES = buildTag("chestplates");
-    public static final Tags.IOptionalNamedTag<Item> HELMETS = buildTag("helmets");
-    public static final Tags.IOptionalNamedTag<Item> LEGGINGS = buildTag("leggings");
+    public static final Tags.IOptionalNamedTag<Item> BOOTS = buildForgeTag("boots");
+    public static final Tags.IOptionalNamedTag<Item> CHESTPLATES = buildForgeTag("chestplates");
+    public static final Tags.IOptionalNamedTag<Item> HELMETS = buildForgeTag("helmets");
+    public static final Tags.IOptionalNamedTag<Item> LEGGINGS = buildForgeTag("leggings");
 
     public ModItemTagsProvider(DataGenerator dataGenerator, BlockTagsProvider blockTagProvider, @Nullable ExistingFileHelper existingFileHelper) {
         super(dataGenerator, blockTagProvider, SimplyHarder.MOD_ID, existingFileHelper);
     }
-    @NotNull
-    private static Tags.IOptionalNamedTag<Item> buildTag(String pickaxes) {
-        return ItemTags.createOptional(new ResourceLocation(SimplyHarder.MOD_ID, pickaxes));
+
+    private static Tags.IOptionalNamedTag<Item> buildForgeTag(String path) {
+        return ItemTags.createOptional(new ResourceLocation("forge", path));
     }
 
     @Override
@@ -45,10 +45,25 @@ public class ModItemTagsProvider extends ItemTagsProvider {
         this.shovels();
         this.swords();
 
+        this.meleeWeapons();
+
         this.boots();
         this.chestplates();
         this.helmets();
         this.leggings();
+        this.shields();
+    }
+
+    private void meleeWeapons() {
+        this.tag(MELEE_WEAPONS).addTag(AXES);
+        this.tag(MELEE_WEAPONS).addTag(HOES);
+        this.tag(MELEE_WEAPONS).addTag(PICKAXES);
+        this.tag(MELEE_WEAPONS).addTag(SHOVELS);
+        this.tag(MELEE_WEAPONS).addTag(SWORDS);
+    }
+
+    private void shields(){
+        this.tag(SHIELDS).add(Items.SHIELD);
     }
 
     private void axes() {

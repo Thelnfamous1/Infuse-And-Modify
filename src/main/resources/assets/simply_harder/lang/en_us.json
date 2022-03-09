@@ -18,7 +18,16 @@
   "item.simply_harder.gear_mod.installed.modifiers.legs": "Installed for Legs:",
   "item.simply_harder.gear_mod.installed.modifiers.chest": "Installed for Body:",
   "item.simply_harder.gear_mod.installed.modifiers.head": "Installed for Head:",
+
   "gear_mod.simply_harder.unknown": "Unknown",
+  "gear_mod.simply_harder.mighty_edge": "Mighty Edge",
+  "gear_mod.simply_harder.dexterous_grip": "Dexterous Grip",
+  "gear_mod.simply_harder.impactful_body": "Impactful Body",
+  "gear_mod.simply_harder.resilient_plate": "Resilient Plate",
+  "gear_mod.simply_harder.mitigating_scale": "Mitigating Scale",
+  "gear_mod.simply_harder.dense_frame": "Dense Frame",
+  "gear_mod.simply_harder.mobile_augment": "Mobile Augment",
+  "gear_mod.simply_harder.resolute_implant": "Resolute Implant",
 
   "item.simply_harder.enhancement_core": "Enhancement Core",
   "item.simply_harder.enhancement_core.lore": "Required for forging Masterwork gear.",
@@ -41,5 +50,10 @@
   "item.simply_harder.masterwork.modifiers.chest": "Masterworked for Body:",
   "item.simply_harder.masterwork.modifiers.head": "Masterworked for Head:",
 
-  "masterwork_progression.simply_harder.none": "None"
+  "masterwork_progression.simply_harder.none": "None",
+  "masterwork_progression.simply_harder.melee_weapon": "Melee Weapon",
+  "masterwork_progression.simply_harder.boots": "Boots",
+  "masterwork_progression.simply_harder.chestplate": "Chestplate",
+  "masterwork_progression.simply_harder.helmet": "Helmet",
+  "masterwork_progression.simply_harder.leggings": "Leggings"
 }

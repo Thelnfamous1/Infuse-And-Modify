@@ -45,6 +45,18 @@ public class MasterworkProgression {
         return new MasterworkProgression(id, tiers);
     }
 
+    public JsonObject toJson(){
+        JsonObject jsonObject = new JsonObject();
+        jsonObject.addProperty(ID, this.id.toString());
+        JsonArray tiersArr = new JsonArray();
+        int size = this.tiers.size();
+        for(int i = 0; i < size; i++){
+            int currentTier = i + 1;
+            tiersArr.add(MasterworkTier.toJson(this.tiers.get(currentTier)));
+        }
+        return jsonObject;
+    }
+
     public static MasterworkProgression fromNetwork(FriendlyByteBuf byteBuf){
         ResourceLocation id = byteBuf.readResourceLocation();
         Map<Integer, MasterworkTier> tiers = byteBuf.readMap(FriendlyByteBuf::readInt, MasterworkTier::fromNetwork);
