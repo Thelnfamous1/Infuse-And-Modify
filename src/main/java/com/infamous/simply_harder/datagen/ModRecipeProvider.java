@@ -32,8 +32,11 @@ public class ModRecipeProvider extends RecipeProvider {
         SpecialRecipeBuilder.special(SHRecipes.INFUSE_UPGRADE_MODULE.get()).save(onFinished, new ResourceLocation(SimplyHarder.MOD_ID, InfuseUpgradeModuleRecipe.NAME).toString());
         SpecialRecipeBuilder.special(SHRecipes.MODIFICATION.get()).save(onFinished, new ResourceLocation(SimplyHarder.MOD_ID, ModificationRecipe.NAME).toString());
 
-        buildSimpleMasterworkingRecipe(onFinished, ModItemTagsProvider.MELEE_WEAPONS, new ResourceLocation(SimplyHarder.MOD_ID, "melee_weapons"));
-        buildSimpleMasterworkingRecipe(onFinished, ModItemTagsProvider.ARMORS, new ResourceLocation(SimplyHarder.MOD_ID, "armors"));
+        buildSimpleMasterworkingRecipe(onFinished, ModItemTagsProvider.MELEE_WEAPONS, new ResourceLocation(SimplyHarder.MOD_ID, "melee_weapon"));
+        buildSimpleMasterworkingRecipe(onFinished, ModItemTagsProvider.BOOTS, new ResourceLocation(SimplyHarder.MOD_ID, "boots"));
+        buildSimpleMasterworkingRecipe(onFinished, ModItemTagsProvider.CHESTPLATES, new ResourceLocation(SimplyHarder.MOD_ID, "chestplate"));
+        buildSimpleMasterworkingRecipe(onFinished, ModItemTagsProvider.HELMETS, new ResourceLocation(SimplyHarder.MOD_ID, "helmet"));
+        buildSimpleMasterworkingRecipe(onFinished, ModItemTagsProvider.LEGGINGS, new ResourceLocation(SimplyHarder.MOD_ID, "leggings"));
 
         // ADD IRON -> DIAMOND INFUSION RECIPES
         buildSimpleInfusionRecipe(onFinished, Items.IRON_AXE, Items.DIAMOND_AXE);

@@ -29,6 +29,8 @@ public class ModItemTagsProvider extends ItemTagsProvider {
     public static final Tags.IOptionalNamedTag<Item> HELMETS = buildForgeTag("helmets");
     public static final Tags.IOptionalNamedTag<Item> LEGGINGS = buildForgeTag("leggings");
 
+    public static final Tags.IOptionalNamedTag<Item> ARMORS = buildForgeTag("armors");
+
     public ModItemTagsProvider(DataGenerator dataGenerator, BlockTagsProvider blockTagProvider, @Nullable ExistingFileHelper existingFileHelper) {
         super(dataGenerator, blockTagProvider, SimplyHarder.MOD_ID, existingFileHelper);
     }
@@ -44,14 +46,22 @@ public class ModItemTagsProvider extends ItemTagsProvider {
         this.pickaxes();
         this.shovels();
         this.swords();
-
         this.meleeWeapons();
+
+        this.shields();
 
         this.boots();
         this.chestplates();
         this.helmets();
         this.leggings();
-        this.shields();
+        this.armors();
+    }
+
+    private void armors() {
+        this.tag(ARMORS).addTag(BOOTS);
+        this.tag(ARMORS).addTag(CHESTPLATES);
+        this.tag(ARMORS).addTag(HELMETS);
+        this.tag(ARMORS).addTag(LEGGINGS);
     }
 
     private void meleeWeapons() {

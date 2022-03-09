@@ -49,7 +49,7 @@ public class MasterworkingRecipeBuilder {
     }
     
     public void save(Consumer<FinishedRecipe> onFinished, Item base){
-        this.save(onFinished, MasterworkingRecipe.NAME + "/" + base.getRegistryName().getPath());
+        this.save(onFinished, base.getRegistryName().getPath());
     }
 
     public void save(Consumer<FinishedRecipe> onFinished, String name) {
@@ -59,7 +59,7 @@ public class MasterworkingRecipeBuilder {
     public void save(Consumer<FinishedRecipe> onFinished, ResourceLocation id) {
         this.ensureValid(id);
         this.advancement.parent(new ResourceLocation(id.getNamespace(), "recipes/root")).addCriterion("has_the_recipe", RecipeUnlockedTrigger.unlocked(id)).rewards(AdvancementRewards.Builder.recipe(id)).requirements(RequirementsStrategy.OR);
-        onFinished.accept(new MasterworkingRecipeBuilder.Result(id, this.masterworkable, this.progressionId, this.advancement, new ResourceLocation(id.getNamespace(), "recipes/" + InfusionRecipe.NAME + "/" + id.getPath())));
+        onFinished.accept(new MasterworkingRecipeBuilder.Result(new ResourceLocation(id.getNamespace(), MasterworkingRecipe.NAME + "/" + id.getPath()), this.masterworkable, this.progressionId, this.advancement, new ResourceLocation(id.getNamespace(), "recipes/" + MasterworkingRecipe.NAME + "/" + id.getPath())));
     }
 
     private void ensureValid(ResourceLocation id) {

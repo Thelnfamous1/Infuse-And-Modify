@@ -1,10 +1,8 @@
 package com.infamous.simply_harder.datagen.builder;
 
-import com.google.gson.JsonObject;
 import com.infamous.simply_harder.custom.data.MasterworkProgression;
 import com.infamous.simply_harder.custom.data.MasterworkTier;
 import com.infamous.simply_harder.custom.data.WrappedAttributeModifierMap;
-import com.infamous.simply_harder.datagen.provider.FinishedMasterworkProgression;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.ai.attributes.Attribute;
@@ -16,6 +14,7 @@ import java.util.UUID;
 import java.util.function.Consumer;
 
 public class MasterworkProgressionBuilder {
+    public static final int DEFAULT_TIERS = 10;
     private final ResourceLocation progressionId;
     private final Map<Integer, MasterworkTier> tiers = new HashMap<>();
     private int counter = 0;
@@ -68,12 +67,12 @@ public class MasterworkProgressionBuilder {
     public MasterworkProgressionBuilder addDefaultTiers(EquipmentSlot[] slots, Attribute[] attributes, UUID[] uuids, double[] amounts, AttributeModifier.Operation[] operations) {
         validateArgs(slots, attributes, uuids, amounts, operations);
 
-        for(int tier = 1; tier <= 10; tier++){
+        for(int tier = 1; tier <= DEFAULT_TIERS; tier++){
             WrappedAttributeModifierMap.Builder wrappedAttributeModifiersBuilder = WrappedAttributeModifierMap.Builder.builder();
 
             for(EquipmentSlot slot : slots){
                 for(int i = 0; i < attributes.length; i++){
-                    wrappedAttributeModifiersBuilder.addAttributeModifier(attributes[i], slot, new AttributeModifier(uuids[slot.getIndex()], getId().toString(), amounts[i] * tier, operations[i]));
+                    wrappedAttributeModifiersBuilder.addAttributeModifier(attributes[i], slot, new AttributeModifier(uuids[i], this.progressionId.toString(), amounts[i] * tier, operations[i]));
                 }
             }
             this.addTier(MasterworkTier.Builder.builder()
@@ -90,27 +89,11 @@ public class MasterworkProgressionBuilder {
         return new MasterworkProgression(this.progressionId, this.tiers);
     }
 
-    public void save(Consumer<FinishedMasterworkProgression> onFinished) {
-        onFinished.accept(new MasterworkProgressionBuilder.Result(this.progressionId, this.tiers));
+    public void save(Consumer<MasterworkProgression> onFinished) {
+        onFinished.accept(this.build());
     }
 
     public ResourceLocation getId() {
         return this.progressionId;
-    }
-
-    public static class Result implements FinishedMasterworkProgression {
-        private final MasterworkProgression progression;
-
-        public Result(ResourceLocation id, Map<Integer, MasterworkTier> tiers) {
-            this.progression = new MasterworkProgression(id, tiers);
-        }
-
-        public JsonObject serializeMasterworkProgression() {
-            return this.progression.toJson();
-        }
-
-        public ResourceLocation getId() {
-            return this.progression.getId();
-        }
     }
 }

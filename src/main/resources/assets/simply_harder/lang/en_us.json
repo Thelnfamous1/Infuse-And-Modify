@@ -26,8 +26,9 @@
   "gear_mod.simply_harder.resilient_plate": "Resilient Plate",
   "gear_mod.simply_harder.mitigating_scale": "Mitigating Scale",
   "gear_mod.simply_harder.dense_frame": "Dense Frame",
-  "gear_mod.simply_harder.mobile_augment": "Mobile Augment",
-  "gear_mod.simply_harder.resolute_implant": "Resolute Implant",
+  "gear_mod.simply_harder.mobile_amplifier": "Mobile Amplifier",
+  "gear_mod.simply_harder.resolute_augment": "Resolute Augment",
+  "gear_mod.simply_harder.fortunate_weighting": "Fortunate Weighting",
 
   "item.simply_harder.enhancement_core": "Enhancement Core",
   "item.simply_harder.enhancement_core.lore": "Required for forging Masterwork gear.",

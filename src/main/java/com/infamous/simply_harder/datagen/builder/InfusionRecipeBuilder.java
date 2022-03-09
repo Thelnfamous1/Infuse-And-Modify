@@ -3,6 +3,7 @@ package com.infamous.simply_harder.datagen.builder;
 import com.google.gson.JsonObject;
 import com.infamous.simply_harder.SimplyHarder;
 import com.infamous.simply_harder.custom.recipe.InfusionRecipe;
+import com.infamous.simply_harder.custom.recipe.MasterworkingRecipe;
 import com.infamous.simply_harder.registry.SHRecipes;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementRewards;
@@ -44,7 +45,7 @@ public class InfusionRecipeBuilder {
     }
     
     public void save(Consumer<FinishedRecipe> onFinished, Item base, Item addition){
-        this.save(onFinished, InfusionRecipe.NAME + "/" + addition.getRegistryName().getPath() + "_from_" + base.getRegistryName().getPath());
+        this.save(onFinished, addition.getRegistryName().getPath() + "_from_" + base.getRegistryName().getPath());
     }
 
     public void save(Consumer<FinishedRecipe> onFinished, String name) {
@@ -54,7 +55,7 @@ public class InfusionRecipeBuilder {
     public void save(Consumer<FinishedRecipe> onFinished, ResourceLocation id) {
         this.ensureValid(id);
         this.advancement.parent(new ResourceLocation(id.getNamespace(), "recipes/root")).addCriterion("has_the_recipe", RecipeUnlockedTrigger.unlocked(id)).rewards(AdvancementRewards.Builder.recipe(id)).requirements(RequirementsStrategy.OR);
-        onFinished.accept(new InfusionRecipeBuilder.Result(id, this.base, this.addition, this.advancement, new ResourceLocation(id.getNamespace(), "recipes/" + InfusionRecipe.NAME + "/" + id.getPath())));
+        onFinished.accept(new InfusionRecipeBuilder.Result(new ResourceLocation(id.getNamespace(), InfusionRecipe.NAME + "/" + id.getPath()), this.base, this.addition, this.advancement, new ResourceLocation(id.getNamespace(), "recipes/" + InfusionRecipe.NAME + "/" + id.getPath())));
     }
 
     private void ensureValid(ResourceLocation id) {
