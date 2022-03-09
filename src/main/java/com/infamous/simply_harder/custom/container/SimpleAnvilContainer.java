@@ -9,10 +9,18 @@ public class SimpleAnvilContainer extends SimpleContainer {
     private final AnvilMenu anvilMenu;
     private final Player player;
 
-    public SimpleAnvilContainer(AnvilMenu anvilMenu, Player player, ItemStack... itemStacks) {
-        super(itemStacks);
+    public SimpleAnvilContainer(AnvilMenu anvilMenu, Player player, ItemStack left, ItemStack right) {
+        super(left, right);
         this.player = player;
         this.anvilMenu = anvilMenu;
+    }
+
+    public ItemStack getLeft(){
+        return this.getItem(AnvilMenu.INPUT_SLOT);
+    }
+
+    public ItemStack getRight(){
+        return this.getItem(AnvilMenu.ADDITIONAL_SLOT);
     }
 
     public int getRepairCost(){

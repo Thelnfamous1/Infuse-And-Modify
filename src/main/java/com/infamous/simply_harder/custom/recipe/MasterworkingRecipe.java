@@ -1,9 +1,10 @@
 package com.infamous.simply_harder.custom.recipe;
 
-import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-import com.infamous.simply_harder.custom.WrappedMasterworkTier;
+import com.infamous.simply_harder.SimplyHarder;
 import com.infamous.simply_harder.custom.container.SimpleAnvilContainer;
+import com.infamous.simply_harder.custom.data.MasterworkProgression;
+import com.infamous.simply_harder.custom.data.MasterworkTier;
 import com.infamous.simply_harder.custom.item.EnhancementCoreItem;
 import com.infamous.simply_harder.registry.SHRecipes;
 import net.minecraft.network.FriendlyByteBuf;
@@ -16,58 +17,75 @@ import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.registries.ForgeRegistryEntry;
 
-import java.util.LinkedHashMap;
-import java.util.Map;
-
 public class MasterworkingRecipe extends ForgingRecipe {
 
     public static final String NAME = "masterworking";
-    private final Ingredient base;
-    private final Map<Integer, WrappedMasterworkTier> tiers;
+    private final Ingredient masterworkable;
+    private final ResourceLocation progressionId;
 
-    public MasterworkingRecipe(ResourceLocation id, Ingredient base, Map<Integer, WrappedMasterworkTier> tiers){
+    public MasterworkingRecipe(ResourceLocation id, Ingredient masterworkable, ResourceLocation progressionId){
         super(id);
-        this.base = base;
-        this.tiers = tiers;
+        this.masterworkable = masterworkable;
+        this.progressionId = progressionId;
+    }
+
+    private MasterworkProgression getProgression(){
+        return SimplyHarder.MASTERWORK_PROGRESSION_MANAGER.getProgression(this.progressionId).orElse(MasterworkProgression.NONE);
     }
 
     @Override
-    public boolean matches(SimpleAnvilContainer container, Level level) {
-        ItemStack left = ForgingRecipe.getLeft(container);
-        ItemStack right = ForgingRecipe.getRight(container);
-        return this.base.test(left) && this.inTierRange(EnhancementCoreItem.getTierCheckTag(left))
-                && EnhancementCoreItem.isEnhancementCore(right);
+    protected boolean simpleMatches(SimpleAnvilContainer container, Level level) {
+        ItemStack left = container.getLeft();
+        ItemStack right = container.getRight();
+        return this.canMasterwork(left)
+                && EnhancementCoreItem.isCore(right);
     }
 
-    private boolean inTierRange(int tier) {
-        return Math.max(0, tier) == Math.min(tier, this.tiers.size());
+    private boolean canMasterwork(ItemStack stack) {
+        MasterworkProgression progression = this.getProgression();
+        if(progression.isNone()){
+            return false;
+        }
+
+        return this.masterworkable.test(stack)
+                && this.canProgress(progression, stack)
+                && progression.inTierRange(EnhancementCoreItem.getTierCheckTag(stack));
+    }
+
+    private boolean canProgress(MasterworkProgression progression, ItemStack stack) {
+        MasterworkProgression storedProgression = EnhancementCoreItem.getProgressionCheckTag(stack);
+        return storedProgression.isNone() || progression.matches(storedProgression);
     }
 
     @Override
     public ItemStack assemble(SimpleAnvilContainer container) {
-        ItemStack left = ForgingRecipe.getLeft(container);
+        ItemStack left = container.getLeft();
         ItemStack result = left.copy();
-        int newTier = EnhancementCoreItem.getTierCheckTag(left) + 1;
-        EnhancementCoreItem.setTier(result, newTier);
-        EnhancementCoreItem.clearModifiers(result);
-        EnhancementCoreItem.addModifiers(result, this.getTier(newTier).modifierMap());
+        int nextTier = this.getNextTier(left);
+        EnhancementCoreItem.setProgression(result, this.progressionId);
+        EnhancementCoreItem.setTier(result, nextTier);
         return result;
     }
 
-    @Override
-    public int calculateLevelCost(SimpleAnvilContainer container) {
-        ItemStack left = ForgingRecipe.getLeft(container);
-        return this.getTier(EnhancementCoreItem.getTierCheckTag(left) + 1).levelCost();
+    protected int getNextTier(ItemStack left) {
+        return EnhancementCoreItem.getTierCheckTag(left) + 1;
     }
 
     @Override
-    public int calculateMaterialCost(SimpleAnvilContainer container) {
-        ItemStack left = ForgingRecipe.getLeft(container);
-        return this.getTier(EnhancementCoreItem.getTierCheckTag(left) + 1).materialCost();
+    protected int calculateLevelCost(SimpleAnvilContainer container) {
+        ItemStack left = container.getLeft();
+        return this.getNextTierInProgression(left).levelCost();
     }
 
-    protected WrappedMasterworkTier getTier(int tier) {
-        return this.tiers.get(tier);
+    @Override
+    protected int calculateMaterialCost(SimpleAnvilContainer container) {
+        ItemStack left = container.getLeft();
+        return this.getNextTierInProgression(left).materialCost();
+    }
+
+    protected MasterworkTier getNextTierInProgression(ItemStack stack) {
+        int nextTier = this.getNextTier(stack);
+        return this.getProgression().getTier(nextTier).orElse(MasterworkTier.EMPTY);
     }
 
     @Override
@@ -82,48 +100,30 @@ public class MasterworkingRecipe extends ForgingRecipe {
 
     public static class Serializer extends ForgeRegistryEntry<RecipeSerializer<?>> implements RecipeSerializer<MasterworkingRecipe> {
 
-        public static final String BASE = "base";
-        public static final String TIERS = "tiers";
+        public static final String MASTERWORKABLE = "masterworkable";
+        public static final String PROGRESSION = "progression";
 
         @Override
         public MasterworkingRecipe fromJson(ResourceLocation id, JsonObject jsonObject) {
-            Ingredient base = Ingredient.fromJson(jsonObject.get(BASE));
+            Ingredient masterworkable = Ingredient.fromJson(jsonObject.get(MASTERWORKABLE));
 
-            JsonArray tiersArr = GsonHelper.getAsJsonArray(jsonObject, TIERS);
-            int size = tiersArr.size();
-            Map<Integer, WrappedMasterworkTier> tiers = new LinkedHashMap<>(size);
-            for(int i = 0; i < size; i++){
-                int currentTier = i + 1;
-                tiers.put(currentTier, WrappedMasterworkTier.fromJson(tiersArr.get(i)));
-            }
+            ResourceLocation progressionId = new ResourceLocation(GsonHelper.getAsString(jsonObject, PROGRESSION));
 
-            return new MasterworkingRecipe(id, base, tiers);
+            return new MasterworkingRecipe(id, masterworkable, progressionId);
         }
 
         @Override
         public MasterworkingRecipe fromNetwork(ResourceLocation id, FriendlyByteBuf byteBuf) {
-            Ingredient base = Ingredient.fromNetwork(byteBuf);
+            Ingredient masterworkable = Ingredient.fromNetwork(byteBuf);
+            ResourceLocation progressionId = byteBuf.readResourceLocation();
 
-            int size = byteBuf.readVarInt();
-            Map<Integer, WrappedMasterworkTier> tiers = new LinkedHashMap<>(size);
-            for(int i = 0; i < size; i++){
-                int currentTier = i + 1;
-                tiers.put(currentTier, WrappedMasterworkTier.fromNetwork(byteBuf));
-            }
-
-            return new MasterworkingRecipe(id, base, tiers);
+            return new MasterworkingRecipe(id, masterworkable, progressionId);
         }
 
         @Override
         public void toNetwork(FriendlyByteBuf byteBuf, MasterworkingRecipe recipe) {
-            recipe.base.toNetwork(byteBuf);
-
-            int size = recipe.tiers.size();
-            byteBuf.writeVarInt(size);
-            for(int i = 0; i < size; i++){
-                int currentTier = i + 1;
-                recipe.tiers.get(currentTier).toNetwork(byteBuf);
-            }
+            recipe.masterworkable.toNetwork(byteBuf);
+            byteBuf.writeResourceLocation(recipe.progressionId);
         }
     }
 }

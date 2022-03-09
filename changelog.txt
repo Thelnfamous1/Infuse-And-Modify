@@ -926,7 +926,7 @@
              * genPatches is now finalized by checkPatches
              * the S2S artifacts are automatically removed
              * added class and method access checking
- - 32.0.56  Fix the modifier combined name for keybinds displaying two pluses outside of forgedev #6901 (#6902)
+ - 32.0.56  Fix the attributeModifier combined name for keybinds displaying two pluses outside of forgedev #6901 (#6902)
  - 32.0.55  Fix harvest level and tool type not actually getting set #6906 (#6922)
  - 32.0.54  Reimplement ITeleporter Patches (#6886)
  - 32.0.53  Add function to add items with the same behavior as the pumpkin for enderman (#6890)
@@ -1133,8 +1133,8 @@
            may break servers, especially those chunkloading fake players.
  - 31.1.46 Revert defualt jvm args.
  - 31.1.45 Fixed dev time compilation using J9+ producing incorrect bytecode.
- - 31.1.44 Add "type" field to global loot modifier jsons. (#6554)
-           * Add "type" field to global loot modifier jsons and fix tests.
+ - 31.1.44 Add "type" field to global loot attributeModifier jsons. (#6554)
+           * Add "type" field to global loot attributeModifier jsons and fix tests.
            To avoid binary breaking, "type" defaults to be the same as the filename.
            * Fix license headers.
  - 31.1.43 Fix child annotations not inheriting member name, cleanup
@@ -2102,7 +2102,7 @@
  - 25.0.56  Fix Custom Entity Data not persisting between world loads. Closes #5562
             Fix BlockRailState inverting flexibility flag. Closes #5550
             Disable Forge's hooks on dispensing Buckets until Fluid system re-write. Closes #5545
-            Fix modifier only keybinds. Closes #5544
+            Fix attributeModifier only keybinds. Closes #5544
  - 25.0.55  Fix entity shearing logic (#5566)
  - 25.0.54  Fix droppers not spawning items in world (#5559)
  - 25.0.53  Allow vanilla connections properly, and allow mods to decide.
@@ -2218,7 +2218,7 @@
  - 24.0.172 Finish off most old patches, fix issue for mounted entities.
  - 24.0.171 Patch direct accesses to Entity.type to use getter instead (#5308)
  - 24.0.170 Tentatively reintroduce a container-opening system
- - 24.0.169 Add synchronized modifier to runtime enhanced enum methods
+ - 24.0.169 Add synchronized attributeModifier to runtime enhanced enum methods
  - 24.0.168 Add IExtensibleEnum, fix DimensionType create method
  - 24.0.167 Change IRenderHandler to an interface Closes #4640
  - 24.0.166 Made functional interface IChunkGeneratorFactory public (#5395)
@@ -3640,7 +3640,7 @@ v8.99
  - v8.99.1186 Fix MC-105406 (OpenGL leak in View Frustum) (#3308)
  - v8.99.1185 Fix very laggy mipmap slider MC-64581 (#3305)
  - v8.99.1184 Add Block#getStateForPlacement (#3129)
- - v8.99.1183 Add better key modifier behavior for GUI contexts (#3307)
+ - v8.99.1183 Add better key attributeModifier behavior for GUI contexts (#3307)
  - v8.99.1182 Make item repair recipe respect itemstack's getMaxDamage (#3295)
  - v8.99.1181 Fix infinite loop in dragon fight when the dragon is over the void.
  - v8.99.1180 Fix Tabbing issues with config classes.
@@ -3780,7 +3780,7 @@ v8.99
  - v8.99.1073 Something that needs to happen: warn people about bad modids- if they're not lowercased, or if they're too long.
  - v8.99.1072 Add missing cancelable
  - v8.99.1071 Add hand-specific render event
- - v8.99.1070 Fix hotkey with default modifier loading wrong when modifier set to NONE
+ - v8.99.1070 Fix hotkey with default attributeModifier loading wrong when attributeModifier set to NONE
  - v8.99.1069 Fix async race condition on new chunks (closes #3020) (#3090)
               This patch fixes a race condition that sometimes caused a just generated chunk
               to be generated a second time.  In some this caused generated structures to
@@ -4128,8 +4128,8 @@ v8.99
               Also fix support for sopme of the spec that was partially respected.
  - v8.99.861  Enhance some error logging related to OBJLoader issues, and RegistryEntries.
  - v8.99.860  Merge pull request #2723 from mezz/pick-fix
-              Fix some plain keybinds not working when a modifier is active
- - v8.99.859  Fix some plain keybinds not working when a modifier is active
+              Fix some plain keybinds not working when a attributeModifier is active
+ - v8.99.859  Fix some plain keybinds not working when a attributeModifier is active
  - v8.99.858  Merge pull request #2719 from mezz/pick-fix
               Fix #2717 Pick block hotkey not working in inventories
  - v8.99.857  Fix #2717 Pick block hotkey not working in inventories
@@ -4150,12 +4150,12 @@ v8.99
               Fix PlaySoundEvent replacing a sound with PositionedSound causing an NPE.
  - v8.99.845  Fixed using PlaySoundEvent to replace a sound with a PositionedSound causing an NPE due to the Sound field not being set by a call to ISound.createAccessor(SoundHandler).
  - v8.99.844  Merge pull request #2707 from mezz/keyBinding19-4
-              Add modifier support to vanilla keybindings.
+              Add attributeModifier support to vanilla keybindings.
  - v8.99.843  Merge pull request #2604 from williewillus/pie
               New PlayerInteractEvent for 1.9
  - v8.99.842  Player Interact Event
- - v8.99.841  Add modifier support to vanilla keybindings.
-              Add Orange conflict color for modifier/key conflicts
+ - v8.99.841  Add attributeModifier support to vanilla keybindings.
+              Add Orange conflict color for attributeModifier/key conflicts
               (like Ctrl and Ctrl-Z conflicting)
               Related to #2692
  - v8.99.840  Merge pull request #2704 from AEnterprise/1.9
@@ -4173,8 +4173,8 @@ v8.99
  - v8.99.831  Merge pull request #2616 from iTitus/updateNotificationIcon
               Add update notification icon made by @gigaherz, closes #2582
  - v8.99.830  Merge pull request #2697 from mezz/keyBinding19-3
-              Fix inability to attack while holding modifier keys
- - v8.99.829  Fix inability to attack while holding modifier keys
+              Fix inability to attack while holding attributeModifier keys
+ - v8.99.829  Fix inability to attack while holding attributeModifier keys
  - v8.99.828  Merge pull request #2695 from mezz/keyBinding19-2
               Re-Add key binding modifiers and contexts.
  - v8.99.827  Re-Add key binding modifiers and contexts.
@@ -4507,7 +4507,7 @@ v8.99
  - v8.99.592  Added local click position to PlayerInteractEvent.
  - v8.99.591  Added EntityViewRenderEvent#FOVModifier
               Enables mods to modify raw FOV directly.
-              Avoids modifier limit from FOVUpdateEvent.
+              Avoids attributeModifier limit from FOVUpdateEvent.
               Aware of blocks which are needed for fov change related with materials.
  - v8.99.590  Fixed dummy blocks not being removed from registry on dedicated server correctly. Closes #2487
               Also added some more debug logs!
@@ -9316,7 +9316,7 @@ v99.99-pre
  - v99.99-pre-2032 Jenkins needs this script, *pokes Overmind* -.-
  - v99.99-pre-2031 Fix profiler issue with RenderGlobal patch. Closes #414
  - v99.99-pre-2030 Fix EventTransformer throwing an NPE when transforming a class that doesn't exist. Closes #413
- - v99.99-pre-2029 Fix fortune modifier always passed as 0 to idDropped closes #412
+ - v99.99-pre-2029 Fix fortune attributeModifier always passed as 0 to idDropped closes #412
  - v99.99-pre-2028 Fixes comparison for items in creative inventory, closes #411
  - v99.99-pre-2027 Added a hook into SlotArmor so Items can control if they are classified as a Armor type. Closes #408
  - v99.99-pre-2026 Add item frame transformations to the EntityItem render helper Closes #407

@@ -1,6 +1,7 @@
 package com.infamous.simply_harder.custom.recipe;
 
 import com.infamous.simply_harder.custom.container.SimpleAnvilContainer;
+import com.infamous.simply_harder.custom.data.GearMod;
 import com.infamous.simply_harder.custom.item.GearModItem;
 import com.infamous.simply_harder.registry.SHRecipes;
 import net.minecraft.resources.ResourceLocation;
@@ -17,30 +18,35 @@ public class ModificationRecipe extends ForgingRecipe {
     }
 
     @Override
-    public int calculateLevelCost(SimpleAnvilContainer container) {
-        return GearModItem.getLevelCost(ForgingRecipe.getRight(container));
+    protected int calculateLevelCost(SimpleAnvilContainer container) {
+        return GearModItem.getLevelCostCheckTag(container.getRight());
     }
 
     @Override
-    public int calculateMaterialCost(SimpleAnvilContainer container) {
-        return GearModItem.getMaterialCost(ForgingRecipe.getRight(container));
+    protected int calculateMaterialCost(SimpleAnvilContainer container) {
+        return GearModItem.getMaterialCost(container.getRight());
     }
 
     @Override
-    public boolean matches(SimpleAnvilContainer container, Level level) {
-        ItemStack left = getLeft(container);
-        ItemStack right = getRight(container);
+    protected boolean simpleMatches(SimpleAnvilContainer container, Level level) {
+        ItemStack left = container.getLeft();
+        ItemStack right = container.getRight();
+        GearMod mod = GearModItem.getModCheckTag(right);
         return GearModItem.isUsableMod(right)
-                && GearModItem.isValidForMod(left, right);
+                && this.canInstall(left, mod);
+    }
+
+    private boolean canInstall(ItemStack left, GearMod mod) {
+        return mod.installable().test(left) && !GearModItem.hasMod(left);
     }
 
     @Override
     public ItemStack assemble(SimpleAnvilContainer container) {
-        ItemStack left = getLeft(container);
-        ItemStack right = getRight(container);
+        ItemStack left = container.getLeft();
+        ItemStack right = container.getRight();
 
         ItemStack result = left.copy();
-        GearModItem.addMod(result, right);
+        GearModItem.setMod(result, right);
         return result;
     }
 

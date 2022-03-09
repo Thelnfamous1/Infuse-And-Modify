@@ -2,10 +2,9 @@ package com.infamous.simply_harder.custom.recipe;
 
 import com.infamous.simply_harder.custom.container.SimpleAnvilContainer;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.inventory.AnvilMenu;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 
 public abstract class ForgingRecipe implements Recipe<SimpleAnvilContainer> {
@@ -15,17 +14,13 @@ public abstract class ForgingRecipe implements Recipe<SimpleAnvilContainer> {
         this.id = id;
     }
 
-    public static SimpleAnvilContainer buildAnvilContainer(AnvilMenu anvilMenu, Player player, ItemStack left, ItemStack right){
-        return new SimpleAnvilContainer(anvilMenu, player, left, right);
+    @Override
+    public boolean matches(SimpleAnvilContainer container, Level level) {
+        return this.calculateMaterialCost(container) <= container.getRight().getCount()
+                && this.simpleMatches(container, level);
     }
 
-    protected static ItemStack getLeft(SimpleAnvilContainer container) {
-        return container.getItem(AnvilMenu.INPUT_SLOT);
-    }
-
-    protected static ItemStack getRight(SimpleAnvilContainer container) {
-        return container.getItem(AnvilMenu.ADDITIONAL_SLOT);
-    }
+    protected abstract boolean simpleMatches(SimpleAnvilContainer container, Level level);
 
     public ResourceLocation getId() {
         return this.id;
@@ -44,7 +39,14 @@ public abstract class ForgingRecipe implements Recipe<SimpleAnvilContainer> {
         return new ItemStack(Blocks.ANVIL);
     }
 
-    public abstract int calculateLevelCost(SimpleAnvilContainer container);
+    public int calculateTotalLevelCost(SimpleAnvilContainer container){
+        return this.calculateLevelCost(container) * container.getLeft().getCount();
+    }
+    public int calculateTotalMaterialCost(SimpleAnvilContainer container){
+        return this.calculateMaterialCost(container) * container.getLeft().getCount();
+    }
 
-    public abstract int calculateMaterialCost(SimpleAnvilContainer container);
+    protected abstract int calculateLevelCost(SimpleAnvilContainer container);
+
+    protected abstract int calculateMaterialCost(SimpleAnvilContainer container);
 }

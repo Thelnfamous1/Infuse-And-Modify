@@ -4,17 +4,25 @@
   "item.simply_harder.upgrade_gear_module.lore": "A collection of universal components that can be used to infuse gear items.",
   
   "item.simply_harder.gear_mod": "Gear Mod",
-  "item.simply_harder.gear_mod.installed_gear_mod": "Installed Gear Mod:",
-  "item.simply_harder.gear_mod.modifiers.mainhand": "Installed for Main Hand:",
-  "item.simply_harder.gear_mod.modifiers.offhand": "Installed for Off Hand:",
-  "item.simply_harder.gear_mod.modifiers.feet": "Installed for Feet:",
-  "item.simply_harder.gear_mod.modifiers.legs": "Installed for Legs:",
-  "item.simply_harder.gear_mod.modifiers.chest": "Installed for Body:",
-  "item.simply_harder.gear_mod.modifiers.head": "Installed for Head:",
-  "gear_mod.simply_harder.test": "Test",
+  "item.simply_harder.gear_mod.name": "Name:",
+  "item.simply_harder.gear_mod.modifiers.mainhand": "Can Install for Main Hand:",
+  "item.simply_harder.gear_mod.modifiers.offhand": "Can Install for Off Hand:",
+  "item.simply_harder.gear_mod.modifiers.feet": "Can Install for Feet:",
+  "item.simply_harder.gear_mod.modifiers.legs": "Can Install for Legs:",
+  "item.simply_harder.gear_mod.modifiers.chest": "Can Install for Body:",
+  "item.simply_harder.gear_mod.modifiers.head": "Can Install for Head:",
+  "item.simply_harder.gear_mod.installed": "Installed Gear Mod:",
+  "item.simply_harder.gear_mod.installed.modifiers.mainhand": "Installed for Main Hand:",
+  "item.simply_harder.gear_mod.installed.modifiers.offhand": "Installed for Off Hand:",
+  "item.simply_harder.gear_mod.installed.modifiers.feet": "Installed for Feet:",
+  "item.simply_harder.gear_mod.installed.modifiers.legs": "Installed for Legs:",
+  "item.simply_harder.gear_mod.installed.modifiers.chest": "Installed for Body:",
+  "item.simply_harder.gear_mod.installed.modifiers.head": "Installed for Head:",
+  "gear_mod.simply_harder.unknown": "Unknown",
 
   "item.simply_harder.enhancement_core": "Enhancement Core",
   "item.simply_harder.enhancement_core.lore": "Required for forging Masterwork gear.",
+  "item.simply_harder.masterwork.progression": "Masterwork Progression:",
   "item.simply_harder.masterwork.tier": "Masterwork Tier:",
   "item.simply_harder.masterwork.tier.1": "I",
   "item.simply_harder.masterwork.tier.2": "II",
@@ -31,5 +39,7 @@
   "item.simply_harder.masterwork.modifiers.feet": "Masterworked for Feet:",
   "item.simply_harder.masterwork.modifiers.legs": "Masterworked for Legs:",
   "item.simply_harder.masterwork.modifiers.chest": "Masterworked for Body:",
-  "item.simply_harder.masterwork.modifiers.head": "Masterworked for Head:"
+  "item.simply_harder.masterwork.modifiers.head": "Masterworked for Head:",
+
+  "masterwork_progression.simply_harder.none": "None"
 }

@@ -28,15 +28,15 @@ public class SHForgeClientEvents {
             toolTip.add(TextComponent.EMPTY);
             TooltipHelper.appendMasterworkLines(toolTip, itemStack);
             if(flags.isAdvanced()){
-                TooltipHelper.appendAttributeModifiersLines(EnhancementCoreItem.getMasterwork(itemStack), toolTip, EnhancementCoreItem.MASTERWORK_NAME);
+                TooltipHelper.appendAttributeModifiersLinesFromMasterworkProgression(EnhancementCoreItem.getTierCheckTag(itemStack), EnhancementCoreItem.getProgressionCheckTag(itemStack), toolTip, EnhancementCoreItem.MASTERWORK_NAME);
             }
         }
 
         if(GearModItem.hasMod(itemStack)){
             toolTip.add(TextComponent.EMPTY);
-            TooltipHelper.appendModificationLines(toolTip, itemStack);
+            TooltipHelper.appendInstalledModLines(toolTip, itemStack);
             if(flags.isAdvanced()){
-                TooltipHelper.appendAttributeModifiersLines(GearModItem.getMod(itemStack), toolTip, GearModItem.NAME);
+                TooltipHelper.appendAttributeModifiersLinesFromGearMod(GearModItem.getModCheckTag(itemStack), toolTip, GearModItem.INSTALLED_LOCALIZATION_STRING);
             }
         }
     }

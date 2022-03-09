@@ -1,5 +1,8 @@
 package com.infamous.simply_harder;
 
+import com.infamous.simply_harder.custom.GearModManager;
+import com.infamous.simply_harder.custom.MasterworkProgressionManager;
+import com.infamous.simply_harder.custom.SimpleRegistryObjectHolder;
 import com.infamous.simply_harder.registry.SHAttributes;
 import com.infamous.simply_harder.registry.SHItems;
 import com.infamous.simply_harder.registry.SHRecipes;
@@ -17,6 +20,9 @@ public class SimplyHarder
     public static final String MOD_ID = "simply_harder";
     // Directly reference a log4j logger.
     public static final Logger LOGGER = LogManager.getLogger();
+
+    public static final GearModManager GEAR_MOD_MANAGER = new GearModManager();
+    public static final MasterworkProgressionManager MASTERWORK_PROGRESSION_MANAGER = new MasterworkProgressionManager();
 
     public SimplyHarder() {
         // Register the setup method for modloading
