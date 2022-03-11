@@ -1,0 +1,9 @@
+{
+  "type": "simply_harder:infusion",
+  "base": {
+    "item": "minecraft:diamond_helmet"
+  },
+  "infusion": {
+    "item": "minecraft:netherite_helmet"
+  }
+}

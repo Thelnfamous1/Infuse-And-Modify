@@ -1,0 +1,16 @@
+{
+  "id": "simply_harder:healthy_head_guard",
+  "installable": {
+    "tag": "simply_harder:helmets"
+  },
+  "attribute_modifiers": [
+    {
+      "attribute": "minecraft:generic.max_health",
+      "slot": "head",
+      "uuid": "2c968932-08a4-4ecc-abbe-50a7371a4cdb",
+      "name": "simply_harder:healthy_head_guard",
+      "amount": 2.0,
+      "operation": 0
+    }
+  ]
+}

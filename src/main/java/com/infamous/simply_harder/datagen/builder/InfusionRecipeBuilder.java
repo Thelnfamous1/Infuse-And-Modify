@@ -12,6 +12,7 @@ import net.minecraft.advancements.RequirementsStrategy;
 import net.minecraft.advancements.critereon.RecipeUnlockedTrigger;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -44,18 +45,18 @@ public class InfusionRecipeBuilder {
         return this;
     }
     
-    public void save(Consumer<FinishedRecipe> onFinished, Item base, Item addition){
-        this.save(onFinished, addition.getRegistryName().getPath() + "_from_" + base.getRegistryName().getPath());
+    public void save(Consumer<FinishedRecipe> onFinished, Item base, Item addition, CreativeModeTab creativeTab){
+        this.save(onFinished, addition.getRegistryName().getPath() + "_from_" + base.getRegistryName().getPath(), creativeTab);
     }
 
-    public void save(Consumer<FinishedRecipe> onFinished, String name) {
-        this.save(onFinished, new ResourceLocation(SimplyHarder.MOD_ID, name));
+    public void save(Consumer<FinishedRecipe> onFinished, String name, CreativeModeTab creativeTab) {
+        this.save(onFinished, new ResourceLocation(SimplyHarder.MOD_ID, name), creativeTab);
     }
 
-    public void save(Consumer<FinishedRecipe> onFinished, ResourceLocation id) {
+    public void save(Consumer<FinishedRecipe> onFinished, ResourceLocation id, CreativeModeTab creativeTab) {
         this.ensureValid(id);
         this.advancement.parent(new ResourceLocation(id.getNamespace(), "recipes/root")).addCriterion("has_the_recipe", RecipeUnlockedTrigger.unlocked(id)).rewards(AdvancementRewards.Builder.recipe(id)).requirements(RequirementsStrategy.OR);
-        onFinished.accept(new InfusionRecipeBuilder.Result(new ResourceLocation(id.getNamespace(), InfusionRecipe.NAME + "/" + id.getPath()), this.base, this.addition, this.advancement, new ResourceLocation(id.getNamespace(), "recipes/" + InfusionRecipe.NAME + "/" + id.getPath())));
+        onFinished.accept(new InfusionRecipeBuilder.Result(new ResourceLocation(id.getNamespace(), InfusionRecipe.NAME + "/" + id.getPath()), this.base, this.addition, this.advancement, new ResourceLocation(id.getNamespace(), "recipes/" + creativeTab.getRecipeFolderName() + "/" + id.getPath())));
     }
 
     private void ensureValid(ResourceLocation id) {

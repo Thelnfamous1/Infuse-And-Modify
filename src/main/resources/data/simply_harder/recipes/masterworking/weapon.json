@@ -1,0 +1,7 @@
+{
+  "type": "simply_harder:masterworking",
+  "masterworkable": {
+    "tag": "simply_harder:weapons"
+  },
+  "progression": "simply_harder:weapon"
+}

@@ -1,0 +1,16 @@
+{
+  "id": "simply_harder:strong_foot_guards",
+  "installable": {
+    "tag": "simply_harder:boots"
+  },
+  "attribute_modifiers": [
+    {
+      "attribute": "minecraft:generic.attack_damage",
+      "slot": "feet",
+      "uuid": "37823925-51dc-408f-954f-3e577d7c0a2e",
+      "name": "simply_harder:strong_foot_guards",
+      "amount": 1.0,
+      "operation": 0
+    }
+  ]
+}

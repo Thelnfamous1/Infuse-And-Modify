@@ -1,0 +1,16 @@
+{
+  "id": "simply_harder:strong_blade",
+  "installable": {
+    "tag": "simply_harder:weapons"
+  },
+  "attribute_modifiers": [
+    {
+      "attribute": "minecraft:generic.attack_damage",
+      "slot": "mainhand",
+      "uuid": "9b0f12ac-5f12-4dd8-8eb3-2cd2a088440b",
+      "name": "simply_harder:strong_blade",
+      "amount": 1.0,
+      "operation": 0
+    }
+  ]
+}

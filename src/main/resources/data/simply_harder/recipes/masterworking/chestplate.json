@@ -1,0 +1,7 @@
+{
+  "type": "simply_harder:masterworking",
+  "masterworkable": {
+    "tag": "simply_harder:chestplates"
+  },
+  "progression": "simply_harder:chestplate"
+}

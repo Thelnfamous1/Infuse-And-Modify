@@ -13,6 +13,7 @@ import net.minecraft.advancements.critereon.RecipeUnlockedTrigger;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.Tag;
+import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
@@ -48,18 +49,18 @@ public class MasterworkingRecipeBuilder {
         return this;
     }
     
-    public void save(Consumer<FinishedRecipe> onFinished, Item base){
-        this.save(onFinished, base.getRegistryName().getPath());
+    public void save(Consumer<FinishedRecipe> onFinished, Item base, CreativeModeTab creativeTab){
+        this.save(onFinished, base.getRegistryName().getPath(), creativeTab);
     }
 
-    public void save(Consumer<FinishedRecipe> onFinished, String name) {
-        this.save(onFinished, new ResourceLocation(SimplyHarder.MOD_ID, name));
+    public void save(Consumer<FinishedRecipe> onFinished, String name, CreativeModeTab creativeTab) {
+        this.save(onFinished, new ResourceLocation(SimplyHarder.MOD_ID, name), creativeTab);
     }
 
-    public void save(Consumer<FinishedRecipe> onFinished, ResourceLocation id) {
+    public void save(Consumer<FinishedRecipe> onFinished, ResourceLocation id, CreativeModeTab creativeTab) {
         this.ensureValid(id);
         this.advancement.parent(new ResourceLocation(id.getNamespace(), "recipes/root")).addCriterion("has_the_recipe", RecipeUnlockedTrigger.unlocked(id)).rewards(AdvancementRewards.Builder.recipe(id)).requirements(RequirementsStrategy.OR);
-        onFinished.accept(new MasterworkingRecipeBuilder.Result(new ResourceLocation(id.getNamespace(), MasterworkingRecipe.NAME + "/" + id.getPath()), this.masterworkable, this.progressionId, this.advancement, new ResourceLocation(id.getNamespace(), "recipes/" + MasterworkingRecipe.NAME + "/" + id.getPath())));
+        onFinished.accept(new MasterworkingRecipeBuilder.Result(new ResourceLocation(id.getNamespace(), MasterworkingRecipe.NAME + "/" + id.getPath()), this.masterworkable, this.progressionId, this.advancement, new ResourceLocation(id.getNamespace(), "recipes/" + creativeTab.getRecipeFolderName() + "/" + id.getPath())));
     }
 
     private void ensureValid(ResourceLocation id) {

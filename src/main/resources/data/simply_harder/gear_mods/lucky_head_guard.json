@@ -1,0 +1,16 @@
+{
+  "id": "simply_harder:lucky_head_guard",
+  "installable": {
+    "tag": "simply_harder:helmets"
+  },
+  "attribute_modifiers": [
+    {
+      "attribute": "minecraft:generic.luck",
+      "slot": "head",
+      "uuid": "2c968932-08a4-4ecc-abbe-50a7371a4cdb",
+      "name": "simply_harder:lucky_head_guard",
+      "amount": 1.0,
+      "operation": 0
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "parent": "simply_harder:recipes/root",
+  "rewards": {
+    "recipes": [
+      "simply_harder:diamond_axe_from_iron_axe"
+    ]
+  },
+  "criteria": {
+    "has_upgrade_module": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "simply_harder:upgrade_module"
+            ],
+            "nbt": "{\"simply_harder:upgrade_module\":{InfusedItem:{Count:1b,id:\"minecraft:diamond_axe\",tag:{Damage:0}}}}"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "simply_harder:diamond_axe_from_iron_axe"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_upgrade_module",
+      "has_the_recipe"
+    ]
+  ]
+}

@@ -38,6 +38,7 @@ public class SHForgeEvents {
     static void onItemAttributeEvent(ItemAttributeModifierEvent event){
         ItemStack itemStack = event.getItemStack();
         EquipmentSlot slotType = event.getSlotType();
+
         if(EnhancementCoreItem.hasMasterwork(itemStack)){
             Multimap<Attribute, AttributeModifier> modifiers = AttributeHelper.getAttributeModifiersFromMasterworkProgression(EnhancementCoreItem.getTierCheckTag(itemStack), EnhancementCoreItem.getProgressionCheckTag(itemStack), slotType);
             for(Map.Entry<Attribute, AttributeModifier> entry : modifiers.entries()){

@@ -1,0 +1,9 @@
+{
+  "type": "simply_harder:infusion",
+  "base": {
+    "item": "minecraft:iron_hoe"
+  },
+  "infusion": {
+    "item": "minecraft:diamond_hoe"
+  }
+}

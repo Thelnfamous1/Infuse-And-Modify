@@ -1,0 +1,16 @@
+{
+  "id": "simply_harder:fortified_leg_guards",
+  "installable": {
+    "tag": "simply_harder:leggings"
+  },
+  "attribute_modifiers": [
+    {
+      "attribute": "minecraft:generic.armor",
+      "slot": "legs",
+      "uuid": "afd64ff9-2e2e-4b14-a594-21117631bb70",
+      "name": "simply_harder:fortified_leg_guards",
+      "amount": 2.0,
+      "operation": 0
+    }
+  ]
+}

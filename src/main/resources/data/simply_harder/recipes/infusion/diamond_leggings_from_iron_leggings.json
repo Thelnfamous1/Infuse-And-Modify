@@ -1,0 +1,9 @@
+{
+  "type": "simply_harder:infusion",
+  "base": {
+    "item": "minecraft:iron_leggings"
+  },
+  "infusion": {
+    "item": "minecraft:diamond_leggings"
+  }
+}

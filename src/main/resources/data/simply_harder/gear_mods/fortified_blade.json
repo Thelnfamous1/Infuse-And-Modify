@@ -1,0 +1,16 @@
+{
+  "id": "simply_harder:fortified_blade",
+  "installable": {
+    "tag": "simply_harder:weapons"
+  },
+  "attribute_modifiers": [
+    {
+      "attribute": "minecraft:generic.armor",
+      "slot": "mainhand",
+      "uuid": "9b0f12ac-5f12-4dd8-8eb3-2cd2a088440b",
+      "name": "simply_harder:fortified_blade",
+      "amount": 2.0,
+      "operation": 0
+    }
+  ]
+}

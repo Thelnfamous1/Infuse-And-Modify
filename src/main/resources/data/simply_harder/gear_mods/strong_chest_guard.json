@@ -1,0 +1,16 @@
+{
+  "id": "simply_harder:strong_chest_guard",
+  "installable": {
+    "tag": "simply_harder:chestplates"
+  },
+  "attribute_modifiers": [
+    {
+      "attribute": "minecraft:generic.attack_damage",
+      "slot": "chest",
+      "uuid": "1600b3eb-c37d-440b-bfed-fd3484e2d0ae",
+      "name": "simply_harder:strong_chest_guard",
+      "amount": 1.0,
+      "operation": 0
+    }
+  ]
+}

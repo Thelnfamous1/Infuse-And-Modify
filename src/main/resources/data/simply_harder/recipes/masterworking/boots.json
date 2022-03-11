@@ -1,0 +1,7 @@
+{
+  "type": "simply_harder:masterworking",
+  "masterworkable": {
+    "tag": "simply_harder:boots"
+  },
+  "progression": "simply_harder:boots"
+}

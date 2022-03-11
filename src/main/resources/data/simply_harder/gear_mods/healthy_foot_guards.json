@@ -1,0 +1,16 @@
+{
+  "id": "simply_harder:healthy_foot_guards",
+  "installable": {
+    "tag": "simply_harder:boots"
+  },
+  "attribute_modifiers": [
+    {
+      "attribute": "minecraft:generic.max_health",
+      "slot": "feet",
+      "uuid": "37823925-51dc-408f-954f-3e577d7c0a2e",
+      "name": "simply_harder:healthy_foot_guards",
+      "amount": 2.0,
+      "operation": 0
+    }
+  ]
+}

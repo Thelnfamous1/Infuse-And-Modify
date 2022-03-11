@@ -7,7 +7,6 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.infamous.simply_harder.SimplyHarder;
 import com.infamous.simply_harder.custom.data.MasterworkProgression;
-import com.infamous.simply_harder.datagen.ModItemTagsProvider;
 import com.infamous.simply_harder.datagen.builder.MasterworkProgressionBuilder;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.DataProvider;
@@ -32,11 +31,11 @@ import java.util.function.Consumer;
 public class MasterworkProgressionProvider implements DataProvider {
     private static final Logger LOGGER = LogManager.getLogger();
     private static final Gson GSON = (new GsonBuilder()).setPrettyPrinting().create();
+    public static final ResourceLocation WEAPON = new ResourceLocation(SimplyHarder.MOD_ID, "weapon");
     public static final ResourceLocation BOOTS = new ResourceLocation(SimplyHarder.MOD_ID, "boots");
     public static final ResourceLocation CHESTPLATE = new ResourceLocation(SimplyHarder.MOD_ID, "chestplate");
     public static final ResourceLocation HELMET = new ResourceLocation(SimplyHarder.MOD_ID, "helmet");
     public static final ResourceLocation LEGGINGS = new ResourceLocation(SimplyHarder.MOD_ID, "leggings");
-    public static final ResourceLocation MELEE_WEAPON = new ResourceLocation(SimplyHarder.MOD_ID, "melee_weapon");
     protected final DataGenerator generator;
 
     public MasterworkProgressionProvider(DataGenerator dataGenerator) {
@@ -93,8 +92,10 @@ public class MasterworkProgressionProvider implements DataProvider {
 
     protected void buildMasterworkProgressions(Consumer<MasterworkProgression> onFinished) {
         AttributeModifier.Operation[] operations = {AttributeModifier.Operation.ADDITION, AttributeModifier.Operation.ADDITION};
+        Attribute[] weaponAttributes = new Attribute[]{Attributes.ATTACK_DAMAGE, Attributes.ATTACK_SPEED};
+        double[] weaponAmounts = {0.2D, 0.05D};
 
-        this.buildMeleeWeapon(onFinished, operations);
+        this.buildWeapon(onFinished, operations, weaponAttributes, weaponAmounts);
 
         Attribute[] armorAttributes = {Attributes.ARMOR, Attributes.ARMOR_TOUGHNESS};
         double[] armorAmounts = {0.2D, 0.1D};
@@ -161,15 +162,14 @@ public class MasterworkProgressionProvider implements DataProvider {
                 .save(onFinished);
     }
 
-    private void buildMeleeWeapon(Consumer<MasterworkProgression> onFinished, AttributeModifier.Operation[] operations) {
-        double[] meleeWeaponAmounts = {0.2D, 0.05D};
-        UUID meleeWeaponsUUID = UUID.fromString("a2ad69fe-46b6-4d36-8c32-26ca1c3b10cd");
-        MasterworkProgressionBuilder.progression(MELEE_WEAPON)
+    private void buildWeapon(Consumer<MasterworkProgression> onFinished, AttributeModifier.Operation[] operations, Attribute[] weaponAttributes, double[] weaponAmounts) {
+        UUID weaponUUID = UUID.fromString("a2ad69fe-46b6-4d36-8c32-26ca1c3b10cd");
+        MasterworkProgressionBuilder.progression(WEAPON)
                 .addDefaultTiers(
                         new EquipmentSlot[]{EquipmentSlot.MAINHAND},
-                        new Attribute[]{Attributes.ATTACK_DAMAGE, Attributes.ATTACK_SPEED},
-                        new UUID[]{meleeWeaponsUUID, meleeWeaponsUUID},
-                        meleeWeaponAmounts,
+                        weaponAttributes,
+                        new UUID[]{weaponUUID, weaponUUID},
+                        weaponAmounts,
                         operations)
                 .save(onFinished);
     }

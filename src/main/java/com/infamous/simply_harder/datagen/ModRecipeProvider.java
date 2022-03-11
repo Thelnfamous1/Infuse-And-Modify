@@ -15,6 +15,7 @@ import net.minecraft.data.DataGenerator;
 import net.minecraft.data.recipes.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.Tag;
+import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -32,35 +33,35 @@ public class ModRecipeProvider extends RecipeProvider {
         SpecialRecipeBuilder.special(SHRecipes.INFUSE_UPGRADE_MODULE.get()).save(onFinished, new ResourceLocation(SimplyHarder.MOD_ID, InfuseUpgradeModuleRecipe.NAME).toString());
         SpecialRecipeBuilder.special(SHRecipes.MODIFICATION.get()).save(onFinished, new ResourceLocation(SimplyHarder.MOD_ID, ModificationRecipe.NAME).toString());
 
-        buildSimpleMasterworkingRecipe(onFinished, ModItemTagsProvider.MELEE_WEAPONS, new ResourceLocation(SimplyHarder.MOD_ID, "melee_weapon"));
-        buildSimpleMasterworkingRecipe(onFinished, ModItemTagsProvider.BOOTS, new ResourceLocation(SimplyHarder.MOD_ID, "boots"));
-        buildSimpleMasterworkingRecipe(onFinished, ModItemTagsProvider.CHESTPLATES, new ResourceLocation(SimplyHarder.MOD_ID, "chestplate"));
-        buildSimpleMasterworkingRecipe(onFinished, ModItemTagsProvider.HELMETS, new ResourceLocation(SimplyHarder.MOD_ID, "helmet"));
-        buildSimpleMasterworkingRecipe(onFinished, ModItemTagsProvider.LEGGINGS, new ResourceLocation(SimplyHarder.MOD_ID, "leggings"));
+        buildSimpleMasterworkingRecipe(onFinished, ModItemTagsProvider.WEAPONS, new ResourceLocation(SimplyHarder.MOD_ID, "weapon"), CreativeModeTab.TAB_COMBAT);
+        buildSimpleMasterworkingRecipe(onFinished, ModItemTagsProvider.BOOTS, new ResourceLocation(SimplyHarder.MOD_ID, "boots"), CreativeModeTab.TAB_COMBAT);
+        buildSimpleMasterworkingRecipe(onFinished, ModItemTagsProvider.CHESTPLATES, new ResourceLocation(SimplyHarder.MOD_ID, "chestplate"), CreativeModeTab.TAB_COMBAT);
+        buildSimpleMasterworkingRecipe(onFinished, ModItemTagsProvider.HELMETS, new ResourceLocation(SimplyHarder.MOD_ID, "helmet"), CreativeModeTab.TAB_COMBAT);
+        buildSimpleMasterworkingRecipe(onFinished, ModItemTagsProvider.LEGGINGS, new ResourceLocation(SimplyHarder.MOD_ID, "leggings"), CreativeModeTab.TAB_COMBAT);
 
         // ADD IRON -> DIAMOND INFUSION RECIPES
-        buildSimpleInfusionRecipe(onFinished, Items.IRON_AXE, Items.DIAMOND_AXE);
-        buildSimpleInfusionRecipe(onFinished, Items.IRON_HOE, Items.DIAMOND_HOE);
-        buildSimpleInfusionRecipe(onFinished, Items.IRON_PICKAXE, Items.DIAMOND_PICKAXE);
-        buildSimpleInfusionRecipe(onFinished, Items.IRON_SHOVEL, Items.DIAMOND_SHOVEL);
-        buildSimpleInfusionRecipe(onFinished, Items.IRON_SWORD, Items.DIAMOND_SWORD);
+        buildSimpleInfusionRecipe(onFinished, Items.IRON_AXE, Items.DIAMOND_AXE, CreativeModeTab.TAB_TOOLS);
+        buildSimpleInfusionRecipe(onFinished, Items.IRON_HOE, Items.DIAMOND_HOE, CreativeModeTab.TAB_TOOLS);
+        buildSimpleInfusionRecipe(onFinished, Items.IRON_PICKAXE, Items.DIAMOND_PICKAXE, CreativeModeTab.TAB_TOOLS);
+        buildSimpleInfusionRecipe(onFinished, Items.IRON_SHOVEL, Items.DIAMOND_SHOVEL, CreativeModeTab.TAB_TOOLS);
+        buildSimpleInfusionRecipe(onFinished, Items.IRON_SWORD, Items.DIAMOND_SWORD, CreativeModeTab.TAB_COMBAT);
 
-        buildSimpleInfusionRecipe(onFinished, Items.IRON_BOOTS, Items.DIAMOND_BOOTS);
-        buildSimpleInfusionRecipe(onFinished, Items.IRON_CHESTPLATE, Items.DIAMOND_CHESTPLATE);
-        buildSimpleInfusionRecipe(onFinished, Items.IRON_HELMET, Items.DIAMOND_HELMET);
-        buildSimpleInfusionRecipe(onFinished, Items.IRON_LEGGINGS, Items.DIAMOND_LEGGINGS);
+        buildSimpleInfusionRecipe(onFinished, Items.IRON_BOOTS, Items.DIAMOND_BOOTS, CreativeModeTab.TAB_COMBAT);
+        buildSimpleInfusionRecipe(onFinished, Items.IRON_CHESTPLATE, Items.DIAMOND_CHESTPLATE, CreativeModeTab.TAB_COMBAT);
+        buildSimpleInfusionRecipe(onFinished, Items.IRON_HELMET, Items.DIAMOND_HELMET, CreativeModeTab.TAB_COMBAT);
+        buildSimpleInfusionRecipe(onFinished, Items.IRON_LEGGINGS, Items.DIAMOND_LEGGINGS, CreativeModeTab.TAB_COMBAT);
 
         // ADD DIAMOND -> NETHERITE INFUSION RECIPES
-        buildSimpleInfusionRecipe(onFinished, Items.DIAMOND_AXE, Items.NETHERITE_AXE);
-        buildSimpleInfusionRecipe(onFinished, Items.DIAMOND_HOE, Items.NETHERITE_HOE);
-        buildSimpleInfusionRecipe(onFinished, Items.DIAMOND_PICKAXE, Items.NETHERITE_PICKAXE);
-        buildSimpleInfusionRecipe(onFinished, Items.DIAMOND_SHOVEL, Items.NETHERITE_SHOVEL);
-        buildSimpleInfusionRecipe(onFinished, Items.DIAMOND_SWORD, Items.NETHERITE_SWORD);
+        buildSimpleInfusionRecipe(onFinished, Items.DIAMOND_AXE, Items.NETHERITE_AXE, CreativeModeTab.TAB_TOOLS);
+        buildSimpleInfusionRecipe(onFinished, Items.DIAMOND_HOE, Items.NETHERITE_HOE, CreativeModeTab.TAB_TOOLS);
+        buildSimpleInfusionRecipe(onFinished, Items.DIAMOND_PICKAXE, Items.NETHERITE_PICKAXE, CreativeModeTab.TAB_TOOLS);
+        buildSimpleInfusionRecipe(onFinished, Items.DIAMOND_SHOVEL, Items.NETHERITE_SHOVEL, CreativeModeTab.TAB_TOOLS);
+        buildSimpleInfusionRecipe(onFinished, Items.DIAMOND_SWORD, Items.NETHERITE_SWORD, CreativeModeTab.TAB_COMBAT);
 
-        buildSimpleInfusionRecipe(onFinished, Items.DIAMOND_BOOTS, Items.NETHERITE_BOOTS);
-        buildSimpleInfusionRecipe(onFinished, Items.DIAMOND_CHESTPLATE, Items.NETHERITE_CHESTPLATE);
-        buildSimpleInfusionRecipe(onFinished, Items.DIAMOND_HELMET, Items.NETHERITE_HELMET);
-        buildSimpleInfusionRecipe(onFinished, Items.DIAMOND_LEGGINGS, Items.NETHERITE_LEGGINGS);
+        buildSimpleInfusionRecipe(onFinished, Items.DIAMOND_BOOTS, Items.NETHERITE_BOOTS, CreativeModeTab.TAB_COMBAT);
+        buildSimpleInfusionRecipe(onFinished, Items.DIAMOND_CHESTPLATE, Items.NETHERITE_CHESTPLATE, CreativeModeTab.TAB_COMBAT);
+        buildSimpleInfusionRecipe(onFinished, Items.DIAMOND_HELMET, Items.NETHERITE_HELMET, CreativeModeTab.TAB_COMBAT);
+        buildSimpleInfusionRecipe(onFinished, Items.DIAMOND_LEGGINGS, Items.NETHERITE_LEGGINGS, CreativeModeTab.TAB_COMBAT);
 
         // ADD NETHERITE TOOLS RECIPES
         ShapedRecipeBuilder.shaped(Items.NETHERITE_AXE).define('#', Items.STICK).define('X', Items.NETHERITE_INGOT).pattern("XX").pattern("X#").pattern(" #").unlockedBy("has_netherite_ingot", has(Items.NETHERITE_INGOT)).save(onFinished, new ResourceLocation(SimplyHarder.MOD_ID, "netherite_axe"));
@@ -92,12 +93,12 @@ public class ModRecipeProvider extends RecipeProvider {
         DisabledRecipeBuilder.disabled(Items.NETHERITE_SWORD).save(onFinished, new ResourceLocation("netherite_sword_smithing"));
     }
 
-    private void buildSimpleInfusionRecipe(Consumer<FinishedRecipe> onFinished, Item base, Item addition) {
-        InfusionRecipeBuilder.infusion(base, addition).unlocks("has_upgrade_module", hasInfusedUpgradeModule(addition.getDefaultInstance())).save(onFinished, base, addition);
+    private void buildSimpleInfusionRecipe(Consumer<FinishedRecipe> onFinished, Item base, Item addition, CreativeModeTab creativeTab) {
+        InfusionRecipeBuilder.infusion(base, addition).unlocks("has_upgrade_module", hasInfusedUpgradeModule(addition.getDefaultInstance())).save(onFinished, base, addition, creativeTab);
     }
 
-    private void buildSimpleMasterworkingRecipe(Consumer<FinishedRecipe> onFinished, Tag<Item> masterworkable, ResourceLocation progressionId) {
-        MasterworkingRecipeBuilder.masterworking(masterworkable, progressionId).unlocks("has_enhancement_core", has(SHItems.ENHANCEMENT_CORE.get())).save(onFinished, progressionId);
+    private void buildSimpleMasterworkingRecipe(Consumer<FinishedRecipe> onFinished, Tag<Item> masterworkable, ResourceLocation progressionId, CreativeModeTab creativeTab) {
+        MasterworkingRecipeBuilder.masterworking(masterworkable, progressionId).unlocks("has_enhancement_core", has(SHItems.ENHANCEMENT_CORE.get())).save(onFinished, progressionId, creativeTab);
     }
 
     private static ItemStack buildUpgradeModule(ItemStack stack){

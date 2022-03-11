@@ -1,0 +1,16 @@
+{
+  "id": "simply_harder:hasty_blade",
+  "installable": {
+    "tag": "simply_harder:weapons"
+  },
+  "attribute_modifiers": [
+    {
+      "attribute": "minecraft:generic.attack_speed",
+      "slot": "mainhand",
+      "uuid": "9b0f12ac-5f12-4dd8-8eb3-2cd2a088440b",
+      "name": "simply_harder:hasty_blade",
+      "amount": 0.4,
+      "operation": 0
+    }
+  ]
+}

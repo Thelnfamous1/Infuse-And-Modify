@@ -1,0 +1,16 @@
+{
+  "id": "simply_harder:hasty_leg_guards",
+  "installable": {
+    "tag": "simply_harder:leggings"
+  },
+  "attribute_modifiers": [
+    {
+      "attribute": "minecraft:generic.attack_speed",
+      "slot": "legs",
+      "uuid": "afd64ff9-2e2e-4b14-a594-21117631bb70",
+      "name": "simply_harder:hasty_leg_guards",
+      "amount": 0.4,
+      "operation": 0
+    }
+  ]
+}

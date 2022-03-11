@@ -1,0 +1,35 @@
+{
+  "parent": "simply_harder:recipes/root",
+  "rewards": {
+    "recipes": [
+      "simply_harder:netherite_leggings_from_diamond_leggings"
+    ]
+  },
+  "criteria": {
+    "has_upgrade_module": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "simply_harder:upgrade_module"
+            ],
+            "nbt": "{\"simply_harder:upgrade_module\":{InfusedItem:{Count:1b,id:\"minecraft:netherite_leggings\",tag:{Damage:0}}}}"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "simply_harder:netherite_leggings_from_diamond_leggings"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_upgrade_module",
+      "has_the_recipe"
+    ]
+  ]
+}

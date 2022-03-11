@@ -1,0 +1,16 @@
+{
+  "id": "simply_harder:fortified_chest_guard",
+  "installable": {
+    "tag": "simply_harder:chestplates"
+  },
+  "attribute_modifiers": [
+    {
+      "attribute": "minecraft:generic.armor",
+      "slot": "chest",
+      "uuid": "1600b3eb-c37d-440b-bfed-fd3484e2d0ae",
+      "name": "simply_harder:fortified_chest_guard",
+      "amount": 2.0,
+      "operation": 0
+    }
+  ]
+}

@@ -15,28 +15,34 @@ import javax.annotation.Nullable;
 
 public class ModItemTagsProvider extends ItemTagsProvider {
 
-    public static final Tags.IOptionalNamedTag<Item> AXES = buildForgeTag("axes");
-    public static final Tags.IOptionalNamedTag<Item> HOES = buildForgeTag("hoes");
-    public static final Tags.IOptionalNamedTag<Item> PICKAXES = buildForgeTag("pickaxes");
-    public static final Tags.IOptionalNamedTag<Item> SWORDS = buildForgeTag("swords");
-    public static final Tags.IOptionalNamedTag<Item> SHOVELS = buildForgeTag("shovels");
-    public static final Tags.IOptionalNamedTag<Item> MELEE_WEAPONS = buildForgeTag("melee_weapons");
+    public static final Tags.IOptionalNamedTag<Item> AXES = buildProprietaryTag("axes");
+    public static final Tags.IOptionalNamedTag<Item> HOES = buildProprietaryTag("hoes");
+    public static final Tags.IOptionalNamedTag<Item> PICKAXES = buildProprietaryTag("pickaxes");
+    public static final Tags.IOptionalNamedTag<Item> SHOVELS = buildProprietaryTag("shovels");
+    public static final Tags.IOptionalNamedTag<Item> TOOLS = buildProprietaryTag("tools");
 
-    public static final Tags.IOptionalNamedTag<Item> SHIELDS = buildForgeTag("shields");
+    public static final Tags.IOptionalNamedTag<Item> SWORDS = buildProprietaryTag("swords");
+    public static final Tags.IOptionalNamedTag<Item> TRIDENTS = buildProprietaryTag("tridents");
+    public static final Tags.IOptionalNamedTag<Item> WEAPONS = buildProprietaryTag("weapons");
 
-    public static final Tags.IOptionalNamedTag<Item> BOOTS = buildForgeTag("boots");
-    public static final Tags.IOptionalNamedTag<Item> CHESTPLATES = buildForgeTag("chestplates");
-    public static final Tags.IOptionalNamedTag<Item> HELMETS = buildForgeTag("helmets");
-    public static final Tags.IOptionalNamedTag<Item> LEGGINGS = buildForgeTag("leggings");
+    public static final Tags.IOptionalNamedTag<Item> BOWS = buildProprietaryTag("bows");
+    public static final Tags.IOptionalNamedTag<Item> CROSSBOWS = buildProprietaryTag("crossbows");
+    public static final Tags.IOptionalNamedTag<Item> PROJECTILE_WEAPONS = buildProprietaryTag("projectile_weapons");
 
-    public static final Tags.IOptionalNamedTag<Item> ARMORS = buildForgeTag("armors");
+    public static final Tags.IOptionalNamedTag<Item> SHIELDS = buildProprietaryTag("shields");
+
+    public static final Tags.IOptionalNamedTag<Item> BOOTS = buildProprietaryTag("boots");
+    public static final Tags.IOptionalNamedTag<Item> CHESTPLATES = buildProprietaryTag("chestplates");
+    public static final Tags.IOptionalNamedTag<Item> HELMETS = buildProprietaryTag("helmets");
+    public static final Tags.IOptionalNamedTag<Item> LEGGINGS = buildProprietaryTag("leggings");
+    public static final Tags.IOptionalNamedTag<Item> ARMORS = buildProprietaryTag("armors");
 
     public ModItemTagsProvider(DataGenerator dataGenerator, BlockTagsProvider blockTagProvider, @Nullable ExistingFileHelper existingFileHelper) {
         super(dataGenerator, blockTagProvider, SimplyHarder.MOD_ID, existingFileHelper);
     }
 
-    private static Tags.IOptionalNamedTag<Item> buildForgeTag(String path) {
-        return ItemTags.createOptional(new ResourceLocation("forge", path));
+    private static Tags.IOptionalNamedTag<Item> buildProprietaryTag(String path) {
+        return ItemTags.createOptional(new ResourceLocation(SimplyHarder.MOD_ID, path));
     }
 
     @Override
@@ -45,8 +51,15 @@ public class ModItemTagsProvider extends ItemTagsProvider {
         this.hoes();
         this.pickaxes();
         this.shovels();
+        this.tools();
+
         this.swords();
-        this.meleeWeapons();
+        this.tridents();
+        this.weapons();
+
+        this.bows();
+        this.crossbows();
+        this.projectileWeapons();
 
         this.shields();
 
@@ -57,6 +70,19 @@ public class ModItemTagsProvider extends ItemTagsProvider {
         this.armors();
     }
 
+    private void projectileWeapons() {
+        this.tag(PROJECTILE_WEAPONS).addTag(BOWS);
+        this.tag(PROJECTILE_WEAPONS).addTag(CROSSBOWS);
+    }
+
+    private void crossbows() {
+        this.tag(CROSSBOWS).add(Items.CROSSBOW);
+    }
+
+    private void bows() {
+        this.tag(BOWS).add(Items.BOW);
+    }
+
     private void armors() {
         this.tag(ARMORS).addTag(BOOTS);
         this.tag(ARMORS).addTag(CHESTPLATES);
@@ -64,16 +90,25 @@ public class ModItemTagsProvider extends ItemTagsProvider {
         this.tag(ARMORS).addTag(LEGGINGS);
     }
 
-    private void meleeWeapons() {
-        this.tag(MELEE_WEAPONS).addTag(AXES);
-        this.tag(MELEE_WEAPONS).addTag(HOES);
-        this.tag(MELEE_WEAPONS).addTag(PICKAXES);
-        this.tag(MELEE_WEAPONS).addTag(SHOVELS);
-        this.tag(MELEE_WEAPONS).addTag(SWORDS);
+    private void tools(){
+        this.tag(TOOLS).addTag(AXES);
+        this.tag(TOOLS).addTag(HOES);
+        this.tag(TOOLS).addTag(PICKAXES);
+        this.tag(TOOLS).addTag(SHOVELS);
+    }
+
+    private void weapons() {
+        this.tag(WEAPONS).addTag(SWORDS);
+        this.tag(WEAPONS).addTag(TRIDENTS);
+        this.tag(WEAPONS).addTag(TOOLS);
     }
 
     private void shields(){
         this.tag(SHIELDS).add(Items.SHIELD);
+    }
+
+    private void tridents(){
+        this.tag(TRIDENTS).add(Items.TRIDENT);
     }
 
     private void axes() {

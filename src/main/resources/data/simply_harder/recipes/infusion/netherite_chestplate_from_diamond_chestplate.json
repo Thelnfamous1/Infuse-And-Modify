@@ -1,0 +1,9 @@
+{
+  "type": "simply_harder:infusion",
+  "base": {
+    "item": "minecraft:diamond_chestplate"
+  },
+  "infusion": {
+    "item": "minecraft:netherite_chestplate"
+  }
+}

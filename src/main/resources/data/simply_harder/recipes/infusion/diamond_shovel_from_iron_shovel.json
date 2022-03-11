@@ -1,0 +1,9 @@
+{
+  "type": "simply_harder:infusion",
+  "base": {
+    "item": "minecraft:iron_shovel"
+  },
+  "infusion": {
+    "item": "minecraft:diamond_shovel"
+  }
+}
