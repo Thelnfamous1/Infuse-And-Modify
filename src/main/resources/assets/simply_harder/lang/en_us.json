@@ -1,7 +1,7 @@
 {
-  "item.simply_harder.upgrade_gear_module": "Upgrade Module",
-  "item.simply_harder.upgrade_gear_module.infused_item": "Infused Item:",
-  "item.simply_harder.upgrade_gear_module.lore": "A collection of universal components that can be used to infuse gear items.",
+  "item.simply_harder.upgrade_module": "Upgrade Module",
+  "item.simply_harder.upgrade_module.infused_item": "Infused Item:",
+  "item.simply_harder.upgrade_module.lore": "A collection of universal components that can be used to infuse gear items.",
   
   "item.simply_harder.gear_mod": "Gear Mod",
   "item.simply_harder.gear_mod.name": "Name:",

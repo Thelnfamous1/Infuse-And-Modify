@@ -1,6 +1,7 @@
 package com.infamous.simply_harder.custom.recipe;
 
 import com.infamous.simply_harder.custom.item.UpgradeModuleItem;
+import com.infamous.simply_harder.datagen.ModItemTagsProvider;
 import com.infamous.simply_harder.registry.SHRecipes;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.Container;
@@ -23,7 +24,7 @@ public class InfuseUpgradeModuleRecipe extends BaseInfusionRecipe {
 
     @Override
     public boolean isAdditionIngredient(ItemStack stack) {
-        return !stack.isEmpty() && stack.isDamageableItem();
+        return stack.is(ModItemTagsProvider.INFUSIONS);
     }
 
     @Override
@@ -32,6 +33,7 @@ public class InfuseUpgradeModuleRecipe extends BaseInfusionRecipe {
         ItemStack addition = BaseInfusionRecipe.getAddition(container);
 
         ItemStack infusedUpgradeModule = upgradeModule.copy();
+        infusedUpgradeModule.setCount(1); // only create a single infused upgrade module from the stack
         UpgradeModuleItem.setInfusedItem(infusedUpgradeModule, addition);
         return infusedUpgradeModule;
     }

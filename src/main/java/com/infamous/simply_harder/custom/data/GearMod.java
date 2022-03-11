@@ -20,7 +20,7 @@ public record GearMod(ResourceLocation id,
     public static final String LEVEL_COST = "level_cost";
     public static final String ATTRIBUTE_MODIFIERS = "attribute_modifiers";
     public static final ResourceLocation UNKNOWN_LOCALIZATION = new ResourceLocation(SimplyHarder.MOD_ID, "unknown");
-    public static final GearMod UNKNOWN = new GearMod(UNKNOWN_LOCALIZATION, Ingredient.EMPTY, 1, new WrappedAttributeModifierMap(ImmutableMultimap.of()));
+    public static final GearMod UNKNOWN = new GearMod(UNKNOWN_LOCALIZATION, Ingredient.EMPTY, 0, new WrappedAttributeModifierMap(ImmutableMultimap.of()));
 
     public static GearMod fromJson(JsonObject jsonObject) {
         ResourceLocation id = new ResourceLocation(GsonHelper.getAsString(jsonObject, ID));
@@ -34,6 +34,7 @@ public record GearMod(ResourceLocation id,
         JsonObject jsonObject = new JsonObject();
         jsonObject.addProperty(ID, this.id.toString());
         jsonObject.add(INSTALLABLE, this.installable.toJson());
+        jsonObject.addProperty(LEVEL_COST, this.levelCost);
         jsonObject.add(ATTRIBUTE_MODIFIERS, this.wrappedAttributeModifiers.toJson());
         return jsonObject;
     }
@@ -51,12 +52,6 @@ public record GearMod(ResourceLocation id,
         gearMod.installable.toNetwork(byteBuf);
         byteBuf.writeVarInt(gearMod.levelCost);
         gearMod.wrappedAttributeModifiers.toNetwork(byteBuf);
-    }
-
-    public CompoundTag save(){
-        CompoundTag compoundtag = new CompoundTag();
-        compoundtag.putString(GearModItem.GEAR_MOD_NAME, this.id.toString());
-        return compoundtag;
     }
 
 }

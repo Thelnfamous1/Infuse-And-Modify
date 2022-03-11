@@ -1,5 +1,6 @@
 package com.infamous.simply_harder.datagen;
 
+import com.google.common.base.Equivalence;
 import com.infamous.simply_harder.SimplyHarder;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.tags.BlockTagsProvider;
@@ -7,6 +8,7 @@ import net.minecraft.data.tags.ItemTagsProvider;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.data.ExistingFileHelper;
@@ -36,6 +38,7 @@ public class ModItemTagsProvider extends ItemTagsProvider {
     public static final Tags.IOptionalNamedTag<Item> HELMETS = buildProprietaryTag("helmets");
     public static final Tags.IOptionalNamedTag<Item> LEGGINGS = buildProprietaryTag("leggings");
     public static final Tags.IOptionalNamedTag<Item> ARMORS = buildProprietaryTag("armors");
+    public static final Tags.IOptionalNamedTag<Item> INFUSIONS = buildProprietaryTag("infusions");
 
     public ModItemTagsProvider(DataGenerator dataGenerator, BlockTagsProvider blockTagProvider, @Nullable ExistingFileHelper existingFileHelper) {
         super(dataGenerator, blockTagProvider, SimplyHarder.MOD_ID, existingFileHelper);
@@ -68,11 +71,16 @@ public class ModItemTagsProvider extends ItemTagsProvider {
         this.helmets();
         this.leggings();
         this.armors();
+
+        this.infusions();
+    }
+
+    private void infusions() {
+        this.tag(INFUSIONS).addTag(ARMORS).addTag(WEAPONS);
     }
 
     private void projectileWeapons() {
-        this.tag(PROJECTILE_WEAPONS).addTag(BOWS);
-        this.tag(PROJECTILE_WEAPONS).addTag(CROSSBOWS);
+        this.tag(PROJECTILE_WEAPONS).addTag(BOWS).addTag(CROSSBOWS);
     }
 
     private void crossbows() {
@@ -84,23 +92,15 @@ public class ModItemTagsProvider extends ItemTagsProvider {
     }
 
     private void armors() {
-        this.tag(ARMORS).addTag(BOOTS);
-        this.tag(ARMORS).addTag(CHESTPLATES);
-        this.tag(ARMORS).addTag(HELMETS);
-        this.tag(ARMORS).addTag(LEGGINGS);
+        this.tag(ARMORS).addTag(BOOTS).addTag(CHESTPLATES).addTag(HELMETS).addTag(LEGGINGS);
     }
 
     private void tools(){
-        this.tag(TOOLS).addTag(AXES);
-        this.tag(TOOLS).addTag(HOES);
-        this.tag(TOOLS).addTag(PICKAXES);
-        this.tag(TOOLS).addTag(SHOVELS);
+        this.tag(TOOLS).addTag(AXES).addTag(HOES).addTag(PICKAXES).addTag(SHOVELS);
     }
 
     private void weapons() {
-        this.tag(WEAPONS).addTag(SWORDS);
-        this.tag(WEAPONS).addTag(TRIDENTS);
-        this.tag(WEAPONS).addTag(TOOLS);
+        this.tag(WEAPONS).addTag(SWORDS).addTag(TRIDENTS).addTag(TOOLS);
     }
 
     private void shields(){
@@ -112,84 +112,92 @@ public class ModItemTagsProvider extends ItemTagsProvider {
     }
 
     private void axes() {
-        this.tag(AXES).add(Items.WOODEN_AXE);
-        this.tag(AXES).add(Items.GOLDEN_AXE);
-        this.tag(AXES).add(Items.STONE_AXE);
-        this.tag(AXES).add(Items.IRON_AXE);
-        this.tag(AXES).add(Items.DIAMOND_AXE);
-        this.tag(AXES).add(Items.NETHERITE_AXE);
+        this.tag(AXES).add(Items.WOODEN_AXE)
+                .add(Items.GOLDEN_AXE)
+                .add(Items.STONE_AXE)
+                .add(Items.IRON_AXE)
+                .add(Items.DIAMOND_AXE)
+                .add(Items.NETHERITE_AXE);
     }
 
     private void hoes() {
-        this.tag(HOES).add(Items.WOODEN_HOE);
-        this.tag(HOES).add(Items.GOLDEN_HOE);
-        this.tag(HOES).add(Items.STONE_HOE);
-        this.tag(HOES).add(Items.IRON_HOE);
-        this.tag(HOES).add(Items.DIAMOND_HOE);
-        this.tag(HOES).add(Items.NETHERITE_HOE);
+        this.tag(HOES)
+                .add(Items.WOODEN_HOE)
+                .add(Items.GOLDEN_HOE)
+                .add(Items.STONE_HOE)
+                .add(Items.IRON_HOE)
+                .add(Items.DIAMOND_HOE)
+                .add(Items.NETHERITE_HOE);
     }
 
     private void pickaxes() {
-        this.tag(PICKAXES).add(Items.WOODEN_PICKAXE);
-        this.tag(PICKAXES).add(Items.GOLDEN_PICKAXE);
-        this.tag(PICKAXES).add(Items.STONE_PICKAXE);
-        this.tag(PICKAXES).add(Items.IRON_PICKAXE);
-        this.tag(PICKAXES).add(Items.DIAMOND_PICKAXE);
-        this.tag(PICKAXES).add(Items.NETHERITE_PICKAXE);
+        this.tag(PICKAXES)
+                .add(Items.WOODEN_PICKAXE)
+                .add(Items.GOLDEN_PICKAXE)
+                .add(Items.STONE_PICKAXE)
+                .add(Items.IRON_PICKAXE)
+                .add(Items.DIAMOND_PICKAXE)
+                .add(Items.NETHERITE_PICKAXE);
     }
 
     private void swords() {
-        this.tag(SWORDS).add(Items.WOODEN_SWORD);
-        this.tag(SWORDS).add(Items.GOLDEN_SWORD);
-        this.tag(SWORDS).add(Items.STONE_SWORD);
-        this.tag(SWORDS).add(Items.IRON_SWORD);
-        this.tag(SWORDS).add(Items.DIAMOND_SWORD);
-        this.tag(SWORDS).add(Items.NETHERITE_SWORD);
+        this.tag(SWORDS)
+                .add(Items.WOODEN_SWORD)
+                .add(Items.GOLDEN_SWORD)
+                .add(Items.STONE_SWORD)
+                .add(Items.IRON_SWORD)
+                .add(Items.DIAMOND_SWORD)
+                .add(Items.NETHERITE_SWORD);
     }
 
     private void shovels() {
-        this.tag(SHOVELS).add(Items.WOODEN_SHOVEL);
-        this.tag(SHOVELS).add(Items.GOLDEN_SHOVEL);
-        this.tag(SHOVELS).add(Items.STONE_SHOVEL);
-        this.tag(SHOVELS).add(Items.IRON_SHOVEL);
-        this.tag(SHOVELS).add(Items.DIAMOND_SHOVEL);
-        this.tag(SHOVELS).add(Items.NETHERITE_SHOVEL);
+        this.tag(SHOVELS)
+                .add(Items.WOODEN_SHOVEL)
+                .add(Items.GOLDEN_SHOVEL)
+                .add(Items.STONE_SHOVEL)
+                .add(Items.IRON_SHOVEL)
+                .add(Items.DIAMOND_SHOVEL)
+                .add(Items.NETHERITE_SHOVEL);
     }
 
     private void helmets() {
-        this.tag(HELMETS).add(Items.LEATHER_HELMET);
-        this.tag(HELMETS).add(Items.CHAINMAIL_HELMET);
-        this.tag(HELMETS).add(Items.IRON_HELMET);
-        this.tag(HELMETS).add(Items.GOLDEN_HELMET);
-        this.tag(HELMETS).add(Items.DIAMOND_HELMET);
-        this.tag(HELMETS).add(Items.TURTLE_HELMET); // special case
-        this.tag(HELMETS).add(Items.NETHERITE_HELMET);
+        this.tag(HELMETS)
+                .add(Items.LEATHER_HELMET)
+                .add(Items.CHAINMAIL_HELMET)
+                .add(Items.IRON_HELMET)
+                .add(Items.GOLDEN_HELMET)
+                .add(Items.DIAMOND_HELMET)
+                .add(Items.TURTLE_HELMET)
+                .add(Items.NETHERITE_HELMET);
     }
 
     private void boots() {
-        this.tag(BOOTS).add(Items.LEATHER_BOOTS);
-        this.tag(BOOTS).add(Items.CHAINMAIL_BOOTS);
-        this.tag(BOOTS).add(Items.IRON_BOOTS);
-        this.tag(BOOTS).add(Items.GOLDEN_BOOTS);
-        this.tag(BOOTS).add(Items.DIAMOND_BOOTS);
-        this.tag(BOOTS).add(Items.NETHERITE_BOOTS);
+        this.tag(BOOTS)
+                .add(Items.LEATHER_BOOTS)
+                .add(Items.CHAINMAIL_BOOTS)
+                .add(Items.IRON_BOOTS)
+                .add(Items.GOLDEN_BOOTS)
+                .add(Items.DIAMOND_BOOTS)
+                .add(Items.NETHERITE_BOOTS);
     }
 
     private void chestplates() {
-        this.tag(CHESTPLATES).add(Items.LEATHER_CHESTPLATE);
-        this.tag(CHESTPLATES).add(Items.CHAINMAIL_CHESTPLATE);
-        this.tag(CHESTPLATES).add(Items.IRON_CHESTPLATE);
-        this.tag(CHESTPLATES).add(Items.GOLDEN_CHESTPLATE);
-        this.tag(CHESTPLATES).add(Items.DIAMOND_CHESTPLATE);
-        this.tag(CHESTPLATES).add(Items.NETHERITE_CHESTPLATE);
+        this.tag(CHESTPLATES)
+                .add(Items.LEATHER_CHESTPLATE)
+                .add(Items.CHAINMAIL_CHESTPLATE)
+                .add(Items.IRON_CHESTPLATE)
+                .add(Items.GOLDEN_CHESTPLATE)
+                .add(Items.DIAMOND_CHESTPLATE)
+                .add(Items.NETHERITE_CHESTPLATE);
     }
 
     private void leggings() {
-        this.tag(LEGGINGS).add(Items.LEATHER_LEGGINGS);
-        this.tag(LEGGINGS).add(Items.CHAINMAIL_LEGGINGS);
-        this.tag(LEGGINGS).add(Items.IRON_LEGGINGS);
-        this.tag(LEGGINGS).add(Items.GOLDEN_LEGGINGS);
-        this.tag(LEGGINGS).add(Items.DIAMOND_LEGGINGS);
-        this.tag(LEGGINGS).add(Items.NETHERITE_LEGGINGS);
+        this.tag(LEGGINGS)
+                .add(Items.LEATHER_LEGGINGS)
+                .add(Items.CHAINMAIL_LEGGINGS)
+                .add(Items.IRON_LEGGINGS)
+                .add(Items.GOLDEN_LEGGINGS)
+                .add(Items.DIAMOND_LEGGINGS)
+                .add(Items.NETHERITE_LEGGINGS);
     }
 }

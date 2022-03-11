@@ -33,35 +33,13 @@ public class ModRecipeProvider extends RecipeProvider {
         SpecialRecipeBuilder.special(SHRecipes.INFUSE_UPGRADE_MODULE.get()).save(onFinished, new ResourceLocation(SimplyHarder.MOD_ID, InfuseUpgradeModuleRecipe.NAME).toString());
         SpecialRecipeBuilder.special(SHRecipes.MODIFICATION.get()).save(onFinished, new ResourceLocation(SimplyHarder.MOD_ID, ModificationRecipe.NAME).toString());
 
-        buildSimpleMasterworkingRecipe(onFinished, ModItemTagsProvider.WEAPONS, new ResourceLocation(SimplyHarder.MOD_ID, "weapon"), CreativeModeTab.TAB_COMBAT);
-        buildSimpleMasterworkingRecipe(onFinished, ModItemTagsProvider.BOOTS, new ResourceLocation(SimplyHarder.MOD_ID, "boots"), CreativeModeTab.TAB_COMBAT);
-        buildSimpleMasterworkingRecipe(onFinished, ModItemTagsProvider.CHESTPLATES, new ResourceLocation(SimplyHarder.MOD_ID, "chestplate"), CreativeModeTab.TAB_COMBAT);
-        buildSimpleMasterworkingRecipe(onFinished, ModItemTagsProvider.HELMETS, new ResourceLocation(SimplyHarder.MOD_ID, "helmet"), CreativeModeTab.TAB_COMBAT);
-        buildSimpleMasterworkingRecipe(onFinished, ModItemTagsProvider.LEGGINGS, new ResourceLocation(SimplyHarder.MOD_ID, "leggings"), CreativeModeTab.TAB_COMBAT);
+        this.buildSimpleMasterworkingRecipe(onFinished, ModItemTagsProvider.WEAPONS, new ResourceLocation(SimplyHarder.MOD_ID, "weapon"), CreativeModeTab.TAB_COMBAT);
+        this.buildSimpleMasterworkingRecipe(onFinished, ModItemTagsProvider.BOOTS, new ResourceLocation(SimplyHarder.MOD_ID, "boots"), CreativeModeTab.TAB_COMBAT);
+        this.buildSimpleMasterworkingRecipe(onFinished, ModItemTagsProvider.CHESTPLATES, new ResourceLocation(SimplyHarder.MOD_ID, "chestplate"), CreativeModeTab.TAB_COMBAT);
+        this.buildSimpleMasterworkingRecipe(onFinished, ModItemTagsProvider.HELMETS, new ResourceLocation(SimplyHarder.MOD_ID, "helmet"), CreativeModeTab.TAB_COMBAT);
+        this.buildSimpleMasterworkingRecipe(onFinished, ModItemTagsProvider.LEGGINGS, new ResourceLocation(SimplyHarder.MOD_ID, "leggings"), CreativeModeTab.TAB_COMBAT);
 
-        // ADD IRON -> DIAMOND INFUSION RECIPES
-        buildSimpleInfusionRecipe(onFinished, Items.IRON_AXE, Items.DIAMOND_AXE, CreativeModeTab.TAB_TOOLS);
-        buildSimpleInfusionRecipe(onFinished, Items.IRON_HOE, Items.DIAMOND_HOE, CreativeModeTab.TAB_TOOLS);
-        buildSimpleInfusionRecipe(onFinished, Items.IRON_PICKAXE, Items.DIAMOND_PICKAXE, CreativeModeTab.TAB_TOOLS);
-        buildSimpleInfusionRecipe(onFinished, Items.IRON_SHOVEL, Items.DIAMOND_SHOVEL, CreativeModeTab.TAB_TOOLS);
-        buildSimpleInfusionRecipe(onFinished, Items.IRON_SWORD, Items.DIAMOND_SWORD, CreativeModeTab.TAB_COMBAT);
-
-        buildSimpleInfusionRecipe(onFinished, Items.IRON_BOOTS, Items.DIAMOND_BOOTS, CreativeModeTab.TAB_COMBAT);
-        buildSimpleInfusionRecipe(onFinished, Items.IRON_CHESTPLATE, Items.DIAMOND_CHESTPLATE, CreativeModeTab.TAB_COMBAT);
-        buildSimpleInfusionRecipe(onFinished, Items.IRON_HELMET, Items.DIAMOND_HELMET, CreativeModeTab.TAB_COMBAT);
-        buildSimpleInfusionRecipe(onFinished, Items.IRON_LEGGINGS, Items.DIAMOND_LEGGINGS, CreativeModeTab.TAB_COMBAT);
-
-        // ADD DIAMOND -> NETHERITE INFUSION RECIPES
-        buildSimpleInfusionRecipe(onFinished, Items.DIAMOND_AXE, Items.NETHERITE_AXE, CreativeModeTab.TAB_TOOLS);
-        buildSimpleInfusionRecipe(onFinished, Items.DIAMOND_HOE, Items.NETHERITE_HOE, CreativeModeTab.TAB_TOOLS);
-        buildSimpleInfusionRecipe(onFinished, Items.DIAMOND_PICKAXE, Items.NETHERITE_PICKAXE, CreativeModeTab.TAB_TOOLS);
-        buildSimpleInfusionRecipe(onFinished, Items.DIAMOND_SHOVEL, Items.NETHERITE_SHOVEL, CreativeModeTab.TAB_TOOLS);
-        buildSimpleInfusionRecipe(onFinished, Items.DIAMOND_SWORD, Items.NETHERITE_SWORD, CreativeModeTab.TAB_COMBAT);
-
-        buildSimpleInfusionRecipe(onFinished, Items.DIAMOND_BOOTS, Items.NETHERITE_BOOTS, CreativeModeTab.TAB_COMBAT);
-        buildSimpleInfusionRecipe(onFinished, Items.DIAMOND_CHESTPLATE, Items.NETHERITE_CHESTPLATE, CreativeModeTab.TAB_COMBAT);
-        buildSimpleInfusionRecipe(onFinished, Items.DIAMOND_HELMET, Items.NETHERITE_HELMET, CreativeModeTab.TAB_COMBAT);
-        buildSimpleInfusionRecipe(onFinished, Items.DIAMOND_LEGGINGS, Items.NETHERITE_LEGGINGS, CreativeModeTab.TAB_COMBAT);
+        this.buildInfusionRecipes(onFinished);
 
         // ADD NETHERITE TOOLS RECIPES
         ShapedRecipeBuilder.shaped(Items.NETHERITE_AXE).define('#', Items.STICK).define('X', Items.NETHERITE_INGOT).pattern("XX").pattern("X#").pattern(" #").unlockedBy("has_netherite_ingot", has(Items.NETHERITE_INGOT)).save(onFinished, new ResourceLocation(SimplyHarder.MOD_ID, "netherite_axe"));
@@ -91,6 +69,74 @@ public class ModRecipeProvider extends RecipeProvider {
         DisabledRecipeBuilder.disabled(Items.NETHERITE_PICKAXE).save(onFinished, new ResourceLocation("netherite_pickaxe_smithing"));
         DisabledRecipeBuilder.disabled(Items.NETHERITE_SHOVEL).save(onFinished, new ResourceLocation("netherite_shovel_smithing"));
         DisabledRecipeBuilder.disabled(Items.NETHERITE_SWORD).save(onFinished, new ResourceLocation("netherite_sword_smithing"));
+    }
+
+    private void buildInfusionRecipes(Consumer<FinishedRecipe> onFinished) {
+        // ADD WOOD TOOL -> STONE TOOL INFUSION RECIPES
+        this.buildSimpleInfusionRecipe(onFinished, Items.WOODEN_AXE, Items.STONE_AXE, CreativeModeTab.TAB_TOOLS);
+        this.buildSimpleInfusionRecipe(onFinished, Items.WOODEN_HOE, Items.STONE_HOE, CreativeModeTab.TAB_TOOLS);
+        this.buildSimpleInfusionRecipe(onFinished, Items.WOODEN_PICKAXE, Items.STONE_PICKAXE, CreativeModeTab.TAB_TOOLS);
+        this.buildSimpleInfusionRecipe(onFinished, Items.WOODEN_SHOVEL, Items.STONE_SHOVEL, CreativeModeTab.TAB_TOOLS);
+        this.buildSimpleInfusionRecipe(onFinished, Items.WOODEN_SWORD, Items.STONE_SWORD, CreativeModeTab.TAB_COMBAT);
+
+        // ADD LEATHER ARMOR -> CHAINMAIL ARMOR INFUSION RECIPES
+        this.buildSimpleInfusionRecipe(onFinished, Items.LEATHER_BOOTS, Items.CHAINMAIL_BOOTS, CreativeModeTab.TAB_COMBAT);
+        this.buildSimpleInfusionRecipe(onFinished, Items.LEATHER_CHESTPLATE, Items.CHAINMAIL_CHESTPLATE, CreativeModeTab.TAB_COMBAT);
+        this.buildSimpleInfusionRecipe(onFinished, Items.LEATHER_HELMET, Items.CHAINMAIL_HELMET, CreativeModeTab.TAB_COMBAT);
+        this.buildSimpleInfusionRecipe(onFinished, Items.LEATHER_LEGGINGS, Items.CHAINMAIL_LEGGINGS, CreativeModeTab.TAB_COMBAT);
+
+        // ADD GOLD TOOL -> STONE TOOL INFUSION RECIPES
+        this.buildSimpleInfusionRecipe(onFinished, Items.GOLDEN_AXE, Items.STONE_AXE, CreativeModeTab.TAB_TOOLS);
+        this.buildSimpleInfusionRecipe(onFinished, Items.GOLDEN_HOE, Items.STONE_HOE, CreativeModeTab.TAB_TOOLS);
+        this.buildSimpleInfusionRecipe(onFinished, Items.GOLDEN_PICKAXE, Items.STONE_PICKAXE, CreativeModeTab.TAB_TOOLS);
+        this.buildSimpleInfusionRecipe(onFinished, Items.GOLDEN_SHOVEL, Items.STONE_SHOVEL, CreativeModeTab.TAB_TOOLS);
+        this.buildSimpleInfusionRecipe(onFinished, Items.GOLDEN_SWORD, Items.STONE_SWORD, CreativeModeTab.TAB_COMBAT);
+
+        // ADD GOLD ARMOR -> CHAINMAIL ARMOR INFUSION RECIPES
+        this.buildSimpleInfusionRecipe(onFinished, Items.GOLDEN_BOOTS, Items.CHAINMAIL_BOOTS, CreativeModeTab.TAB_COMBAT);
+        this.buildSimpleInfusionRecipe(onFinished, Items.GOLDEN_CHESTPLATE, Items.CHAINMAIL_CHESTPLATE, CreativeModeTab.TAB_COMBAT);
+        this.buildSimpleInfusionRecipe(onFinished, Items.GOLDEN_HELMET, Items.CHAINMAIL_HELMET, CreativeModeTab.TAB_COMBAT);
+        this.buildSimpleInfusionRecipe(onFinished, Items.GOLDEN_LEGGINGS, Items.CHAINMAIL_LEGGINGS, CreativeModeTab.TAB_COMBAT);
+
+        // ADD STONE TOOL -> IRON TOOL INFUSION RECIPES
+        this.buildSimpleInfusionRecipe(onFinished, Items.STONE_AXE, Items.IRON_AXE, CreativeModeTab.TAB_TOOLS);
+        this.buildSimpleInfusionRecipe(onFinished, Items.STONE_HOE, Items.IRON_HOE, CreativeModeTab.TAB_TOOLS);
+        this.buildSimpleInfusionRecipe(onFinished, Items.STONE_PICKAXE, Items.IRON_PICKAXE, CreativeModeTab.TAB_TOOLS);
+        this.buildSimpleInfusionRecipe(onFinished, Items.STONE_SHOVEL, Items.IRON_SHOVEL, CreativeModeTab.TAB_TOOLS);
+        this.buildSimpleInfusionRecipe(onFinished, Items.STONE_SWORD, Items.IRON_SWORD, CreativeModeTab.TAB_COMBAT);
+
+        // ADD CHAINMAIL ARMOR -> IRON ARMOR INFUSION RECIPES
+        this.buildSimpleInfusionRecipe(onFinished, Items.CHAINMAIL_BOOTS, Items.IRON_BOOTS, CreativeModeTab.TAB_COMBAT);
+        this.buildSimpleInfusionRecipe(onFinished, Items.CHAINMAIL_CHESTPLATE, Items.IRON_CHESTPLATE, CreativeModeTab.TAB_COMBAT);
+        this.buildSimpleInfusionRecipe(onFinished, Items.CHAINMAIL_HELMET, Items.IRON_HELMET, CreativeModeTab.TAB_COMBAT);
+        this.buildSimpleInfusionRecipe(onFinished, Items.CHAINMAIL_LEGGINGS, Items.IRON_LEGGINGS, CreativeModeTab.TAB_COMBAT);
+
+        // ADD IRON -> DIAMOND INFUSION RECIPES
+        this.buildSimpleInfusionRecipe(onFinished, Items.IRON_AXE, Items.DIAMOND_AXE, CreativeModeTab.TAB_TOOLS);
+        this.buildSimpleInfusionRecipe(onFinished, Items.IRON_HOE, Items.DIAMOND_HOE, CreativeModeTab.TAB_TOOLS);
+        this.buildSimpleInfusionRecipe(onFinished, Items.IRON_PICKAXE, Items.DIAMOND_PICKAXE, CreativeModeTab.TAB_TOOLS);
+        this.buildSimpleInfusionRecipe(onFinished, Items.IRON_SHOVEL, Items.DIAMOND_SHOVEL, CreativeModeTab.TAB_TOOLS);
+        this.buildSimpleInfusionRecipe(onFinished, Items.IRON_SWORD, Items.DIAMOND_SWORD, CreativeModeTab.TAB_COMBAT);
+
+        this.buildSimpleInfusionRecipe(onFinished, Items.IRON_BOOTS, Items.DIAMOND_BOOTS, CreativeModeTab.TAB_COMBAT);
+        this.buildSimpleInfusionRecipe(onFinished, Items.IRON_CHESTPLATE, Items.DIAMOND_CHESTPLATE, CreativeModeTab.TAB_COMBAT);
+        this.buildSimpleInfusionRecipe(onFinished, Items.IRON_HELMET, Items.DIAMOND_HELMET, CreativeModeTab.TAB_COMBAT);
+        this.buildSimpleInfusionRecipe(onFinished, Items.IRON_LEGGINGS, Items.DIAMOND_LEGGINGS, CreativeModeTab.TAB_COMBAT);
+
+        // ADD TURTLE -> DIAMOND INFUSION RECIPE
+        this.buildSimpleInfusionRecipe(onFinished, Items.TURTLE_HELMET, Items.DIAMOND_HELMET, CreativeModeTab.TAB_COMBAT);
+
+        // ADD DIAMOND -> NETHERITE INFUSION RECIPES
+        this.buildSimpleInfusionRecipe(onFinished, Items.DIAMOND_AXE, Items.NETHERITE_AXE, CreativeModeTab.TAB_TOOLS);
+        this.buildSimpleInfusionRecipe(onFinished, Items.DIAMOND_HOE, Items.NETHERITE_HOE, CreativeModeTab.TAB_TOOLS);
+        this.buildSimpleInfusionRecipe(onFinished, Items.DIAMOND_PICKAXE, Items.NETHERITE_PICKAXE, CreativeModeTab.TAB_TOOLS);
+        this.buildSimpleInfusionRecipe(onFinished, Items.DIAMOND_SHOVEL, Items.NETHERITE_SHOVEL, CreativeModeTab.TAB_TOOLS);
+        this.buildSimpleInfusionRecipe(onFinished, Items.DIAMOND_SWORD, Items.NETHERITE_SWORD, CreativeModeTab.TAB_COMBAT);
+
+        this.buildSimpleInfusionRecipe(onFinished, Items.DIAMOND_BOOTS, Items.NETHERITE_BOOTS, CreativeModeTab.TAB_COMBAT);
+        this.buildSimpleInfusionRecipe(onFinished, Items.DIAMOND_CHESTPLATE, Items.NETHERITE_CHESTPLATE, CreativeModeTab.TAB_COMBAT);
+        this.buildSimpleInfusionRecipe(onFinished, Items.DIAMOND_HELMET, Items.NETHERITE_HELMET, CreativeModeTab.TAB_COMBAT);
+        this.buildSimpleInfusionRecipe(onFinished, Items.DIAMOND_LEGGINGS, Items.NETHERITE_LEGGINGS, CreativeModeTab.TAB_COMBAT);
     }
 
     private void buildSimpleInfusionRecipe(Consumer<FinishedRecipe> onFinished, Item base, Item addition, CreativeModeTab creativeTab) {

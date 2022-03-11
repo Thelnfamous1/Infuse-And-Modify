@@ -1,0 +1,9 @@
+{
+  "type": "simply_harder:infusion",
+  "base": {
+    "item": "minecraft:chainmail_boots"
+  },
+  "infusion": {
+    "item": "minecraft:iron_boots"
+  }
+}

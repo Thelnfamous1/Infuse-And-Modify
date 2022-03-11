@@ -1,0 +1,9 @@
+{
+  "type": "simply_harder:infusion",
+  "base": {
+    "item": "minecraft:leather_helmet"
+  },
+  "infusion": {
+    "item": "minecraft:chainmail_helmet"
+  }
+}

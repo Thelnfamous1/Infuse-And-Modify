@@ -1,0 +1,9 @@
+{
+  "type": "simply_harder:infusion",
+  "base": {
+    "item": "minecraft:chainmail_chestplate"
+  },
+  "infusion": {
+    "item": "minecraft:iron_chestplate"
+  }
+}

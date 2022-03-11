@@ -101,21 +101,15 @@ public class GearModItem extends Item {
         return SimplyHarder.GEAR_MOD_MANAGER.getGearMod(gearModId).orElse(GearMod.UNKNOWN);
     }
 
-    public static void setMod(ItemStack left, ItemStack right) {
-        GearMod gearMod = getInternalModCheckTag(right);
-
+    public static void setMod(ItemStack left, GearMod gearMod) {
         CompoundTag gearModTag = getModTag(left);
-        gearModTag.put(GEAR_MOD_NAME, gearMod.save());
+        gearModTag.putString(GEAR_MOD_NAME, gearMod.id().toString());
     }
 
     public static int getLevelCostCheckTag(ItemStack right) {
         GearMod gearMod = getInternalModCheckTag(right);
 
         return gearMod.levelCost();
-    }
-
-    public static int getMaterialCost(ItemStack right) {
-        return 1;
     }
 
     public static void appendInternalModLines(List<Component> toolTip, ItemStack itemStack) {

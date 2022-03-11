@@ -3,6 +3,7 @@
   "installable": {
     "tag": "simply_harder:leggings"
   },
+  "level_cost": 1,
   "attribute_modifiers": [
     {
       "attribute": "minecraft:generic.attack_knockback",

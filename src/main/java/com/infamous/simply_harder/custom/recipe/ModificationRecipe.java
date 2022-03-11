@@ -1,5 +1,6 @@
 package com.infamous.simply_harder.custom.recipe;
 
+import com.infamous.simply_harder.SimplyHarder;
 import com.infamous.simply_harder.custom.container.SimpleAnvilContainer;
 import com.infamous.simply_harder.custom.data.GearMod;
 import com.infamous.simply_harder.custom.item.GearModItem;
@@ -24,16 +25,15 @@ public class ModificationRecipe extends ForgingRecipe {
 
     @Override
     protected int calculateMaterialCost(SimpleAnvilContainer container) {
-        return GearModItem.getMaterialCost(container.getRight());
+        return 1;
     }
 
     @Override
     protected boolean simpleMatches(SimpleAnvilContainer container, Level level) {
         ItemStack left = container.getLeft();
         ItemStack right = container.getRight();
-        GearMod mod = GearModItem.getModCheckTag(right);
         return GearModItem.isUsableMod(right)
-                && this.canInstall(left, mod);
+                && this.canInstall(left, GearModItem.getInternalModCheckTag(right));
     }
 
     private boolean canInstall(ItemStack left, GearMod mod) {
@@ -46,7 +46,7 @@ public class ModificationRecipe extends ForgingRecipe {
         ItemStack right = container.getRight();
 
         ItemStack result = left.copy();
-        GearModItem.setMod(result, right);
+        GearModItem.setMod(result, GearModItem.getInternalModCheckTag(right));
         return result;
     }
 

@@ -14,8 +14,8 @@ import java.util.Optional;
 
 public class AttributeHelper {
 
-    public static final String ADDITIIVE_MODIFIER_LOCALIZATION = "attribute.attributeModifier.plus.";
-    public static final String SUBTRACTIVE_MODIFIER_LOCALIZATION = "attribute.attributeModifier.take.";
+    public static final String ADDITIIVE_MODIFIER_LOCALIZATION = "attribute.modifier.plus.";
+    public static final String SUBTRACTIVE_MODIFIER_LOCALIZATION = "attribute.modifier.take.";
 
     public static Optional<Attribute> getAttribute(ResourceLocation attributeName) {
         return Optional.ofNullable(ForgeRegistries.ATTRIBUTES.containsKey(attributeName) ? ForgeRegistries.ATTRIBUTES.getValue(attributeName) : null);

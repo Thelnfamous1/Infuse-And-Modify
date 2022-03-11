@@ -3,6 +3,7 @@
   "installable": {
     "tag": "simply_harder:weapons"
   },
+  "level_cost": 1,
   "attribute_modifiers": [
     {
       "attribute": "minecraft:generic.max_health",

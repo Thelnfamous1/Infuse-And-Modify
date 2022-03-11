@@ -16,7 +16,7 @@ public abstract class ForgingRecipe implements Recipe<SimpleAnvilContainer> {
 
     @Override
     public boolean matches(SimpleAnvilContainer container, Level level) {
-        return this.calculateMaterialCost(container) <= container.getRight().getCount()
+        return this.calculateTotalMaterialCost(container) <= container.getRight().getCount()
                 && this.simpleMatches(container, level);
     }
 
@@ -42,6 +42,7 @@ public abstract class ForgingRecipe implements Recipe<SimpleAnvilContainer> {
     public int calculateTotalLevelCost(SimpleAnvilContainer container){
         return this.calculateLevelCost(container) * container.getLeft().getCount();
     }
+
     public int calculateTotalMaterialCost(SimpleAnvilContainer container){
         return this.calculateMaterialCost(container) * container.getLeft().getCount();
     }

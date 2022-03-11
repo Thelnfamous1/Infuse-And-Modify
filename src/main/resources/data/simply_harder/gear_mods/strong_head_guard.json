@@ -3,6 +3,7 @@
   "installable": {
     "tag": "simply_harder:helmets"
   },
+  "level_cost": 1,
   "attribute_modifiers": [
     {
       "attribute": "minecraft:generic.attack_damage",
