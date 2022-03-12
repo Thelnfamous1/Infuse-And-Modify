@@ -1,4 +1,4 @@
-package com.infamous.simply_harder.datagen;
+package com.infamous.simply_harder.datagen.provider;
 
 import com.google.common.base.Equivalence;
 import com.infamous.simply_harder.SimplyHarder;

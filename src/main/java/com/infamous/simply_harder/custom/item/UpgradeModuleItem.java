@@ -55,7 +55,7 @@ public class UpgradeModuleItem extends Item {
     }
 
     public static void setInfusedItem(ItemStack infuseTo, ItemStack infuseFrom) {
-        CompoundTag upgradeModuleTag = getUpgradeModule(infuseTo);
+        CompoundTag upgradeModuleTag = getUpgradeModuleTag(infuseTo);
         upgradeModuleTag.put(INFUSED_ITEM_TAG, infuseFrom.save(new CompoundTag()));
     }
 
@@ -63,26 +63,32 @@ public class UpgradeModuleItem extends Item {
         if(!hasInfusion(stack)){
             return false;
         }
-        return getUpgradeModule(stack).contains(INFUSED_ITEM_TAG, Tag.TAG_COMPOUND);
+        return getUpgradeModuleTag(stack).contains(INFUSED_ITEM_TAG, Tag.TAG_COMPOUND);
     }
 
     public static ItemStack getInfusedItem(ItemStack stack){
-        CompoundTag upgradeModule = getUpgradeModule(stack);
+        CompoundTag upgradeModule = getUpgradeModuleTag(stack);
         return ItemStack.of(upgradeModule.getCompound(INFUSED_ITEM_TAG));
     }
 
     public static Item getInfusedItemType(ItemStack stack){
-        CompoundTag upgradeModuleTag = getUpgradeModule(stack);
+        CompoundTag upgradeModuleTag = getUpgradeModuleTag(stack);
         CompoundTag infusedItemTag = upgradeModuleTag.getCompound(INFUSED_ITEM_TAG);
         return ForgeRegistries.ITEMS.getValue(new ResourceLocation(infusedItemTag.getString("id")));
     }
 
-    private static CompoundTag getUpgradeModule(ItemStack itemStack) {
+    private static CompoundTag getUpgradeModuleTag(ItemStack itemStack) {
         CompoundTag tag = itemStack.getOrCreateTag();
         if (!tag.contains(UPGRADE_MODULE_TAG, Tag.TAG_COMPOUND)) {
             tag.put(UPGRADE_MODULE_TAG, new CompoundTag());
         }
         return tag.getCompound(UPGRADE_MODULE_TAG);
+    }
+
+    public static ItemStack createInfusedUpgradeModule(ItemStack stack){
+        ItemStack upgradeModule = SHItems.UPGRADE_MODULE.get().getDefaultInstance();
+        setInfusedItem(upgradeModule, stack);
+        return upgradeModule;
     }
 
     @Override

@@ -8,7 +8,6 @@ import com.google.gson.JsonObject;
 import com.infamous.simply_harder.SimplyHarder;
 import com.infamous.simply_harder.custom.data.GearMod;
 import com.infamous.simply_harder.custom.data.WrappedAttributeModifierMap;
-import com.infamous.simply_harder.datagen.ModItemTagsProvider;
 import com.infamous.simply_harder.datagen.builder.GearModBuilder;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.DataProvider;
@@ -133,6 +132,7 @@ public class GearModProvider implements DataProvider {
             GearModBuilder.gearMod(name)
                     .installable(Ingredient.of(tag))
                     .levelCost(1)
+                    .levelRefund(1)
                     .wrappedAttributeModifiers(wrappedAttributeModifiersBuilder.build())
                     .save(onFinished);
     }

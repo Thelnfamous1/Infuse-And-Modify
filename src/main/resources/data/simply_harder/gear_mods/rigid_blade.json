@@ -4,6 +4,7 @@
     "tag": "simply_harder:weapons"
   },
   "level_cost": 1,
+  "level_refund": 1,
   "attribute_modifiers": [
     {
       "attribute": "minecraft:generic.armor_toughness",

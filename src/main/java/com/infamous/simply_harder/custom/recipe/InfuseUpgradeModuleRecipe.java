@@ -1,7 +1,7 @@
 package com.infamous.simply_harder.custom.recipe;
 
 import com.infamous.simply_harder.custom.item.UpgradeModuleItem;
-import com.infamous.simply_harder.datagen.ModItemTagsProvider;
+import com.infamous.simply_harder.datagen.provider.ModItemTagsProvider;
 import com.infamous.simply_harder.registry.SHRecipes;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.Container;

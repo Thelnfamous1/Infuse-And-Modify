@@ -75,9 +75,12 @@ public class MasterworkProgressionBuilder {
                     wrappedAttributeModifiersBuilder.addAttributeModifier(attributes[i], slot, new AttributeModifier(uuids[i], this.progressionId.toString(), amounts[i] * tier, operations[i]));
                 }
             }
+            int defaultCostForTier = calculateDefaultCostForTier(tier);
             this.addTier(MasterworkTier.Builder.builder()
-                    .levelCost(calculateDefaultCostForTier(tier))
-                    .materialCost(calculateDefaultCostForTier(tier))
+                    .levelCost(defaultCostForTier)
+                    .materialCost(defaultCostForTier)
+                    .levelRefund(defaultCostForTier * 0.5F)
+                    .materialRefund(defaultCostForTier * 0.5F)
                     .wrappedAttributeModifiers(wrappedAttributeModifiersBuilder.build())
                     .build()
             );

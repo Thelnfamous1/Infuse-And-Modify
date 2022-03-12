@@ -1,9 +1,9 @@
 package com.infamous.simply_harder;
 
 import com.infamous.simply_harder.custom.recipe.ModRecipeTypes;
-import com.infamous.simply_harder.datagen.ModBlockTagsProvider;
-import com.infamous.simply_harder.datagen.ModItemTagsProvider;
-import com.infamous.simply_harder.datagen.ModRecipeProvider;
+import com.infamous.simply_harder.datagen.provider.ModBlockTagsProvider;
+import com.infamous.simply_harder.datagen.provider.ModItemTagsProvider;
+import com.infamous.simply_harder.datagen.provider.ModRecipeProvider;
 import com.infamous.simply_harder.datagen.provider.GearModProvider;
 import com.infamous.simply_harder.datagen.provider.MasterworkProgressionProvider;
 import com.infamous.simply_harder.network.SHNetwork;

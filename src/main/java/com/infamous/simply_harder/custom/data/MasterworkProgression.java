@@ -16,6 +16,7 @@ public class MasterworkProgression {
 
     public static final String TIERS = "tiers";
     public static final String ID = "id";
+    public static final int STARTING_TIER = 1;
     private final ResourceLocation id;
     private final Map<Integer, MasterworkTier> tiers;
 

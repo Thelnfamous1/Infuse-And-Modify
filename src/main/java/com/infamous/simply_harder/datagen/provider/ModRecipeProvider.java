@@ -1,4 +1,4 @@
-package com.infamous.simply_harder.datagen;
+package com.infamous.simply_harder.datagen.provider;
 
 import com.infamous.simply_harder.SimplyHarder;
 import com.infamous.simply_harder.custom.item.UpgradeModuleItem;
@@ -7,6 +7,7 @@ import com.infamous.simply_harder.custom.recipe.ModificationRecipe;
 import com.infamous.simply_harder.datagen.builder.DisabledRecipeBuilder;
 import com.infamous.simply_harder.datagen.builder.InfusionRecipeBuilder;
 import com.infamous.simply_harder.datagen.builder.MasterworkingRecipeBuilder;
+import com.infamous.simply_harder.datagen.provider.ModItemTagsProvider;
 import com.infamous.simply_harder.registry.SHItems;
 import com.infamous.simply_harder.registry.SHRecipes;
 import net.minecraft.advancements.critereon.InventoryChangeTrigger;
@@ -147,14 +148,8 @@ public class ModRecipeProvider extends RecipeProvider {
         MasterworkingRecipeBuilder.masterworking(masterworkable, progressionId).unlocks("has_enhancement_core", has(SHItems.ENHANCEMENT_CORE.get())).save(onFinished, progressionId, creativeTab);
     }
 
-    private static ItemStack buildUpgradeModule(ItemStack stack){
-        ItemStack upgradeModule = SHItems.UPGRADE_MODULE.get().getDefaultInstance();
-        UpgradeModuleItem.setInfusedItem(upgradeModule, stack);
-        return upgradeModule;
-    }
-
     private static InventoryChangeTrigger.TriggerInstance hasInfusedUpgradeModule(ItemStack stack){
-        ItemStack upgradeModule = buildUpgradeModule(stack);
+        ItemStack upgradeModule = UpgradeModuleItem.createInfusedUpgradeModule(stack);
         return hasItemWithNbt(upgradeModule);
     }
 

@@ -1,25 +1,24 @@
 package com.infamous.simply_harder.custom.item;
 
 import com.infamous.simply_harder.SimplyHarder;
-import com.infamous.simply_harder.custom.data.MasterworkProgression;
-import com.infamous.simply_harder.custom.data.WrappedAttributeModifier;
-import com.infamous.simply_harder.custom.data.WrappedAttributeModifierMap;
+import com.infamous.simply_harder.custom.data.*;
 import com.infamous.simply_harder.registry.SHItems;
-import com.infamous.simply_harder.util.AttributeHelper;
 import com.infamous.simply_harder.util.TooltipHelper;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.entity.ai.attributes.Attribute;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.entity.ExperienceOrb;
+import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
-import java.util.Map;
 
 public class EnhancementCoreItem extends Item {
     public static final String NAME = "enhancement_core";
@@ -88,6 +87,34 @@ public class EnhancementCoreItem extends Item {
     public static void setProgression(ItemStack result, ResourceLocation progressionId) {
         CompoundTag masterworkTag = getMasterwork(result);
         masterworkTag.putString(MASTERWORK_PROGRESSION_TAG, progressionId.toString());
+    }
+
+    public static ItemStack createMaterialRefund(MasterworkProgression progression, int highestTier) {
+        ItemStack refund = SHItems.ENHANCEMENT_CORE.get().getDefaultInstance();
+        float totalRefundAmount = 0;
+        for(int i = MasterworkProgression.STARTING_TIER; i < highestTier; i++){
+            MasterworkTier masterworkTier = progression.getTier(i).orElse(MasterworkTier.EMPTY);
+            totalRefundAmount += masterworkTier.materialRefund();
+        }
+        refund.setCount((int) totalRefundAmount); // rounded down
+        return refund;
+    }
+
+    public static void spawnMaterialRefund(Level level, Vec3 position, MasterworkProgression progression, int highestTier) {
+        ItemStack materialRefund = createMaterialRefund(progression, highestTier);
+        if(!materialRefund.isEmpty()){
+            level.addFreshEntity(new ItemEntity(level, position.x, position.y, position.z, materialRefund));
+        }
+    }
+
+    public static void spawnLevelRefund(ServerLevel level, Vec3 position, MasterworkProgression progression, int highestTier) {
+        float totalRefundAmount = 0;
+        for(int i = MasterworkProgression.STARTING_TIER; i < highestTier; i++){
+            MasterworkTier masterworkTier = progression.getTier(i).orElse(MasterworkTier.EMPTY);
+            totalRefundAmount += masterworkTier.levelRefund();
+        }
+        ExperienceOrb.award(level, position, (int) totalRefundAmount); // rounded down
+
     }
 
     @Override

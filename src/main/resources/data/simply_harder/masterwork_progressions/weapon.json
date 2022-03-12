@@ -4,6 +4,8 @@
     {
       "level_cost": 1,
       "material_cost": 1,
+      "level_refund": 0.5,
+      "material_refund": 0.5,
       "attribute_modifiers": [
         {
           "attribute": "minecraft:generic.attack_damage",
@@ -26,6 +28,8 @@
     {
       "level_cost": 1,
       "material_cost": 1,
+      "level_refund": 0.5,
+      "material_refund": 0.5,
       "attribute_modifiers": [
         {
           "attribute": "minecraft:generic.attack_damage",
@@ -48,6 +52,8 @@
     {
       "level_cost": 2,
       "material_cost": 2,
+      "level_refund": 1.0,
+      "material_refund": 1.0,
       "attribute_modifiers": [
         {
           "attribute": "minecraft:generic.attack_damage",
@@ -70,6 +76,8 @@
     {
       "level_cost": 2,
       "material_cost": 2,
+      "level_refund": 1.0,
+      "material_refund": 1.0,
       "attribute_modifiers": [
         {
           "attribute": "minecraft:generic.attack_damage",
@@ -92,6 +100,8 @@
     {
       "level_cost": 3,
       "material_cost": 3,
+      "level_refund": 1.5,
+      "material_refund": 1.5,
       "attribute_modifiers": [
         {
           "attribute": "minecraft:generic.attack_damage",
@@ -114,6 +124,8 @@
     {
       "level_cost": 3,
       "material_cost": 3,
+      "level_refund": 1.5,
+      "material_refund": 1.5,
       "attribute_modifiers": [
         {
           "attribute": "minecraft:generic.attack_damage",
@@ -136,6 +148,8 @@
     {
       "level_cost": 4,
       "material_cost": 4,
+      "level_refund": 2.0,
+      "material_refund": 2.0,
       "attribute_modifiers": [
         {
           "attribute": "minecraft:generic.attack_damage",
@@ -158,6 +172,8 @@
     {
       "level_cost": 4,
       "material_cost": 4,
+      "level_refund": 2.0,
+      "material_refund": 2.0,
       "attribute_modifiers": [
         {
           "attribute": "minecraft:generic.attack_damage",
@@ -180,6 +196,8 @@
     {
       "level_cost": 5,
       "material_cost": 5,
+      "level_refund": 2.5,
+      "material_refund": 2.5,
       "attribute_modifiers": [
         {
           "attribute": "minecraft:generic.attack_damage",
@@ -202,6 +220,8 @@
     {
       "level_cost": 5,
       "material_cost": 5,
+      "level_refund": 2.5,
+      "material_refund": 2.5,
       "attribute_modifiers": [
         {
           "attribute": "minecraft:generic.attack_damage",

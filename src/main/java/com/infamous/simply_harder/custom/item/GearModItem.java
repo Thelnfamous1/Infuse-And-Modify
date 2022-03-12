@@ -11,8 +11,13 @@ import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.entity.ExperienceOrb;
+import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.Vec3;
+import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -101,6 +106,11 @@ public class GearModItem extends Item {
         return SimplyHarder.GEAR_MOD_MANAGER.getGearMod(gearModId).orElse(GearMod.UNKNOWN);
     }
 
+    public static void setInternal(ItemStack stack, GearMod gearMod) {
+        CompoundTag internalTag = getInternalTag(stack);
+        internalTag.putString(GEAR_MOD_NAME, gearMod.id().toString());
+    }
+
     public static void setMod(ItemStack left, GearMod gearMod) {
         CompoundTag gearModTag = getModTag(left);
         gearModTag.putString(GEAR_MOD_NAME, gearMod.id().toString());
@@ -123,6 +133,21 @@ public class GearModItem extends Item {
                                         .withStyle(ChatFormatting.GREEN)
                         )
         );
+    }
+
+    public static ItemStack createGearMod(GearMod gearMod) {
+        ItemStack gearModItem = SHItems.GEAR_MOD.get().getDefaultInstance();
+        setInternal(gearModItem, gearMod);
+        return gearModItem;
+    }
+
+    public static void spawnGearMod(Level level, Vec3 position, GearMod gearMod) {
+        ItemStack gearModItem = createGearMod(gearMod);
+        level.addFreshEntity(new ItemEntity(level, position.x, position.y, position.z, gearModItem));
+    }
+
+    public static void spawnLevelRefund(ServerLevel level, Vec3 position, GearMod gearMod){
+        ExperienceOrb.award(level, position, gearMod.levelRefund());
     }
 
     @Override

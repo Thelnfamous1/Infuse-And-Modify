@@ -12,6 +12,7 @@ public class GearModBuilder {
     private final ResourceLocation id;
     private Ingredient installable = Ingredient.EMPTY;
     private int levelCost;
+    private int levelRefund;
     private WrappedAttributeModifierMap wrappedAttributeModifiers = WrappedAttributeModifierMap.EMPTY;
 
     public GearModBuilder(ResourceLocation id){
@@ -32,13 +33,18 @@ public class GearModBuilder {
         return this;
     }
 
+    public GearModBuilder levelRefund(int levelRefund){
+        this.levelRefund = levelRefund;
+        return this;
+    }
+
     public GearModBuilder wrappedAttributeModifiers(WrappedAttributeModifierMap wrappedAttributeModifiers){
         this.wrappedAttributeModifiers = wrappedAttributeModifiers;
         return this;
     }
 
     public GearMod build(){
-        return new GearMod(this.id, this.installable, this.levelCost, this.wrappedAttributeModifiers);
+        return new GearMod(this.id, this.installable, this.levelCost, this.levelRefund, this.wrappedAttributeModifiers);
     }
 
     public void save(Consumer<GearMod> onFinished) {
