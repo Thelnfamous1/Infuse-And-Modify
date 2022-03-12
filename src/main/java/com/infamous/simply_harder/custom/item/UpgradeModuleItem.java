@@ -8,10 +8,13 @@ import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TextComponent;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.jetbrains.annotations.Nullable;
 
@@ -89,6 +92,13 @@ public class UpgradeModuleItem extends Item {
         ItemStack upgradeModule = SHItems.UPGRADE_MODULE.get().getDefaultInstance();
         setInfusedItem(upgradeModule, stack);
         return upgradeModule;
+    }
+
+    public static void spawnInfusedItem(ItemStack stack, Level level, Vec3 position) {
+        ItemStack infusedItem = getInfusedItem(stack);
+        if(!infusedItem.isEmpty()){
+            level.addFreshEntity(new ItemEntity(level, position.x, position.y, position.z, infusedItem));
+        }
     }
 
     @Override

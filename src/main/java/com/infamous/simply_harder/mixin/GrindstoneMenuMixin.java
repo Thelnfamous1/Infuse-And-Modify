@@ -2,6 +2,7 @@ package com.infamous.simply_harder.mixin;
 
 import com.infamous.simply_harder.custom.item.EnhancementCoreItem;
 import com.infamous.simply_harder.custom.item.GearModItem;
+import com.infamous.simply_harder.custom.item.UpgradeModuleItem;
 import com.infamous.simply_harder.util.GrindstoneHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
@@ -39,15 +40,18 @@ public abstract class GrindstoneMenuMixin extends AbstractContainerMenu {
         ItemStack bottom = this.repairSlots.getItem(GrindstoneMenu.ADDITIONAL_SLOT);
         boolean checkGearMod = GearModItem.hasMod(top) || GearModItem.hasMod(bottom);
         boolean checkMasterwork = EnhancementCoreItem.hasMasterwork(top) || EnhancementCoreItem.hasMasterwork(bottom);
-        boolean createCustomResult = checkGearMod || checkMasterwork;
+        boolean checkInfusion = UpgradeModuleItem.hasInfusedItem(top) || UpgradeModuleItem.hasInfusedItem(bottom);
+        boolean createCustomResult = checkGearMod || checkMasterwork || checkInfusion;
         if(createCustomResult){
-            Function<ItemStack, ItemStack> tagRemovalFunction = checkGearMod ? GrindstoneHelper::removeGearMod : GrindstoneHelper::removeMasterwork;
+            Function<ItemStack, ItemStack> tagRemovalFunction = checkGearMod ?
+                    GrindstoneHelper::removeGearMod :
+                    checkMasterwork ?
+                            GrindstoneHelper::removeMasterwork :
+                            GrindstoneHelper::removeInfusion;
             ItemStack customResult = GrindstoneHelper.createCustomResult(top, bottom, tagRemovalFunction);
             this.resultSlots.setItem(0, customResult);
             this.broadcastChanges();
             ci.cancel();
         }
     }
-
-
 }
