@@ -7,7 +7,8 @@
     "GrindstoneMenuAccessor",
     "GrindstoneMenuMixin",
     "GrindstoneMenuRepairSlotsMixin",
-    "GrindstoneMenuResultSlotMixin"
+    "GrindstoneMenuResultSlotMixin",
+    "VillagerMixin"
   ],
   "injectors": {
     "defaultRequire": 1
