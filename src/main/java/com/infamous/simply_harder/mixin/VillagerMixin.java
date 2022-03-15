@@ -1,18 +1,14 @@
 package com.infamous.simply_harder.mixin;
 
-import com.infamous.simply_harder.SimplyHarder;
-import com.infamous.simply_harder.registry.SHItems;
 import com.infamous.simply_harder.util.MerchantHelper;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.ai.behavior.BehaviorUtils;
 import net.minecraft.world.entity.npc.AbstractVillager;
 import net.minecraft.world.entity.npc.Villager;
 import net.minecraft.world.entity.npc.VillagerData;
 import net.minecraft.world.entity.npc.VillagerProfession;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.trading.MerchantOffers;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.phys.Vec3;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -38,22 +34,19 @@ public abstract class VillagerMixin extends AbstractVillager {
             return;
         }
         VillagerProfession profession = this.getVillagerData().getProfession();
-        if(!MerchantHelper.hasRankUpRewards(profession)) return;
-
         int newLevel = this.getVillagerData().getLevel();
-        ItemStack reward = ItemStack.EMPTY;
-        switch (newLevel) {
-            case 2 -> reward = new ItemStack(SHItems.UPGRADE_MODULE.get(), 3);
-            case 3 -> reward = new ItemStack(SHItems.ENHANCEMENT_CORE.get(), 3);
-            case 4 -> reward = new ItemStack(SHItems.UPGRADE_MODULE.get(), 6);
-            case 5 -> reward = new ItemStack(SHItems.ENHANCEMENT_CORE.get(), 6);
-            default -> SimplyHarder.LOGGER.info("Unexpected new merchant career level for villager {}: {}", this, newLevel);
+        MerchantHelper.generateAndGiveRewards(this, profession, newLevel, this.lastTradedPlayer);
+    }
+
+    @Inject(method = "updateTrades", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/npc/Villager;addOffersFromItemListings(Lnet/minecraft/world/item/trading/MerchantOffers;[Lnet/minecraft/world/entity/npc/VillagerTrades$ItemListing;I)V", shift = At.Shift.AFTER))
+    private void handleUpdateTrades(CallbackInfo ci){
+        if(this.level.isClientSide){
+            return;
         }
-        if(!reward.isEmpty()){
-            Player lastTradedPlayer = this.lastTradedPlayer;
-            Vec3 throwTargetPos = MerchantHelper.getThrowTargetPos(this, lastTradedPlayer);
-            BehaviorUtils.throwItem(this, reward, throwTargetPos.add(0, 1.0D, 0));
-        }
+        VillagerProfession profession = this.getVillagerData().getProfession();
+        int currentLevel = this.getVillagerData().getLevel();
+        MerchantOffers offers = this.getOffers();
+        MerchantHelper.addAdditionalOffers(profession, currentLevel, offers);
     }
 
 }

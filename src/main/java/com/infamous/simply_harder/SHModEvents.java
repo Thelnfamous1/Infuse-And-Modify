@@ -1,11 +1,8 @@
 package com.infamous.simply_harder;
 
 import com.infamous.simply_harder.custom.recipe.ModRecipeTypes;
-import com.infamous.simply_harder.datagen.provider.ModBlockTagsProvider;
-import com.infamous.simply_harder.datagen.provider.ModItemTagsProvider;
-import com.infamous.simply_harder.datagen.provider.ModRecipeProvider;
-import com.infamous.simply_harder.datagen.provider.GearModProvider;
-import com.infamous.simply_harder.datagen.provider.MasterworkProgressionProvider;
+import com.infamous.simply_harder.datagen.provider.MerchantProgressionProvider;
+import com.infamous.simply_harder.datagen.provider.*;
 import com.infamous.simply_harder.network.SHNetwork;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.resources.ResourceLocation;
@@ -31,11 +28,19 @@ public class SHModEvents {
         DataGenerator generator = event.getGenerator();
         ExistingFileHelper existingFileHelper = event.getExistingFileHelper();
         if(event.includeServer()){
+            // tags
             ModBlockTagsProvider modBlockTagsProvider = new ModBlockTagsProvider(generator, existingFileHelper);
             generator.addProvider(new ModItemTagsProvider(generator, modBlockTagsProvider, existingFileHelper));
+            // recipes
             generator.addProvider(new ModRecipeProvider(generator));
+            // gear mods
             generator.addProvider(new GearModProvider(generator));
+            // masterwork progressions
             generator.addProvider(new MasterworkProgressionProvider(generator));
+            // loot tables
+            generator.addProvider(new ModLootTableProvider(generator));
+            // merchant progressions
+            generator.addProvider(new MerchantProgressionProvider(generator));
         }
     }
 }

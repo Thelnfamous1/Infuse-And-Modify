@@ -98,6 +98,11 @@ public class MasterworkingRecipe extends ForgingRecipe {
         return ModRecipeTypes.MASTERWORKING.get();
     }
 
+    @Override
+    public boolean isSpecial() {
+        return true;
+    }
+
     public static class Serializer extends ForgeRegistryEntry<RecipeSerializer<?>> implements RecipeSerializer<MasterworkingRecipe> {
 
         public static final String MASTERWORKABLE = "masterworkable";

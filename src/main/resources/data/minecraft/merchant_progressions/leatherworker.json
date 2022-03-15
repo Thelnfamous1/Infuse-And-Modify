@@ -1,0 +1,121 @@
+{
+  "profession": "minecraft:leatherworker",
+  "career_rewards_by_level": [
+    "simply_harder:gameplay/merchant_progression/leatherworker/apprentice",
+    "simply_harder:gameplay/merchant_progression/leatherworker/journeyman",
+    "simply_harder:gameplay/merchant_progression/leatherworker/expert",
+    "simply_harder:gameplay/merchant_progression/leatherworker/master"
+  ],
+  "additional_offers_by_level": [
+    {
+      "offers": [
+        {
+          "baseCostA": {
+            "item": "minecraft:emerald"
+          },
+          "result": {
+            "item": "simply_harder:enhancement_core"
+          },
+          "uses": 0,
+          "maxUses": 12,
+          "xp": 1,
+          "priceMultiplier": 0.05,
+          "demand": 0
+        },
+        {
+          "baseCostA": {
+            "item": "minecraft:emerald",
+            "count": 40
+          },
+          "result": {
+            "item": "simply_harder:gear_mod",
+            "nbt": "{\"simply_harder:gear_mod/internal\":{GearModName:\"simply_harder:knocking_leg_guards\"}}"
+          },
+          "uses": 0,
+          "maxUses": 12,
+          "xp": 40,
+          "priceMultiplier": 0.05,
+          "demand": 0
+        }
+      ]
+    },
+    {
+      "offers": [
+        {
+          "baseCostA": {
+            "item": "minecraft:emerald",
+            "count": 40
+          },
+          "result": {
+            "item": "simply_harder:gear_mod",
+            "nbt": "{\"simply_harder:gear_mod/internal\":{GearModName:\"simply_harder:strong_foot_guards\"}}"
+          },
+          "uses": 0,
+          "maxUses": 12,
+          "xp": 40,
+          "priceMultiplier": 0.05,
+          "demand": 0
+        }
+      ]
+    },
+    {
+      "offers": [
+        {
+          "baseCostA": {
+            "item": "minecraft:emerald",
+            "count": 40
+          },
+          "result": {
+            "item": "simply_harder:gear_mod",
+            "nbt": "{\"simply_harder:gear_mod/internal\":{GearModName:\"simply_harder:healthy_head_guard\"}}"
+          },
+          "uses": 0,
+          "maxUses": 12,
+          "xp": 40,
+          "priceMultiplier": 0.05,
+          "demand": 0
+        }
+      ]
+    },
+    {
+      "offers": [
+        {
+          "baseCostA": {
+            "item": "minecraft:emerald",
+            "count": 40
+          },
+          "result": {
+            "item": "simply_harder:gear_mod",
+            "nbt": "{\"simply_harder:gear_mod/internal\":{GearModName:\"simply_harder:hasty_chest_guard\"}}"
+          },
+          "uses": 0,
+          "maxUses": 12,
+          "xp": 40,
+          "priceMultiplier": 0.05,
+          "demand": 0
+        }
+      ]
+    },
+    {
+      "offers": [
+        {
+          "baseCostA": {
+            "item": "minecraft:emerald",
+            "count": 20
+          },
+          "costB": {
+            "item": "simply_harder:enhancement_core"
+          },
+          "result": {
+            "item": "simply_harder:upgrade_module"
+          },
+          "uses": 0,
+          "maxUses": 12,
+          "xp": 20,
+          "priceMultiplier": 0.05,
+          "demand": 0
+        }
+      ]
+    }
+  ]
+}

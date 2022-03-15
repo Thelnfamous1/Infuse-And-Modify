@@ -5,21 +5,12 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import com.infamous.simply_harder.SimplyHarder;
 import com.infamous.simply_harder.custom.data.GearMod;
-import com.infamous.simply_harder.custom.data.WrappedAttributeModifierMap;
-import com.infamous.simply_harder.datagen.builder.GearModBuilder;
+import com.infamous.simply_harder.custom.loot.SHBuiltInGearMods;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.DataProvider;
 import net.minecraft.data.HashCache;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.tags.Tag;
-import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.entity.ai.attributes.Attribute;
-import net.minecraft.world.entity.ai.attributes.AttributeModifier;
-import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.crafting.Ingredient;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -29,7 +20,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Objects;
 import java.util.Set;
-import java.util.UUID;
 import java.util.function.Consumer;
 
 public class GearModProvider implements DataProvider {
@@ -90,51 +80,7 @@ public class GearModProvider implements DataProvider {
     }
 
     protected void buildGearMods(Consumer<GearMod> onFinished) {
-        String weaponSuffix = "blade";
-        UUID weaponUUID = UUID.fromString("9b0f12ac-5f12-4dd8-8eb3-2cd2a088440b");
-        this.buildDefaultGearModsForSlot(onFinished, weaponSuffix, weaponUUID, EquipmentSlot.MAINHAND, ModItemTagsProvider.WEAPONS);
-
-        String helmetSuffix = "head_guard";
-        UUID helmetUUID = UUID.fromString("2c968932-08a4-4ecc-abbe-50a7371a4cdb");
-        this.buildDefaultGearModsForSlot(onFinished, helmetSuffix, helmetUUID, EquipmentSlot.HEAD, ModItemTagsProvider.HELMETS);
-
-        String chestplateSuffix = "chest_guard";
-        UUID chestplateUUID = UUID.fromString("1600b3eb-c37d-440b-bfed-fd3484e2d0ae");
-        this.buildDefaultGearModsForSlot(onFinished, chestplateSuffix, chestplateUUID, EquipmentSlot.CHEST, ModItemTagsProvider.CHESTPLATES);
-
-        String leggingsSuffix = "leg_guards";
-        UUID leggingsUUID = UUID.fromString("afd64ff9-2e2e-4b14-a594-21117631bb70");
-        this.buildDefaultGearModsForSlot(onFinished, leggingsSuffix, leggingsUUID, EquipmentSlot.LEGS, ModItemTagsProvider.LEGGINGS);
-
-        String bootsSuffix = "foot_guards";
-        UUID bootsUUID = UUID.fromString("37823925-51dc-408f-954f-3e577d7c0a2e");
-        this.buildDefaultGearModsForSlot(onFinished, bootsSuffix, bootsUUID, EquipmentSlot.FEET, ModItemTagsProvider.BOOTS);
-    }
-
-    private void buildDefaultGearModsForSlot(Consumer<GearMod> onFinished, String suffix, UUID uuid, EquipmentSlot slot, Tag<Item> tag) {
-        this.buildGearMod(onFinished, uuid, new ResourceLocation(SimplyHarder.MOD_ID, "strong_" + suffix), Attributes.ATTACK_DAMAGE, 1.0D, AttributeModifier.Operation.ADDITION, slot, tag);
-        this.buildGearMod(onFinished, uuid, new ResourceLocation(SimplyHarder.MOD_ID, "hasty_" + suffix), Attributes.ATTACK_SPEED, 0.4D, AttributeModifier.Operation.ADDITION, slot, tag);
-        this.buildGearMod(onFinished, uuid, new ResourceLocation(SimplyHarder.MOD_ID, "knocking_" + suffix), Attributes.ATTACK_KNOCKBACK, 0.1D, AttributeModifier.Operation.ADDITION, slot, tag);
-        this.buildGearMod(onFinished, uuid, new ResourceLocation(SimplyHarder.MOD_ID, "fortified_" + suffix), Attributes.ARMOR, 2.0D, AttributeModifier.Operation.ADDITION, slot, tag);
-        this.buildGearMod(onFinished, uuid, new ResourceLocation(SimplyHarder.MOD_ID, "rigid_" + suffix), Attributes.ARMOR_TOUGHNESS, 1.0D, AttributeModifier.Operation.ADDITION, slot, tag);
-        this.buildGearMod(onFinished, uuid, new ResourceLocation(SimplyHarder.MOD_ID, "resolute_" + suffix), Attributes.KNOCKBACK_RESISTANCE, 0.1D, AttributeModifier.Operation.ADDITION, slot, tag);
-        this.buildGearMod(onFinished, uuid, new ResourceLocation(SimplyHarder.MOD_ID, "swift_" + suffix), Attributes.MOVEMENT_SPEED, 0.01D, AttributeModifier.Operation.ADDITION, slot, tag);
-        this.buildGearMod(onFinished, uuid, new ResourceLocation(SimplyHarder.MOD_ID, "healthy_" + suffix), Attributes.MAX_HEALTH, 2.0D, AttributeModifier.Operation.ADDITION, slot, tag);
-        this.buildGearMod(onFinished, uuid, new ResourceLocation(SimplyHarder.MOD_ID, "lucky_" + suffix), Attributes.LUCK, 1.0D, AttributeModifier.Operation.ADDITION, slot, tag);
-    }
-
-    private void buildGearMod(Consumer<GearMod> onFinished, UUID uuid, ResourceLocation name, Attribute attribute, double amount, AttributeModifier.Operation operation, EquipmentSlot slot, Tag<Item> tag) {
-        WrappedAttributeModifierMap.Builder wrappedAttributeModifiersBuilder = WrappedAttributeModifierMap.Builder.builder();
-        wrappedAttributeModifiersBuilder.addAttributeModifier(
-                            attribute,
-                            slot,
-                            new AttributeModifier(uuid, name.toString(), amount, operation));
-            GearModBuilder.gearMod(name)
-                    .installable(Ingredient.of(tag))
-                    .levelCost(1)
-                    .levelRefund(1)
-                    .wrappedAttributeModifiers(wrappedAttributeModifiersBuilder.build())
-                    .save(onFinished);
+        SHBuiltInGearMods.all().forEach(onFinished);
     }
 
     @Override

@@ -55,6 +55,11 @@ public class InfusionRecipe extends BaseInfusionRecipe {
         return SHRecipes.INFUSION.get();
     }
 
+    @Override
+    public boolean isSpecial() {
+        return true;
+    }
+
     public static class Serializer extends ForgeRegistryEntry<RecipeSerializer<?>> implements RecipeSerializer<InfusionRecipe> {
 
         public InfusionRecipe fromJson(ResourceLocation id, JsonObject jsonObject) {
