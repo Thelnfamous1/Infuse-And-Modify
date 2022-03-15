@@ -43,10 +43,6 @@ public class UpgradeModuleItem extends Item {
         return stack.hasTag() && stack.getTag().contains(UPGRADE_MODULE_TAG, Tag.TAG_COMPOUND);
     }
 
-    public static boolean isInfusedUpgradeModule(ItemStack stack) {
-        return isUpgradeModule(stack) && hasInfusedItem(stack);
-    }
-
     public static boolean isNonInfusedUpgradeModule(ItemStack base) {
         return isUpgradeModule(base) && !hasInfusedItem(base);
     }

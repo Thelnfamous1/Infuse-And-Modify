@@ -30,7 +30,7 @@ public class InfusionRecipe extends BaseInfusionRecipe {
 
     @Override
     public boolean isAdditionIngredient(ItemStack stack) {
-        return UpgradeModuleItem.isInfusedUpgradeModule(stack)
+        return UpgradeModuleItem.hasInfusedItem(stack)
                 && this.infusionAddition.test(UpgradeModuleItem.getInfusedItem(stack));
     }
 

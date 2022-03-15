@@ -42,16 +42,12 @@ public class GearModItem extends Item {
         return itemStack.is(SHItems.GEAR_MOD.get());
     }
 
-    private static boolean hasInternal(ItemStack stack) {
+    public static boolean hasInternal(ItemStack stack) {
         return stack.hasTag() && stack.getTag().contains(INTERNAL_TAG, Tag.TAG_COMPOUND);
     }
 
     public static boolean hasMod(ItemStack stack) {
         return stack.hasTag() && stack.getTag().contains(GEAR_MOD_TAG, Tag.TAG_COMPOUND);
-    }
-
-    public static boolean isUsableMod(ItemStack itemStack) {
-        return isMod(itemStack) && hasInternal(itemStack);
     }
 
     private static CompoundTag getInternalTag(ItemStack itemStack) {

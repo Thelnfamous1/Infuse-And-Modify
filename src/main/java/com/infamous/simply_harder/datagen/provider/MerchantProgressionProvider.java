@@ -6,10 +6,7 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.infamous.simply_harder.custom.MerchantProgressionManager;
-import com.infamous.simply_harder.custom.data.GearMod;
 import com.infamous.simply_harder.custom.data.MerchantProgression;
-import com.infamous.simply_harder.custom.item.GearModItem;
-import com.infamous.simply_harder.custom.loot.SHBuiltInGearMods;
 import com.infamous.simply_harder.custom.loot.SHBuiltInLootTables;
 import com.infamous.simply_harder.datagen.builder.MerchantProgressionBuilder;
 import com.infamous.simply_harder.registry.SHItems;
@@ -17,7 +14,6 @@ import net.minecraft.data.DataGenerator;
 import net.minecraft.data.DataProvider;
 import net.minecraft.data.HashCache;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.npc.VillagerData;
 import net.minecraft.world.entity.npc.VillagerProfession;
 import net.minecraft.world.item.ItemStack;
@@ -77,76 +73,50 @@ public class MerchantProgressionProvider implements DataProvider {
         }
         for(int level = VillagerData.MIN_VILLAGER_LEVEL; level <= VillagerData.MAX_VILLAGER_LEVEL; level++){
             MerchantOffers offers = new MerchantOffers();
-            buildSpecialOffers(profession, offers, level);
+            buildSpecialOffers(offers, profession, level);
             progression.addOffers(offers);
         }
         progression.save(onFinished);
     }
 
-    private void buildSpecialOffers(VillagerProfession profession, MerchantOffers offers, int level) {
+    private void buildSpecialOffers(MerchantOffers offers, VillagerProfession profession, int level) {
         switch (level){
-            case 1 -> {
-                offers.add(coreForEmeralds());
-                offers.add(modForEmeralds(getRandomGearModBySlot(slotForProfession(profession, EquipmentSlot.LEGS))));
-            }
-            case 2 -> {
-                offers.add(modForEmeralds(getRandomGearModBySlot(slotForProfession(profession, EquipmentSlot.FEET))));
-            }
-            case 3 -> {
-                offers.add(modForEmeralds(getRandomGearModBySlot(slotForProfession(profession, EquipmentSlot.HEAD))));
-            }
-            case 4 -> {
-                offers.add(modForEmeralds(getRandomGearModBySlot(slotForProfession(profession, EquipmentSlot.CHEST))));
+            case 1, 2, 3, 4 -> {
+                offers.add(coreForEmeraldsAndItems(getBountyCost(level), level));
+                offers.add(modForEmeralds());
             }
             case 5 -> {
                 offers.add(moduleForEmeraldsAndCore());
             }
         }
-
     }
 
-    private EquipmentSlot slotForProfession(VillagerProfession profession, EquipmentSlot armorSlot) {
-        return profession == VillagerProfession.ARMORER || profession == VillagerProfession.LEATHERWORKER ?
-                armorSlot :
-                EquipmentSlot.MAINHAND;
-    }
-
-    private GearMod getRandomGearModBySlot(EquipmentSlot slot) {
-        switch (slot){
-            case FEET -> {
-                return getRandomGearMod(SHBuiltInGearMods.boots());
+    private ItemStack getBountyCost(int level) {
+        switch (level){
+            case 1 -> {
+                return new ItemStack(Items.ROTTEN_FLESH, 10);
             }
-            case LEGS -> {
-                return getRandomGearMod(SHBuiltInGearMods.leggings());
+            case 2 -> {
+                return new ItemStack(Items.GUNPOWDER, 10);
             }
-            case CHEST -> {
-                return getRandomGearMod(SHBuiltInGearMods.chestplate());
+            case 3 -> {
+                return new ItemStack(Items.ENDER_PEARL, 10);
             }
-            case HEAD -> {
-                return getRandomGearMod(SHBuiltInGearMods.helmet());
+            case 4 -> {
+                return new ItemStack(Items.BLAZE_ROD, 10);
             }
-            case MAINHAND -> {
-                return getRandomGearMod(SHBuiltInGearMods.weapon());
-            }
-            default -> {
-                return GearMod.UNKNOWN;
+            case 5 -> {
+                return new ItemStack(Items.GHAST_TEAR, 10);
             }
         }
+        return ItemStack.EMPTY;
     }
 
-    private GearMod getRandomGearMod(Collection<GearMod> mods) {
-        return mods
-                .stream()
-                .skip(new Random().nextInt(mods.size()))
-                .findFirst()
-                .orElse(GearMod.UNKNOWN);
-    }
-
-    private MerchantOffer modForEmeralds(GearMod gearMod) {
+    private MerchantOffer modForEmeralds() {
         return new MerchantOffer(
                 new ItemStack(Items.EMERALD, 40),
                 ItemStack.EMPTY,
-                GearModItem.createGearMod(gearMod),
+                new ItemStack(SHItems.GEAR_MOD.get()),
                 0,
                 12,
                 40,
@@ -166,14 +136,14 @@ public class MerchantProgressionProvider implements DataProvider {
                 0);
     }
 
-    private MerchantOffer coreForEmeralds() {
+    private MerchantOffer coreForEmeraldsAndItems(ItemStack costB, int level) {
         return new MerchantOffer(
                 new ItemStack(Items.EMERALD),
-                ItemStack.EMPTY,
+                costB,
                 new ItemStack(SHItems.ENHANCEMENT_CORE.get()),
                 0,
                 12,
-                1,
+                level * 4,
                 0.05F,
                 0);
     }

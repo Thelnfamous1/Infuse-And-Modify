@@ -1,6 +1,5 @@
 package com.infamous.simply_harder.custom.recipe;
 
-import com.infamous.simply_harder.SimplyHarder;
 import com.infamous.simply_harder.custom.container.SimpleAnvilContainer;
 import com.infamous.simply_harder.custom.data.GearMod;
 import com.infamous.simply_harder.custom.item.GearModItem;
@@ -32,7 +31,7 @@ public class ModificationRecipe extends ForgingRecipe {
     protected boolean simpleMatches(SimpleAnvilContainer container, Level level) {
         ItemStack left = container.getLeft();
         ItemStack right = container.getRight();
-        return GearModItem.isUsableMod(right)
+        return GearModItem.hasInternal(right)
                 && this.canInstall(left, GearModItem.getInternalModCheckTag(right));
     }
 
